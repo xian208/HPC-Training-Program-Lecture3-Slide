@@ -24,7 +24,7 @@ const { $frontmatter } = useSlideContext()
   border-right: 3px solid var(--tb-teal); line-height: 1;
 }
 .tb-section .body { padding: 0 64px 0 32px; }
-.tb-section .title { font-family: var(--tb-serif); font-weight: 600; font-size: 40px; line-height: 1.2; color: var(--tb-ink); }
+.tb-section .title { font-family: var(--tb-serif); font-weight: 500; font-size: 40px; line-height: 1.2; color: var(--tb-ink); }
 .tb-section .lead { margin-top: 14px; font-size: 18px; color: var(--tb-mut); max-width: 34em; }
 .tb-section .lead p { margin: 0; }
 </style>

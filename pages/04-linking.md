@@ -16,13 +16,13 @@ clicks: 3
 $ gcc hello.c -o hello_dyn
 $ gcc -static hello.c -o hello_static
 $ ls -lh hello_dyn hello_static
--rwxr-xr-x 1 xian208 xian208  69K Sep 27 01:13 hello_dyn
--rwxr-xr-x 1 xian208 xian208 689K Sep 27 01:13 hello_static
+-rwxrwxr-x 1 xian208 xian208  16K Sep 27 19:39 hello_dyn
+-rwxrwxr-x 1 xian208 xian208 737K Sep 27 19:39 hello_static
 
 $ ldd hello_dyn
-	linux-vdso.so.1 (0x0000ffffa7fbc000)
-	libc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000ffffa7d90000)
-	/lib/ld-linux-aarch64.so.1 (0x0000ffffa7f80000)
+	linux-vdso.so.1 (0x00007fe0bf4de000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fe0bf2dc000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007fe0bf4e0000)
 $ ldd hello_static
 	not a dynamic executable
 ```
@@ -30,15 +30,17 @@ $ ldd hello_static
 ::margin::
 
 <MarginNotes :notes="[
-  '預設是 dynamic linking；加上 -static 就是 static linking。',
-  'static 版本大了約 10 倍：69K vs 689K。',
-  'ldd 可以查執行檔有哪些 dynamic link：dynamic 版本只記錄「執行時需要 libc.so.6」。',
-  'static 版本把用到的 libc 內容直接複製進執行檔，所以不需要任何 .so。',
+  '預設 dynamic；加 -static 變 static',
+  'static 大了約 45 倍',
+  'ldd：列出執行時要載入的 .so',
+  '',
 ]" />
 
 <!--
-💻 固定輸出，不需要現場跑：用行高亮帶過就好。
-Debian 上 static linking 需要 libc.a，build-essential 已經裝好了。
+💻 這是 Debian 13 x86_64 上實測的輸出（講義上是 aarch64：69K vs 689K，約 10 倍，ldd 的路徑是 /lib/aarch64-linux-gnu/...）。
+- dynamic 版本只記錄「執行時需要 libc.so.6」，由 loader 在執行時載入。
+- static 版本把用到的 libc 內容直接複製進執行檔。
+- Debian 上 static linking 需要 libc.a，build-essential 已經裝好了。
 -->
 
 ---
@@ -47,14 +49,28 @@ clicks: 3
 
 # 複製進來 vs 執行時接上
 
-<AnimTodo title="兩個執行檔並排" h="250px" :steps="[
-  'static：libc 的 printf.o 等被複製進執行檔，方塊跟著變大（69K → 689K）',
-  'dynamic：執行檔只留一條指向 libc.so.6 的箭頭',
-  '按下執行：loader 才把 libc.so.6 載入並接上箭頭（銜接上一章的 Loader）',
+<Flow :width="860" :height="250" :groups="[
+  { x: 0, y: 4, w: 410, h: 242, label: 'STATIC' },
+  { x: 450, y: 4, w: 410, h: 242, label: 'DYNAMIC', at: 2 },
+]" :nodes="[
+  { id: 'a', x: 140, y: 75, label: 'libc.a', sub: 'printf.o scanf.o …', w: 190 },
+  { id: 'se', x: 140, y: 190, label: 'hello_static', sub: '737K', w: 190, h: 70, at: 1, tone: 'on' },
+  { id: 'de', x: 590, y: 190, label: 'hello_dyn', sub: '16K', w: 170, at: 2 },
+  { id: 'so', x: 590, y: 75, label: 'libc.so.6', w: 170, at: 2, tone: 'plain' },
+]" :edges="[
+  { from: 'a', to: 'se', at: 1, label: 'link time 複製進來', tone: 'on', lpos: [152, 136] },
+  { from: 'de', to: 'so', at: 2, until: 3, dashed: true, label: '只記錄名字', lpos: [602, 136] },
+  { from: 'so', to: 'de', at: 3, tone: 'on', label: 'load time 接上', lpos: [602, 136] },
 ]" />
 
+<!--
+- static：用到的內容在 link time 複製進執行檔；dynamic：只記下需要 libc.so.6，執行時 loader 才把 .so 接上。
+- static library（.a）可以看成多個 .o 打包而成的封存檔，例如 libc.a 包含 printf.o、scanf.o、malloc.o（free 也定義在 malloc.o 裡）等，可以用 ar t libc.a 列出。
+- shared library（.so）則是把這些程式碼 link 成單一個、可被多個程式共用的檔案。
+-->
+
 ---
-clicks: 5
+clicks: 3
 ---
 
 # 兩者的差異
@@ -62,15 +78,21 @@ clicks: 5
 <table class="cmp">
   <thead><tr><th></th><th>Static Linking</th><th>Dynamic Linking</th></tr></thead>
   <tbody>
-    <tr v-click="1"><td>library 檔案</td><td><code>.a</code>（static library）</td><td><code>.so</code>（shared object）</td></tr>
-    <tr v-click="2"><td>library 的位置</td><td>被複製進 executable file</td><td>不包含在 executable file 裡</td></tr>
-    <tr v-click="3"><td>linking 發生時間</td><td>link time</td><td>load time（或執行中透過 <code>dlopen</code> 載入）</td></tr>
-    <tr v-click="4"><td>executable file 大小</td><td>大</td><td>小</td></tr>
-    <tr v-click="5"><td>library 更新時</td><td>整份 executable 要重新 build（link）</td><td>只要更新 link 到的 <code>.so</code></td></tr>
+    <tr v-click="1"><td>library 檔案</td><td><code>.a</code></td><td><code>.so</code></td></tr>
+    <tr v-click="2"><td>何時 link</td><td>link time</td><td>load time</td></tr>
+    <tr v-click="3"><td>library 更新時</td><td>整份重新 link</td><td>換掉 <code>.so</code> 就好</td></tr>
   </tbody>
 </table>
 
 <style>
-.cmp { width: 100%; }
+.cmp { width: 100%; font-size: 18px; }
 .cmp td:first-child { color: var(--tb-mut); width: 170px; }
 </style>
+
+<!--
+講義的完整比較：
+- library 的位置：static 被複製進 executable file；dynamic 不包含在 executable file 裡
+- linking 發生時間：static 在 link time；dynamic 在 load time（或執行中透過 dlopen 載入）
+- executable file 大小：static 大、dynamic 小
+- library 更新時：static 整份 executable 要重新 build（link）；dynamic 只要更新 link 到的 .so
+-->

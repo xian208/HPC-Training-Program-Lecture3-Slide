@@ -4,7 +4,7 @@ chapter: "06"
 title: Configure
 ---
 
-同一份 source code，換一台機器也能自動產生對的 Makefile
+換一台機器，也能自動產生對的 Makefile
 
 ---
 
@@ -14,18 +14,20 @@ title: Configure
   'curl -LO https://download.open-mpi.org/release/hwloc/v2.11/hwloc-2.11.2.tar.gz',
   'tar xzf hwloc-2.11.2.tar.gz',
   'cd hwloc-2.11.2',
-  './configure --prefix=$HOME/opt/hwloc | head -25   # 在 checking for gcc 那行放 marker',
+  './configure --prefix=$HOME/opt/hwloc   # 在 checking for gcc 那行放 marker',
 ]" />
 
 ::margin::
 
 <strong>NOTE</strong>
 
-configure 一項一項檢查當前環境：CPU 架構、有哪些工具可用（沒有 <code>gawk</code> 就改用 <code>mawk</code>）、C compiler 是誰、能不能正常運作……最後依照結果產生 Makefile。
+逐項檢查環境，最後產生 Makefile
 
 <!--
 🎥 需要網路、輸出又長，用 asciinema 錄。播到 checking for gcc... gcc 的 marker 會自動停下來講。
-安裝：sudo apt install -y curl ca-certificates（後面 zstd、OpenMPI 也會用到）
+- configure 一項一項檢查當前環境：CPU 架構、有哪些工具可用（沒有 gawk 就改用 mawk）、C compiler 是誰、能不能正常運作……最後依照結果產生 Makefile。
+- 安裝：sudo apt install -y curl ca-certificates（後面 zstd、OpenMPI 也會用到）。
+- 不要用 ./configure ... | head -25 截斷輸出：head 讀完 25 行就關閉 pipe，configure 會 Broken pipe 中途結束，不會產生 Makefile。
 -->
 
 ---
@@ -36,13 +38,18 @@ clicks: 2
 
 <v-clicks>
 
-- 通常就是專案裡的 `./configure`：一個 **shell script**，掃描系統環境（編譯器版本、外部 library 的位置……），自動產生適合當前環境的 Makefile
-- 解決的是**可攜性**：手寫的 Makefile 通常把 compiler、library 路徑寫死，換一台機器就可能編不過
+- **是什麼**：掃描環境、產生 Makefile 的 shell script
+- **解決什麼**：可攜性，換一台機器也能編
 
 </v-clicks>
 
+<!--
+- 通常就是專案裡的 ./configure：一個 shell script，掃描系統環境（編譯器版本、外部 library 的位置……），自動產生適合當前環境的 Makefile。
+- 手寫的 Makefile 通常把 compiler、library 路徑寫死，換一台機器就可能編不過。
+-->
+
 ---
-clicks: 4
+clicks: 3
 ---
 
 # 從開發者到使用者：GNU Autotools
@@ -69,13 +76,9 @@ clicks: 4
   </div>
 </div>
 
-<div v-click="4" class="callout">
-Autoconf 根據 configure.ac 產生 configure，讓軟體在不同 Unix-like 系統上自動偵測環境；Automake 根據 Makefile.am 產生 Makefile.in，自動支援 make install、make clean 等標準 target。
-</div>
-
 <style>
 .at-flow { display: grid; gap: 14px; font-family: var(--tb-sans); }
-.at-tag { font-size: 12px; font-weight: 600; letter-spacing: .06em; color: var(--tb-teal); margin-bottom: 4px; }
+.at-tag { font-size: 12px; font-weight: 500; letter-spacing: .06em; color: var(--tb-teal); margin-bottom: 4px; }
 .at-row.dev { opacity: .5; }
 .at-line { display: flex; align-items: center; gap: 10px; margin: 4px 0; }
 .at-line .f { font-family: var(--tb-mono); font-size: 14px; border: 1.3px solid var(--tb-node-line); background: #fff; padding: 3px 10px; }
@@ -88,25 +91,31 @@ Autoconf 根據 configure.ac 產生 configure，讓軟體在不同 Unix-like 系
 </style>
 
 <!--
-🎬 講義的兩張表合併成一條流程：上半開發者端（淡色，了解即可），下半使用者端三步逐步亮起。
+講義的兩張表合併成一條流程：上半開發者端（淡色，了解即可），下半使用者端三步逐步亮起。
+Autoconf 根據 configure.ac 產生 configure，讓軟體在不同 Unix-like 系統上自動偵測環境；Automake 根據 Makefile.am 產生 Makefile.in，自動支援 make install、make clean 等標準 target。兩者都是 GNU Autotools 的一部分。
 -->
 
 ---
 
 # 常用參數
 
-`./configure --help` 可以看有哪些參數
+`./configure --help` 看全部參數
 
 | 參數 | 作用 |
 |---|---|
 | `--prefix=` | `make install` 的安裝路徑 |
-| `CPPFLAGS="-I..."` | 到哪裡找 header file |
-| `LDFLAGS="-L..."` | 到哪裡找要 link 的 library |
-| `LIBS="-l..."` | 要 link 哪個 library |
-| `CC=` / `CXX=` | 指定編譯器，例如 `CC=gcc` |
+| `CC=` / `CFLAGS=` | 編譯器與 flag |
+| `CPPFLAGS` / `LDFLAGS` | 到哪找 header / library |
 
 ```bash
 ./configure --prefix=$HOME/opt/mylib CC=gcc CFLAGS="-O3"
 make -j$(nproc)
 make install
 ```
+
+<!--
+- CPPFLAGS="-I..."：指定要到什麼路徑找 header file。
+- LDFLAGS="-L..."：指定要到什麼路徑找要 link 的 library。
+- LIBS="-l..."：指定要 link 的 library。
+- CC= / CXX=：指定編譯器，例如 CC=gcc。
+-->

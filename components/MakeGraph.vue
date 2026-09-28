@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useId } from 'vue'
 import { useSlideContext } from '@slidev/client'
 
 /**
@@ -46,6 +46,8 @@ function state(id: string) {
   if (step.value.dirty?.includes(id)) return 'dirty'
   return ''
 }
+// 每個圖用自己的 marker id（同名 id 會對應到其他投影片上的元素）
+const uid = useId()
 const W = 92
 const H = 34
 function edgePath([a, b]: [string, string]) {
@@ -61,13 +63,13 @@ const edgeHot = (e: [string, string]) => state(e[1]) === 'rebuilt'
   <div class="mg">
     <svg :viewBox="`0 0 ${width} ${height}`" :width="width" :height="height">
       <defs>
-        <marker id="mg-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <marker :id="`${uid}-arr`"viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
           <path d="M0,0 L10,5 L0,10 z" fill="#1a1a1a" />
         </marker>
       </defs>
       <line
         v-for="e in edges" :key="e.join('>')" v-bind="edgePath(e)"
-        class="edge" :class="{ hot: edgeHot(e) }" marker-end="url(#mg-arr)"
+        class="edge" :class="{ hot: edgeHot(e) }" :marker-end="`url(#${uid}-arr)`"
       />
       <g v-for="n in nodes" :key="n.id" class="node" :class="state(n.id)">
         <rect :x="n.x - W / 2" :y="n.y - H / 2" :width="W" :height="H" />
@@ -90,7 +92,7 @@ const edgeHot = (e: [string, string]) => state(e[1]) === 'rebuilt'
 .node.dirty rect { fill: #f7c9c3; }
 .node.rebuilt rect { fill: var(--tb-node-on); }
 .legend { font-size: 12.5px; color: var(--tb-mut); display: flex; align-items: center; gap: 6px; margin-top: 4px; }
-.legend b { margin-left: auto; color: var(--tb-teal); font-weight: 600; font-size: 14px; }
+.legend b { margin-left: auto; color: var(--tb-teal); font-weight: 500; font-size: 14px; }
 .k { display: inline-block; width: 12px; height: 12px; border: 1.2px solid #1a1a1a; margin-left: 8px; }
 .k.dirty { background: #f7c9c3; margin-left: 0; }
 .k.rebuilt { background: var(--tb-node-on); }

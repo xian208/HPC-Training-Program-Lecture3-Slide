@@ -4,7 +4,7 @@ title: 2026 HPC Training — Lecture 3
 lectureName: Lecture 3　Build from Source
 info: |
   Compiler、Compilation Process、Build Automation、Environment Variable、Module、Spack
-  內容來源：Notion「2026 lecture3」（不含 Lab）
+  內容來源：Notion「2026 lecture3」
 colorSchema: light
 highlighter: shiki
 monaco: true
@@ -15,10 +15,10 @@ routerMode: hash
 transition: fade
 mdc: true
 fonts:
-  sans: Source Sans 3,Noto Sans TC
-  serif: Source Serif 4
-  mono: IBM Plex Mono
-  weights: '400,500,600,700'
+  provider: none
+  sans: LXGWWenKaiTC
+  serif: LXGWWenKaiTC
+  mono: JetBrainsMono
 layout: cover
 kicker: 2026 HPC Training · Lecture 3
 meta: Compiler · Build System · Environment Variable · Module · Spack
@@ -29,10 +29,9 @@ meta: Compiler · Build System · Environment Variable · Module · Spack
 從一行 `gcc` 到管理整套 software stack
 
 <!--
-骨架說明：
 - 每個章節一個檔案，放在 pages/，依序 import
-- 🎬 = 動畫、💻 = 程式 demo、⭐ = 核心動畫；還沒做的動畫以 <AnimTodo> 佔位
-- 章節標籤（左上）自動取最近的 section 頁，不用每頁手寫
+- 💻 = 程式 demo、🎥 = asciinema 錄影、⭐ = 核心動畫
+- 投影片只放圖、demo 與重點；細節都寫在每頁的講者備註（按 p 進 presenter mode）
 -->
 
 ---

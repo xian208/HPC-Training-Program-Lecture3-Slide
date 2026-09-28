@@ -4,22 +4,27 @@ chapter: "09"
 title: Module
 ---
 
-一行指令切換 compiler、library 版本，而且可以乾淨地還原
+一行指令切換版本，而且可以乾淨地還原
 
+---
+clicks: 3
 ---
 
 # Module 是什麼
 
-**Environment Modules / Lmod**：一套用來**動態修改當前 shell 環境變數**的工具
+<v-clicks>
 
-- 每個軟體版本對應一份 **modulefile**，記錄「用這個軟體時要改哪些環境變數」
-- `module load` / `module unload` 套用或還原這些設定
+- **Module**：動態修改當前 shell 的環境變數
+- **modulefile**：每個版本一份，記錄要改什麼
+- `module load` / `unload`：套用，或還原
 
-<v-click>
+</v-clicks>
 
-HPC 優化時常要嘗試不同 compiler、library 版本的組合，同一台機器上常同時有好幾個版本。每次切換都手改 `PATH`、`LD_LIBRARY_PATH`，不但容易打錯，也很難完整還原。
-
-</v-click>
+<!--
+- Environment Modules / Lmod：一套用來動態修改當前 shell 環境變數的工具。
+- 每個軟體版本對應一份 modulefile，記錄「用這個軟體時要改哪些環境變數」。
+- HPC 優化時常要嘗試不同 compiler、library 版本的組合，同一台機器上常同時有好幾個版本。每次切換都手改 PATH、LD_LIBRARY_PATH，不但容易打錯，也很難完整還原；module 讓切換版本變成一行指令，而且可以乾淨地移除。
+-->
 
 ---
 clicks: 5
@@ -30,37 +35,36 @@ clicks: 5
 <div grid="~ cols-[1fr_1fr] gap-5">
 
 <Terminal font-size="12px" :steps="[
-  { cmd: 'zstd --version', out: 'bash: zstd: command not found', tone: 'err' },
+  { cmd: 'which zstd', out: '/usr/bin/zstd' },
   { cmd: 'module load zstd/1.5.6' },
-  { cmd: 'zstd --version', out: '*** Zstandard CLI (64-bit) v1.5.6, by Yann Collet ***', tone: 'ok' },
+  { cmd: 'which zstd', out: '/home/xian208/opt/zstd/1.5.6/bin/zstd', tone: 'ok' },
   { cmd: 'module unload zstd/1.5.6' },
-  { cmd: 'zstd --version', out: 'bash: zstd: command not found', tone: 'err' },
+  { cmd: 'which zstd', out: '/usr/bin/zstd' },
 ]" />
 
 <PathStack cmd="zstd" :steps="[
-  { label: 'load 前', path: ['/usr/local/bin', '/usr/bin', '/bin', '/usr/local/games', '/usr/games'] },
-  { label: 'load 前', path: ['/usr/local/bin', '/usr/bin', '/bin', '/usr/local/games', '/usr/games'] },
-  { label: 'module load 之後', path: ['~/opt/zstd/1.5.6/bin', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/games', '/usr/games'], has: ['~/opt/zstd/1.5.6/bin'] },
-  { label: 'module load 之後', path: ['~/opt/zstd/1.5.6/bin', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/games', '/usr/games'], has: ['~/opt/zstd/1.5.6/bin'] },
-  { label: 'unload 之後', path: ['/usr/local/bin', '/usr/bin', '/bin', '/usr/local/games', '/usr/games'] },
+  { label: 'load 前', path: ['/usr/local/bin', '/usr/bin', '/bin'], has: ['/usr/bin'] },
+  { label: 'load 前', path: ['/usr/local/bin', '/usr/bin', '/bin'], has: ['/usr/bin'] },
+  { label: 'module load 之後', path: ['~/opt/zstd/1.5.6/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: ['~/opt/zstd/1.5.6/bin', '/usr/bin'] },
+  { label: 'module load 之後', path: ['~/opt/zstd/1.5.6/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: ['~/opt/zstd/1.5.6/bin', '/usr/bin'] },
+  { label: 'unload 之後', path: ['/usr/local/bin', '/usr/bin', '/bin'], has: ['/usr/bin'] },
 ]" />
 
 </div>
 
-<div class="callout">
-如果系統已經裝了 zstd，load 前 <code>which zstd</code> 會是 <code>/usr/bin/zstd</code>。觀察重點不變：load 之後會變成自己安裝的路徑，因為 module 把它加在 <code>PATH</code> 最前面。
-</div>
-
 <!--
-⭐ 核心動畫：PATH 畫成一疊目錄，load 時 zstd 的路徑從最上面插入，which 由上往下找到第一個符合的；unload 再把它抽掉。
-講義原文的 home 是 /home/xian208，這裡縮寫成 ~。
+⭐ PATH 畫成一疊目錄，load 時 zstd 的路徑從最上面插入，which 由上往下找到第一個符合的；unload 再把它抽掉。
+- Debian 13 本來就有 /usr/bin/zstd（1.5.7）；load 之後 which 會先找到自己裝的 1.5.6，因為 module 把它加在 PATH 最前面。
+- 講義上的 home 是 /home/xian208，PATH 這裡縮寫成 ~，也省略了 /usr/local/games 等目錄。
 -->
 
+---
+clicks: 3
 ---
 
 # 想知道 load 改了什麼：module show
 
-```text {3|4|5|6|7-8|9|all}{maxHeight: '300px'}
+```text {3|4-6|7-9|all}{maxHeight: '300px'}
    /home/xian208/selfmodule/zstd/1.5.6:
 whatis("zstd 1.5.6")
 prepend_path{"PATH","/home/xian208/opt/zstd/1.5.6/bin",delim=":",priority="0"}
@@ -75,29 +79,37 @@ setenv{"ZSTD_ROOT","/home/xian208/opt/zstd/1.5.6"}
 ::margin::
 
 <MarginNotes label="$ module show zstd/1.5.6" :notes="[
-  '<code>PATH</code>：讓 shell 找得到 zstd 執行檔。',
-  '<code>LD_LIBRARY_PATH</code>：執行時 loader 找 .so。',
-  '<code>LIBRARY_PATH</code>：link 時 gcc 找 library。',
-  '<code>CPATH</code>：編譯時 gcc 找 header。',
-  '<code>PKG_CONFIG_PATH</code>、<code>CMAKE_PREFIX_PATH</code>：讓 pkg-config、CMake 的 find_package 找得到它。',
-  '<code>setenv</code>：直接設定一個變數。',
-  '全部都是對應上一章的環境變數。',
+  'PATH：找得到 zstd 執行檔',
+  '找 .so、library、header',
+  '給 pkg-config、CMake 用',
+  '',
 ]" />
 
+<!--
+- LD_LIBRARY_PATH：執行時 loader 找 .so；LIBRARY_PATH：link 時 gcc 找 library；CPATH：編譯時 gcc 找 header。
+- PKG_CONFIG_PATH、CMAKE_PREFIX_PATH：讓 pkg-config、CMake 的 find_package 找得到它；setenv 直接設定一個變數。
+- 全部都對應上一章的環境變數。
+-->
+
 ---
-clicks: 4
+clicks: 3
 ---
 
 # Module 的運作原理
 
 <v-clicks>
 
-1. module 本身<strong>不「安裝」</strong>任何東西：zstd 早就編好放在 `$HOME/opt/zstd/1.5.6`，只是 shell 不知道要去那裡找
-2. `module load` 讀 modulefile，照裡面的指令改環境變數：`prepend-path PATH …` 把路徑加到最前面，優先於系統內建的版本
-3. `module unload` 把同一份 modulefile **反向執行**，所以環境可以被還原
-4. 要改的是**當前 shell** 的環境變數，而子行程改不了父行程的環境變數，所以 module 是 **shell function**，不是獨立的執行檔
+1. **不安裝**：軟體早就編好，module 只改環境變數
+2. **load / unload**：照 modulefile 加上，再反向移除
+3. **shell function**：才能改到當前 shell
 
 </v-clicks>
+
+<!--
+1. module 本身不「安裝」任何東西：zstd 早就編好放在 $HOME/opt/zstd/1.5.6，只是 shell 不知道要去那裡找。
+2. module load 讀 modulefile，照裡面的指令改環境變數：prepend-path PATH … 把路徑加到最前面，優先於系統內建的版本。module unload 把同一份 modulefile 反向執行，所以環境可以被還原。
+3. 要改的是當前 shell 的環境變數，而子行程改不了父行程的環境變數，所以 module 是 shell function，不是獨立的執行檔。可以用 type module 確認：module is a function。
+-->
 
 ---
 clicks: 6
@@ -116,20 +128,20 @@ clicks: 6
   { cmd: 'echo $FOO', out: 'hello', tone: 'ok' },
 ]" />
 
-<AnimTodo title="子行程泡泡" :steps="[
-  '', '',
-  './set.sh 開出一個子行程泡泡，FOO 設在泡泡裡',
-  '泡泡結束就消失，當前 shell 的 FOO 還是空的',
-  'source：直接在當前 shell 執行',
-  'FOO 留下來了；module 是 shell function，效果就像這樣',
+<Flow :width="360" :height="260" :nodes="[
+  { id: 'sh', x: 180, y: 50, label: 'bash', sub: 'FOO=（空）', w: 170, until: 6 },
+  { id: 'sh2', x: 180, y: 50, label: 'bash', sub: 'FOO=hello', w: 170, at: 6, tone: 'on' },
+  { id: 'ch', x: 180, y: 190, label: './set.sh', sub: 'FOO=hello', w: 170, at: 3, until: 5, tones: { 4: 'dim' } },
+]" :edges="[
+  { from: 'sh', to: 'ch', at: 3, until: 4, label: '開一個子行程' },
+  { from: 'ch', to: 'sh', at: 4, until: 5, dashed: true, tone: 'bad', label: '結束，FOO 沒傳回來' },
 ]" />
 
 </div>
 
 <!--
-環境變數只會從父行程複製給子行程，不會往回傳。
-可以用 type module 確認，輸出會顯示 module is a function。
-AnimTodo 的 click 編號對應左邊 terminal 的步驟。
+- 直接執行 ./set.sh 時，shell 會開一個子行程，FOO 只存在於那個已結束的子行程中。
+- 用 source 則是在當前 shell 執行，修改才會留下來。module 是 shell function，效果就像後者。
 -->
 
 ---
@@ -140,14 +152,14 @@ AnimTodo 的 click 編號對應左邊 terminal 的步驟。
 sudo apt install -y lmod
 ```
 
-module 是 shell function，裝完要先 source 初始化腳本，讓當前 shell 定義 `module`：
+載入 `module` 這個 shell function：
 
 ```bash
 source /etc/profile.d/lmod.sh
 type module     # should print: module is a function
 ```
 
-每開一個新 terminal 都要重新 source，建議直接加進 `~/.bashrc`：
+每個新 terminal 都要，所以加進 `~/.bashrc`：
 
 ```bash
 echo 'source /etc/profile.d/lmod.sh' >> ~/.bashrc
@@ -193,7 +205,7 @@ setenv ZSTD_ROOT $root
 
 # modulefile 要放在哪
 
-modulefile 依照 `<名稱>/<版本>` 的結構擺放，檔名就是版本號
+依照 `<名稱>/<版本>` 擺放，檔名就是版本號
 
 <div grid="~ cols-2 gap-5">
 
@@ -217,14 +229,18 @@ selfmodule/
 </div>
 
 <div class="callout">
-modulefile 有 <strong>TCL</strong>（傳統 Environment Modules）與 <strong>Lua</strong>（Lmod）兩種寫法。Lmod 兩種都能讀，還支援階層式 module：例如 load 了某個 compiler 之後，才看得到用它編譯的 library。
+TCL、Lua 兩種寫法，Lmod 都能讀
 </div>
+
+<!--
+modulefile 有 TCL（傳統 Environment Modules）與 Lua（Lmod）兩種寫法。Lmod 兩種都能讀，還支援階層式 module：例如 load 了某個 compiler 之後，才看得到用它編譯的 library。
+-->
 
 ---
 
 # Module 常用指令
 
-<div grid="~ cols-[1fr_310px] gap-5">
+<div grid="~ cols-[1fr_300px] gap-5">
 
 <Cast src="/casts/module-commands.cast" :rows="14" :todo="[
   'module use $HOME/selfmodule     # marker',
@@ -235,20 +251,17 @@ modulefile 有 <strong>TCL</strong>（傳統 Environment Modules）與 <strong>L
   'module purge',
 ]" />
 
-<div text-sm>
+```bash
+module use <dir>   # where to look
+module avail       # what's there
+module load <m>
+module list        # what's loaded
+module unload <m>
+module purge       # unload all
+```
 
-| 指令 | 作用 |
-|---|---|
-| `module use <dir>` | 告訴 module 去哪找 modulefile |
-| `module avail` | 列出可用的 module |
-| `module load` | 套用 |
-| `module list` | 目前 load 了哪些 |
-| `module unload` | 移除 |
-| `module purge` | 全部 unload |
-
-</div>
 </div>
 
 <!--
-🎥 use → avail → load → list → unload → purge 錄成一段，每個指令放一個 marker。
+🎥 use → avail → load → list → unload → purge 錄成一段，每個指令放一個 marker，播到會自動停。
 -->

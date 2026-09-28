@@ -56,6 +56,6 @@ const mode = computed(() => s.value >= 3 ? 'PRIVATE' : 'PUBLIC')
 .pkt { position: absolute; left: 14px; top: 4px; font-family: var(--tb-mono); font-size: 11px; background: #fff; border: 1.2px solid var(--tb-teal); padding: 0 4px; opacity: 0; transition: top .7s ease, opacity .3s; }
 .pkt.go { opacity: 1; top: 64px; }
 .pkt.stop { opacity: 1; top: 30px; border-color: var(--tb-red); color: var(--tb-red); }
-.x { position: absolute; left: 50px; top: 58px; color: var(--tb-red); font-size: 24px; font-weight: 700; }
+.x { position: absolute; left: 50px; top: 58px; color: var(--tb-red); font-size: 24px; font-weight: 500; }
 .err { font-family: var(--tb-mono); font-size: 11.5px; color: var(--tb-red); margin-top: 4px; }
 </style>

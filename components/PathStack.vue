@@ -54,7 +54,7 @@ const isNew = (p: string) => idx.value > 0 && !prev.value.path.includes(p)
 .ps { font-family: var(--tb-mono); font-size: 13px; }
 .ps-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
 .var { color: var(--tb-orange); font-weight: 500; }
-.lab { font-family: var(--tb-sans); font-size: 14px; font-weight: 600; color: var(--tb-teal); }
+.lab { font-family: var(--tb-sans); font-size: 14px; font-weight: 500; color: var(--tb-teal); }
 .stack { position: relative; display: flex; flex-direction: column; gap: 5px; }
 .dir {
   border: 1.4px solid var(--tb-node-line); background: var(--tb-node-bg); padding: 4px 10px;
@@ -63,7 +63,7 @@ const isNew = (p: string) => idx.value > 0 && !prev.value.path.includes(p)
 .dir .n { color: var(--tb-mut); font-size: 11px; width: 12px; }
 .dir.fresh { background: var(--tb-teal-soft); }
 .dir.hit { background: var(--tb-node-on); }
-.tag { margin-left: auto; font-family: var(--tb-sans); font-size: 11.5px; font-weight: 600; color: var(--tb-ink); }
+.tag { margin-left: auto; font-family: var(--tb-sans); font-size: 11.5px; font-weight: 500; color: var(--tb-ink); }
 .tag.new { color: var(--tb-teal); }
 .which { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--tb-rule); }
 .which .pr { color: var(--tb-teal); }

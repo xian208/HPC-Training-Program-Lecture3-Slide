@@ -34,8 +34,8 @@ const icon = { anim: '🎬 動畫待做', cast: '🎥 錄影待補', image: '�
   border: 1.5px dashed var(--tb-teal); background: repeating-linear-gradient(-45deg, #fafcfc 0 10px, #f3f7f7 10px 20px);
   padding: 14px 18px; font-size: 14px; color: var(--tb-mut);
 }
-.at-kind { font-size: 11.5px; letter-spacing: .1em; color: var(--tb-teal); font-weight: 600; }
-.at-title { font-size: 16px; color: var(--tb-ink); font-weight: 600; margin: 2px 0 6px; }
+.at-kind { font-size: 11.5px; letter-spacing: .1em; color: var(--tb-teal); font-weight: 500; }
+.at-title { font-size: 16px; color: var(--tb-ink); font-weight: 500; margin: 2px 0 6px; }
 .at-steps { margin: 0; padding-left: 0; list-style: none; }
 .at-steps li { margin: 3px 0; }
 .at-click {

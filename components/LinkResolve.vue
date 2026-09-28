@@ -59,7 +59,7 @@ const notes = [
 .lr { display: flex; align-items: center; gap: 8px; font-family: var(--tb-mono); font-size: 13.5px; }
 .col { transition: opacity .35s; }
 .col.off { opacity: .15; }
-.cap { font-family: var(--tb-sans); font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.cap { font-family: var(--tb-sans); font-weight: 500; font-size: 14px; margin-bottom: 4px; }
 .cap em { font-style: normal; font-weight: 400; color: var(--tb-mut); font-size: 12px; }
 .obj, .lib, .exe { border: 1.5px solid var(--tb-node-line); background: var(--tb-node-bg); padding: 10px 12px; min-width: 170px; }
 .ind { padding-left: 16px; }
@@ -74,7 +74,7 @@ const notes = [
 .part.on { background: var(--tb-node-on); }
 .addr { color: var(--tb-teal); opacity: 0; transition: opacity .35s; }
 .addr.show { opacity: 1; }
-.arrow { width: 96px; text-align: center; font-family: var(--tb-sans); font-size: 12.5px; color: var(--tb-teal); font-weight: 600; }
+.arrow { width: 96px; text-align: center; font-family: var(--tb-sans); font-size: 12.5px; color: var(--tb-teal); font-weight: 500; }
 .lr-note { margin-top: 18px; font-size: 16px; font-family: var(--tb-sans); color: var(--tb-ink); border-left: 2.5px solid var(--tb-teal); padding-left: 12px; }
 .fade-enter-active, .fade-leave-active { transition: opacity .2s; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }

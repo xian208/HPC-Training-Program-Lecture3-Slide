@@ -41,7 +41,7 @@ onMounted(async () => {
   player = AP.create(url, el.value!, {
     rows: props.rows, cols: props.cols, speed: props.speed,
     idleTimeLimit: 1, pauseOnMarkers: true, fit: 'width',
-    terminalFontFamily: 'IBM Plex Mono, monospace', terminalFontSize: props.fontSize, theme: 'solarized-light',
+    terminalFontFamily: 'JetBrainsMono, monospace', terminalFontSize: props.fontSize, theme: 'solarized-light',
   })
 })
 onSlideLeave(() => player?.pause?.())
