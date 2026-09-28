@@ -1,0 +1,25 @@
+# x86-64 gcc 13.3 objdump -d hello.o（離線備援）
+0000000000000000 <main>:
+   0:	endbr64
+   4:	push   %rbp
+   5:	mov    %rsp,%rbp
+   8:	sub    $0x10,%rsp
+   c:	movl   $0x1388,-0xc(%rbp)
+  13:	movl   $0x3e8,-0x8(%rbp)
+  1a:	mov    -0xc(%rbp),%edx
+  1d:	mov    -0x8(%rbp),%eax
+  20:	add    %edx,%eax
+  22:	mov    %eax,%edx
+  24:	shr    $0x1f,%edx
+  27:	add    %edx,%eax
+  29:	sar    $1,%eax
+  2b:	mov    %eax,-0x4(%rbp)
+  2e:	mov    -0x4(%rbp),%eax
+  31:	mov    %eax,%esi
+  33:	lea    0x0(%rip),%rax        # 3a <main+0x3a>
+  3a:	mov    %rax,%rdi
+  3d:	mov    $0x0,%eax
+  42:	call   47 <main+0x47>
+  47:	mov    $0x0,%eax
+  4c:	leave
+  4d:	ret

@@ -1,0 +1,39 @@
+# x86-64 gcc 13.3 -O0（離線備援，現場請以 godbolt 的 gcc 14.2 為準）
+.LC2:
+	.string	"%.12f\n"
+main:
+	endbr64
+	pushq	%rbp
+	movq	%rsp, %rbp
+	subq	$16, %rsp
+	pxor	%xmm0, %xmm0
+	movsd	%xmm0, -16(%rbp)
+	movq	$1, -8(%rbp)
+	jmp	.L2
+.L3:
+	pxor	%xmm1, %xmm1
+	cvtsi2sdq	-8(%rbp), %xmm1
+	pxor	%xmm0, %xmm0
+	cvtsi2sdq	-8(%rbp), %xmm0
+	mulsd	%xmm0, %xmm1
+	movsd	.LC1(%rip), %xmm0
+	divsd	%xmm1, %xmm0
+	movsd	-16(%rbp), %xmm1
+	addsd	%xmm1, %xmm0
+	movsd	%xmm0, -16(%rbp)
+	addq	$1, -8(%rbp)
+.L2:
+	cmpq	$500000000, -8(%rbp)
+	jle	.L3
+	movq	-16(%rbp), %rax
+	movq	%rax, %xmm0
+	leaq	.LC2(%rip), %rax
+	movq	%rax, %rdi
+	movl	$1, %eax
+	call	printf@PLT
+	movl	$0, %eax
+	leave
+	ret
+.LC1:
+	.long	0
+	.long	1072693248
