@@ -231,7 +231,7 @@ Variants:
 clicks: 7
 ---
 
-# Step 2：spec 語法 ⭐
+# Step 2：spec 語法
 
 <CmdAnnotate font-size="17px" :parts="[
   { t: 'spack spec ' },
@@ -256,7 +256,7 @@ clicks: 7
 </div>
 
 <!--
-⭐ 把 spec 逐個 token 圈起來、拉出標籤。
+把 spec 逐個 token 圈起來、拉出標籤。
 - 這是在叢集（Rocky 8、gcc 8.4.1、skylake_avx512）上的例子。在 Debian 13 上照抄會出現 Error: No version exists that satisfies these input specs: gcc@8.4.1。
 - 換成 spack compiler list 列出的版本、spack arch -t 的結果，例如 spack spec hdf5@1.14.3 +hl ~cxx +mpi %gcc@14.2.0 ^mpich。
 - 大多 variant 有預設值，不需要每個都用 +/~ 設定；有些 variant 要用 = 設定。
@@ -297,7 +297,7 @@ clicks: 7
 
 <style>
 .legend-3 { display: flex; gap: 18px; font-size: 14px; color: var(--tb-mut); margin-top: 10px; }
-.legend-3 code { color: var(--tb-teal); font-weight: 500; }
+.legend-3 code { color: var(--tb-accent); font-weight: 500; }
 </style>
 
 <!--
@@ -353,4 +353,35 @@ spack unload --all
 - spack load 和 module load 一樣，是修改當前 shell 的環境變數（PATH、LD_LIBRARY_PATH 等）。
 - spack 跟 module 都是改環境變數來決定 software stack，同時使用可能互相衝突，建議不要混用。
 - 想在用 module 的同時用 Spack build 的 library，可以用 spack module tcl refresh / spack module lmod refresh 產生 modulefile，詳細設定見 Spack 官方文件。
+-->
+
+---
+chap: Recap
+---
+
+# Recap：管理 software stack
+
+<Recap :items="[
+  { ch: '08', label: '環境變數', note: 'PATH 找指令，LD_LIBRARY_PATH 找 .so' },
+  { ch: '09', label: 'Module', note: 'load / unload 整組切換' },
+  { ch: '10', label: 'Spack', note: '自動解依賴，從 source 裝好' },
+]" />
+
+<!--
+- 三者的關係：環境變數是底層機制，module 幫你一次改一整組，spack 則連 build 帶依賴一起處理。
+- 接下來進入 Lab。
+-->
+
+---
+chap: Q&A
+center: true
+---
+
+# 有問題嗎？
+
+<Slido />
+
+<!--
+- 停一下收問題：Slido 上按讚數高的先回答。
+- 活動代碼與連結在 slides.md 的 headmatter（slido.code、slido.url）。
 -->

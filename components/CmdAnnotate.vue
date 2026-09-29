@@ -52,19 +52,19 @@ const isOn = (o: number) => props.all || (o > 0 && $clicks.value - props.offset 
 }
 .tok { position: relative; display: inline-block; white-space: pre; transition: color .3s; }
 .tok.lab::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 3px; background: var(--tb-teal);
+  content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 3px; background: var(--tb-accent);
   transform: scaleX(0); transform-origin: left; transition: transform .35s;
 }
 .tok.on::after { transform: scaleX(1); }
-.tok.on { color: var(--tb-teal); }
+.tok.on { color: var(--tb-accent); }
 .lab-box {
   position: absolute; left: 50%; top: calc(100% + 5px); transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center; opacity: 0; transition: opacity .35s; pointer-events: none;
 }
 .tok.on .lab-box { opacity: 1; }
-.lab-box i { width: 1.5px; background: var(--tb-teal); height: var(--h); }
+.lab-box i { width: 1.5px; background: var(--tb-accent); height: var(--h); }
 .lab-box span {
   font-family: var(--tb-sans); font-size: 14px; color: var(--tb-ink); white-space: nowrap;
-  border: 1.2px solid var(--tb-teal); background: #fff; padding: 2px 9px;
+  border: 1.2px solid var(--tb-accent); background: #fff; padding: 2px 9px;
 }
 </style>

@@ -66,16 +66,16 @@ const notes = [
 .ind.small { font-size: 12px; }
 .hole { display: inline-block; min-width: 72px; text-align: center; border: 1.5px dashed var(--tb-red); color: var(--tb-red); background: #fff; transition: all .35s; }
 .hole.found { border-color: var(--tb-orange); color: var(--tb-orange); }
-.hole.fixed { border-style: solid; border-color: var(--tb-teal); color: var(--tb-teal); background: var(--tb-node-on); }
+.hole.fixed { border-style: solid; border-color: var(--tb-accent); color: var(--tb-accent); background: var(--tb-node-on); }
 .mem { border: 1.2px solid var(--tb-node-line); background: #fff; padding: 2px 8px; margin: 4px 0; transition: background-color .35s; }
 .mem.on { background: var(--tb-node-on); }
 .mem.more { border-style: dashed; color: var(--tb-mut); }
 .part { border: 1.2px solid var(--tb-node-line); background: #fff; padding: 4px 8px; margin: 4px 0; }
 .part.on { background: var(--tb-node-on); }
-.addr { color: var(--tb-teal); opacity: 0; transition: opacity .35s; }
+.addr { color: var(--tb-accent); opacity: 0; transition: opacity .35s; }
 .addr.show { opacity: 1; }
-.arrow { width: 96px; text-align: center; font-family: var(--tb-sans); font-size: 12.5px; color: var(--tb-teal); font-weight: 500; }
-.lr-note { margin-top: 18px; font-size: 16px; font-family: var(--tb-sans); color: var(--tb-ink); border-left: 2.5px solid var(--tb-teal); padding-left: 12px; }
+.arrow { width: 96px; text-align: center; font-family: var(--tb-sans); font-size: 12.5px; color: var(--tb-accent); font-weight: 500; }
+.lr-note { margin-top: 18px; font-size: 16px; font-family: var(--tb-sans); color: var(--tb-ink); border-left: 2.5px solid var(--tb-accent); padding-left: 12px; }
 .fade-enter-active, .fade-leave-active { transition: opacity .2s; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 </style>

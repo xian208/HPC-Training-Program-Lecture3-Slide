@@ -20,8 +20,8 @@ const { $frontmatter } = useSlideContext()
 <style>
 .tb-section { padding: 0 !important; height: 100%; display: grid; grid-template-columns: 190px 1fr; align-items: center; background: #fff; }
 .tb-section .num {
-  font-family: var(--tb-mono); font-size: 84px; color: var(--tb-teal); text-align: right; padding-right: 30px;
-  border-right: 3px solid var(--tb-teal); line-height: 1;
+  font-family: var(--tb-mono); font-size: 84px; color: var(--tb-accent); text-align: right; padding-right: 30px;
+  border-right: 3px solid var(--tb-accent); line-height: 1;
 }
 .tb-section .body { padding: 0 64px 0 32px; }
 .tb-section .title { font-family: var(--tb-serif); font-weight: 500; font-size: 40px; line-height: 1.2; color: var(--tb-ink); }

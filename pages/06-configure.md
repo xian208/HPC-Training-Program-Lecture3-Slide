@@ -78,7 +78,7 @@ clicks: 3
 
 <style>
 .at-flow { display: grid; gap: 14px; font-family: var(--tb-sans); }
-.at-tag { font-size: 12px; font-weight: 500; letter-spacing: .06em; color: var(--tb-teal); margin-bottom: 4px; }
+.at-tag { font-size: 12px; font-weight: 500; letter-spacing: .06em; color: var(--tb-accent); margin-bottom: 4px; }
 .at-row.dev { opacity: .5; }
 .at-line { display: flex; align-items: center; gap: 10px; margin: 4px 0; }
 .at-line .f { font-family: var(--tb-mono); font-size: 14px; border: 1.3px solid var(--tb-node-line); background: #fff; padding: 3px 10px; }

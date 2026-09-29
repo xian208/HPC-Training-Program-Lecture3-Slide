@@ -43,7 +43,7 @@ int main() { printf("%d\n", add(1, 2)); return 0; }
 clicks: 5
 ---
 
-# 三次嘗試，兩道關卡 ⭐
+# 三次嘗試，兩道關卡
 
 <Terminal font-size="12px" :steps="[
   { cmd: 'gcc use.c -ladd -o use', out: '/usr/bin/ld: cannot find -ladd: No such file or directory\ncollect2: error: ld returned 1 exit status', tone: 'err' },
@@ -65,7 +65,7 @@ clicks: 5
 </div>
 
 <!--
-⭐ terminal 輸出逐段出現，下方兩道關卡，錯在哪一關就在那裡打叉。
+terminal 輸出逐段出現，下方兩道關卡，錯在哪一關就在那裡打叉。
 程式在編譯與執行時都需要知道「要去哪裡找檔案」，環境變數就是傳遞這類資訊的常見方式。
 -->
 

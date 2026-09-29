@@ -14,6 +14,10 @@ aspectRatio: 16/9
 routerMode: hash
 transition: fade
 mdc: true
+# Slido：填好活動代碼與連結，提問頁會自動顯示 QR code
+slido:
+  code: '#XXXXXXX'
+  url: ''
 fonts:
   provider: none
   sans: LXGWWenKaiTC
@@ -30,7 +34,7 @@ meta: Compiler · Build System · Environment Variable · Module · Spack
 
 <!--
 - 每個章節一個檔案，放在 pages/，依序 import
-- 💻 = 程式 demo、🎥 = asciinema 錄影、⭐ = 核心動畫
+- 💻 = 程式 demo、🎥 = asciinema 錄影
 - 投影片只放圖、demo 與重點；細節都寫在每頁的講者備註（按 p 進 presenter mode）
 -->
 

@@ -79,7 +79,7 @@ onBeforeUnmount(() => ro?.disconnect())
   padding: 6px 4px; transition: opacity .35s, color .35s; flex: none;
 }
 .file em { display: block; font-style: normal; font-family: var(--tb-sans); font-size: 10.5px; color: var(--tb-mut); letter-spacing: .04em; }
-.file.on { color: var(--tb-teal); font-weight: 500; }
+.file.on { color: var(--tb-accent); font-weight: 500; }
 .stage { position: relative; transition: opacity .35s; flex: none; }
 .node {
   border: 1.5px solid var(--tb-node-line); background: var(--tb-node-bg); width: 116px; padding: 10px 6px;
@@ -88,7 +88,7 @@ onBeforeUnmount(() => ro?.disconnect())
 .node b { display: block; font-weight: 500; font-size: 14px; }
 .node code { font-size: 11.5px; background: none; border: 0; color: var(--tb-mut); }
 .node.on { background: var(--tb-node-on); }
-.phase { position: absolute; left: 0; right: 0; top: calc(100% + 6px); text-align: center; font-size: 12px; color: var(--tb-teal); font-weight: 500; letter-spacing: .04em; }
+.phase { position: absolute; left: 0; right: 0; top: calc(100% + 6px); text-align: center; font-size: 12px; color: var(--tb-accent); font-weight: 500; letter-spacing: .04em; }
 .lib {
   position: absolute; left: 50%; transform: translateX(-50%); top: calc(100% + 28px);
   font-family: var(--tb-mono); font-size: 12px; border: 1.2px dashed var(--tb-node-line); padding: 2px 8px; text-align: center; background: #fff; white-space: nowrap; line-height: 1.25;

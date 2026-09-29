@@ -13,10 +13,10 @@ const { $frontmatter } = useSlideContext()
 
 <style>
 .tb-cover { padding: 0 !important; height: 100%; position: relative; background: #fff; }
-.tb-cover::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 14px; background: var(--tb-teal); }
+.tb-cover::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 14px; background: var(--tb-accent); }
 .tb-cover .kicker {
   position: absolute; left: 80px; top: 150px; font-size: 14px; font-weight: 500;
-  letter-spacing: .12em; text-transform: uppercase; color: var(--tb-teal);
+  letter-spacing: .12em; text-transform: uppercase; color: var(--tb-accent);
 }
 .tb-cover .main { position: absolute; left: 80px; right: 80px; top: 180px; }
 .tb-cover .main h1 { font-family: var(--tb-serif); font-size: 46px; font-weight: 500; margin: 0; line-height: 1.15; }

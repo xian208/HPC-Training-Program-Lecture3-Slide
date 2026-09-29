@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, useSlots } from 'vue'
+import { computed, onMounted, ref, useSlots } from 'vue'
 import { useSlideContext } from '@slidev/client'
 import { useChapter } from '../utils/chapter'
 
@@ -9,11 +9,20 @@ import { useChapter } from '../utils/chapter'
  *  - 標題：第一個 `# 標題` 會被放到固定位置
  *  - 右側旁註：用 `::margin::` slot，或放 <MarginNotes>
  *  - frontmatter `wide: true` 讓主欄位吃滿（沒有旁註時自動吃滿）
+ *  - 純文字頁（沒有圖、程式碼、終端機、錄影）內容自動上下置中，標題位置不變；
+ *    frontmatter `center: true / false` 可以強制開關
  */
 const { $page, $frontmatter } = useSlideContext()
 const chapter = useChapter(() => $page.value)
 const slots = useSlots()
 const hasMargin = computed(() => !!slots.margin)
+
+// 有這些東西的頁面內容會隨 click 長高，維持靠上，避免置中時整頁跳動
+const MEDIA = 'svg, pre, img, video, iframe, canvas, .slidev-code-wrapper, .slidev-monaco-container, .term, .cast'
+const main = ref<HTMLElement>()
+const textOnly = ref(false)
+onMounted(() => { textOnly.value = !main.value?.querySelector(MEDIA) })
+const centered = computed(() => $frontmatter?.center ?? textOnly.value)
 const chapLabel = computed(() => {
   if ($frontmatter?.chap) return $frontmatter.chap
   const c = chapter.value
@@ -22,10 +31,10 @@ const chapLabel = computed(() => {
 </script>
 
 <template>
-  <div class="slidev-layout tb">
+  <div class="slidev-layout tb" :class="{ centered }">
     <div class="tb-chap">{{ chapLabel }}</div>
     <div class="tb-stage" :class="{ 'has-margin': hasMargin }">
-      <div class="tb-main"><slot /></div>
+      <div ref="main" class="tb-main"><slot /></div>
       <aside v-if="hasMargin" class="tb-margin"><slot name="margin" /></aside>
     </div>
   </div>
@@ -36,7 +45,7 @@ const chapLabel = computed(() => {
 .tb .tb-chap {
   position: absolute; left: 49px; top: 24px;
   font-size: 12.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
-  color: var(--tb-teal);
+  color: var(--tb-accent);
 }
 .tb .tb-main > h1:first-child {
   /* containing block 是 .tb-stage（top: 104px），所以往上移回標題列的位置 */
@@ -55,14 +64,18 @@ const chapLabel = computed(() => {
 .tb .tb-main p { margin: .5em 0; }
 .tb .tb-main ul, .tb .tb-main ol { margin: .4em 0; padding-left: 1.3em; }
 .tb .tb-main li { margin: .35em 0; }
-.tb .tb-main li::marker { color: var(--tb-teal); }
-.tb .tb-main h3 { font-size: 23px; color: var(--tb-teal); margin: .2em 0 .4em; font-weight: 500; }
+.tb .tb-main li::marker { color: var(--tb-accent); }
+.tb .tb-main h3 { font-size: 23px; color: var(--tb-accent); margin: .2em 0 .4em; font-weight: 500; }
 .tb .tb-margin {
   align-self: start; min-height: 110px;
-  border-left: 2.5px solid var(--tb-teal); padding-left: 16px;
+  border-left: 2.5px solid var(--tb-accent); padding-left: 16px;
   font-size: 18px; line-height: 1.6; color: var(--tb-mut);
 }
+/* 置中：標題是 absolute，不受影響；最後一個元素的下邊距拿掉才會真的置中 */
+.tb.centered .tb-main { display: flex; flex-direction: column; justify-content: center; }
+.tb.centered .tb-main > :last-child { margin-bottom: 0; }
+.tb.centered .tb-margin { align-self: center; }
 .tb .tb-margin strong:first-child {
-  display: block; color: var(--tb-teal); font-size: 12px; letter-spacing: .1em; margin-bottom: 6px;
+  display: block; color: var(--tb-accent); font-size: 12px; letter-spacing: .1em; margin-bottom: 6px;
 }
 </style>

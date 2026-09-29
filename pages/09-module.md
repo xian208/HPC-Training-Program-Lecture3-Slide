@@ -30,7 +30,7 @@ clicks: 3
 clicks: 5
 ---
 
-# module load 前後，PATH 變了什麼 ⭐
+# module load 前後，PATH 變了什麼
 
 <div grid="~ cols-[1fr_1fr] gap-5">
 
@@ -53,7 +53,7 @@ clicks: 5
 </div>
 
 <!--
-⭐ PATH 畫成一疊目錄，load 時 zstd 的路徑從最上面插入，which 由上往下找到第一個符合的；unload 再把它抽掉。
+PATH 畫成一疊目錄，load 時 zstd 的路徑從最上面插入，which 由上往下找到第一個符合的；unload 再把它抽掉。
 - Debian 13 本來就有 /usr/bin/zstd（1.5.7）；load 之後 which 會先找到自己裝的 1.5.6，因為 module 把它加在 PATH 最前面。
 - 講義上的 home 是 /home/xian208，PATH 這裡縮寫成 ~，也省略了 /usr/local/games 等目錄。
 -->

@@ -47,13 +47,13 @@ const mode = computed(() => s.value >= 3 ? 'PRIVATE' : 'PUBLIC')
 .inc { font-family: var(--tb-mono); font-size: 13px; margin-top: 4px; opacity: 0; transition: opacity .35s; }
 .inc.show { opacity: 1; }
 .kw { font-size: 11px; padding: 0 5px; border: 1.2px solid; margin-left: 6px; }
-.kw.PUBLIC { color: var(--tb-teal); }
+.kw.PUBLIC { color: var(--tb-accent); }
 .kw.PRIVATE { color: var(--tb-red); }
 .link { position: relative; height: 92px; width: 330px; }
 .line { position: absolute; left: 40px; top: 0; bottom: 0; width: 2px; background: #1a1a1a; }
-.line.flow { background: var(--tb-teal); width: 3px; }
+.line.flow { background: var(--tb-accent); width: 3px; }
 .lbl { position: absolute; left: 56px; top: 36px; font-family: var(--tb-mono); font-size: 11.5px; color: var(--tb-mut); white-space: nowrap; }
-.pkt { position: absolute; left: 14px; top: 4px; font-family: var(--tb-mono); font-size: 11px; background: #fff; border: 1.2px solid var(--tb-teal); padding: 0 4px; opacity: 0; transition: top .7s ease, opacity .3s; }
+.pkt { position: absolute; left: 14px; top: 4px; font-family: var(--tb-mono); font-size: 11px; background: #fff; border: 1.2px solid var(--tb-accent); padding: 0 4px; opacity: 0; transition: top .7s ease, opacity .3s; }
 .pkt.go { opacity: 1; top: 64px; }
 .pkt.stop { opacity: 1; top: 30px; border-color: var(--tb-red); color: var(--tb-red); }
 .x { position: absolute; left: 50px; top: 58px; color: var(--tb-red); font-size: 24px; font-weight: 500; }

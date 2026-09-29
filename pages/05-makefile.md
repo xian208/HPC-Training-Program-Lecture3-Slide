@@ -36,7 +36,7 @@ clicks: 1
 clicks: 4
 ---
 
-# 連續執行三次 make ⭐
+# 連續執行三次 make
 
 <div grid="~ cols-[1.2fr_1fr] gap-5">
 
@@ -58,7 +58,7 @@ clicks: 4
 </div>
 
 <!--
-⭐ 左邊 terminal、右邊 dependency graph，同一個 click 同步。
+左邊 terminal、右邊 dependency graph，同一個 click 同步。
 Makefile 是後面「變數與 pattern rule」那一頁的版本。
 make 比較的是 target 與 prerequisites 的最後修改時間：prerequisite 比 target 新，target 就重新產生。
 -->

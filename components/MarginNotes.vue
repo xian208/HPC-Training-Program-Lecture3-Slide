@@ -36,7 +36,7 @@ const idx = computed(() => {
 </template>
 
 <style scoped>
-.margin-notes strong { display: block; color: var(--tb-teal); font-size: 12px; letter-spacing: .1em; margin-bottom: 6px; }
+.margin-notes strong { display: block; color: var(--tb-accent); font-size: 12px; letter-spacing: .1em; margin-bottom: 6px; }
 .mn-enter-active, .mn-leave-active { transition: opacity .2s; }
 .mn-enter-from, .mn-leave-to { opacity: 0; }
 .mn-text :deep(code) { font-size: .88em; }

@@ -86,13 +86,13 @@ const edgeHot = (e: [string, string]) => state(e[1]) === 'rebuilt'
 <style scoped>
 .mg { font-family: var(--tb-sans); }
 .edge { stroke: #1a1a1a; stroke-width: 1.4; transition: stroke .35s; }
-.edge.hot { stroke: var(--tb-teal); stroke-width: 2.4; }
+.edge.hot { stroke: var(--tb-accent); stroke-width: 2.4; }
 .node rect { fill: var(--tb-node-bg); stroke: var(--tb-node-line); stroke-width: 1.5; transition: fill .35s; }
 .node text { font-family: var(--tb-mono); font-size: 14px; fill: var(--tb-ink); }
 .node.dirty rect { fill: #f7c9c3; }
 .node.rebuilt rect { fill: var(--tb-node-on); }
 .legend { font-size: 12.5px; color: var(--tb-mut); display: flex; align-items: center; gap: 6px; margin-top: 4px; }
-.legend b { margin-left: auto; color: var(--tb-teal); font-weight: 500; font-size: 14px; }
+.legend b { margin-left: auto; color: var(--tb-accent); font-weight: 500; font-size: 14px; }
 .k { display: inline-block; width: 12px; height: 12px; border: 1.2px solid #1a1a1a; margin-left: 8px; }
 .k.dirty { background: #f7c9c3; margin-left: 0; }
 .k.rebuilt { background: var(--tb-node-on); }

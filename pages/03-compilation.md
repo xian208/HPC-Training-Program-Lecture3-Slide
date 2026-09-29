@@ -49,12 +49,12 @@ hello  hello.c  hello.i  hello.o  hello.s
 clicks: 4
 ---
 
-# 編譯的四個階段 ⭐
+# 編譯的四個階段
 
 <CompilePipeline clicks />
 
 <!--
-⭐ 每一站一個 click：
+每一站一個 click：
 1. Preprocessing：先對原始碼做初步的「文字整理」
 2. Compilation：「翻譯」成貼近硬體的組合語言
 3. Assembly：再轉成機器碼（object file）
@@ -209,7 +209,7 @@ int main() {
 </div>
 
 <style>
-.arch { font-size: 12px; font-weight: 500; color: var(--tb-teal); letter-spacing: .06em; margin-bottom: 4px; }
+.arch { font-size: 12px; font-weight: 500; color: var(--tb-accent); letter-spacing: .06em; margin-bottom: 4px; }
 </style>
 
 <!--
@@ -261,14 +261,14 @@ int main() {
 clicks: 3
 ---
 
-# Linking ⭐
+# Linking
 
 <CompilePipeline :active="4" small />
 
 <LinkResolve />
 
 <!--
-⭐ hello.o 裡的 printf 先畫成空洞 → linker 到 libc 找到 printf.o → 把位址填回去。
+hello.o 裡的 printf 先畫成空洞 → linker 到 libc 找到 printf.o → 把位址填回去。
 - Symbol resolution：找到每個 symbol 對應的定義，例如 printf 實際定義在哪。
 - Relocation：決定 function 或 variable 最終在記憶體中的位置，並更新相關 reference。
 Symbol：程式中代表 function 或 variable 的名稱，例如 main、printf。

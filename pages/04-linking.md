@@ -96,3 +96,34 @@ clicks: 3
 - executable file 大小：static 大、dynamic 小
 - library 更新時：static 整份 executable 要重新 build（link）；dynamic 只要更新 link 到的 .so
 -->
+
+---
+chap: Recap
+---
+
+# Recap：從 source 到執行檔
+
+<Recap :items="[
+  { ch: '02', label: 'Compiler', note: 'flag 決定速度與相容性' },
+  { ch: '03', label: '編譯四階段', note: '前處理、編譯、組譯、連結' },
+  { ch: '04', label: 'Static vs Dynamic', note: '複製進來，還是執行時才接上' },
+]" />
+
+<!--
+- 一句話串起來：compiler 把 source 翻成機器碼，linker 把各份 object 與 library 接起來，loader 在執行時載入 .so。
+- 下一段開始講「很多檔案時怎麼自動化」。
+-->
+
+---
+chap: Q&A
+center: true
+---
+
+# 有問題嗎？
+
+<Slido />
+
+<!--
+- 停一下收問題：Slido 上按讚數高的先回答。
+- 活動代碼與連結在 slides.md 的 headmatter（slido.code、slido.url）。
+-->

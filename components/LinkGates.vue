@@ -63,14 +63,14 @@ const gates = computed(() => [
 .end { font-family: var(--tb-mono); font-size: 14px; border: 1.4px solid var(--tb-node-line); padding: 6px 10px; background: #fff; }
 .end.ok { background: var(--tb-node-on); }
 .seg { flex: 1; height: 3px; background: #cfd5d8; min-width: 14px; transition: background-color .35s; }
-.seg.ok { background: var(--tb-teal); }
+.seg.ok { background: var(--tb-accent); }
 .gate { width: 176px; border: 1.5px solid var(--tb-node-line); background: var(--tb-node-bg); padding: 8px 10px; position: relative; transition: background-color .35s; }
 .gate.fail { background: #f7c9c3; }
 .gate.pass { background: var(--tb-node-on); }
 .mark { position: absolute; right: 8px; top: 2px; font-size: 22px; font-weight: 500; }
 .gate.fail .mark { color: var(--tb-red); }
-.gate.pass .mark { color: var(--tb-teal); }
-.when { font-size: 12px; font-weight: 500; color: var(--tb-teal); letter-spacing: .03em; }
+.gate.pass .mark { color: var(--tb-accent); }
+.when { font-size: 12px; font-weight: 500; color: var(--tb-accent); letter-spacing: .03em; }
 .who { font-size: 15px; font-weight: 500; }
 .find { font-size: 12px; color: var(--tb-mut); margin-top: 3px; }
 .find code { font-size: 11px; background: none; border: 0; padding: 0; }

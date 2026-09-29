@@ -38,7 +38,22 @@ Mac 上也可以直接雙擊 `start.command`。
 ## 字體
 
 與 [slides.elvismao.com](https://slides.elvismao.com/talks/git/) 相同，使用 [emfont](https://font.emtech.cc) 提供的 **霞鶩文楷 TC**（內文、標題）與 **JetBrains Mono**（程式碼），在 `index.html` 載入。
-霞鶩文楷 TC 只有 300 / 400 / 500 三種字重，所以標題用 500。字體與顏色的變數都在 `style.css` 的 `:root`。
+霞鶩文楷 TC 只有 300 / 400 / 500 三種字重，所以標題用 500。字體與顏色的變數都在 `style.css` 的 `:root`，主題色是藍色（`--tb-accent`）。
+
+## 版面
+
+- 標題固定在左上；純文字頁（沒有圖、程式碼、終端機、錄影）的內容會自動上下置中，frontmatter 寫 `center: true / false` 可以強制開關
+- 每段（編譯與連結、Build Automation、環境與套件管理）結尾有 Recap 與 Slido 提問頁
+
+## Slido
+
+在 `slides.md` 的 headmatter 填活動代碼與連結，提問頁會顯示代碼與 QR code：
+
+```yaml
+slido:
+  code: '#1234567'
+  url: https://app.sli.do/event/xxxxxxxx
+```
 
 ## 目錄
 
@@ -70,6 +85,8 @@ scripts/               check-text（文字量）、shoot / sheet（逐頁截圖�
 | `Terminal` | 模擬終端機，每次 click 逐字打出下一個指令 |
 | `MarginNotes` | 右側旁註隨 click 換句子（空字串 = 沿用上一句） |
 | `Cast` | 嵌入 asciinema；檔案還沒錄時自動顯示待錄指令 |
+| `Recap` | 段落回顧卡片（每張：章節編號、名稱、一句重點） |
+| `Slido` | 提問頁：QR code ＋ 加入步驟，代碼讀 headmatter 的 `slido` |
 
 元件都讀 `$clicks`。只靠元件推進的投影片要在 frontmatter 寫 `clicks: N`。
 

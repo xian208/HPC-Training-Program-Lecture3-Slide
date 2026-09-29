@@ -41,7 +41,7 @@ function toneOf(o: { tone?: string, tones?: Record<number, string> }) {
   return t
 }
 const byId = computed(() => Object.fromEntries(props.nodes.map(n => [n.id, n])))
-const MARKERS = [{ k: 'def', c: '#1a1a1a' }, { k: 'on', c: '#0f766e' }, { k: 'bad', c: '#9b2c20' }]
+const MARKERS = [{ k: 'def', c: '#1a1a1a' }, { k: 'on', c: '#1f5fa8' }, { k: 'bad', c: '#9b2c20' }]
 // 每個 Flow 用自己的 marker id：同名的 id 會對應到文件裡第一個，常常是被隱藏的其他投影片，箭頭就畫不出來
 const uid = useId()
 const arrow = (e: E) => `url(#${uid}-arr-${['on', 'bad'].includes(toneOf(e)) ? toneOf(e) : 'def'})`
@@ -112,12 +112,12 @@ function path(e: E) {
 .node .sb { font-family: var(--tb-sans); font-size: 13px; fill: var(--tb-mut); }
 .edge path { fill: none; stroke: #1a1a1a; stroke-width: 1.5; transition: stroke .35s; }
 .edge.dashed path { stroke-dasharray: 5 4; }
-.edge.on path { stroke: var(--tb-teal); stroke-width: 2.4; }
+.edge.on path { stroke: var(--tb-accent); stroke-width: 2.4; }
 .edge.bad path { stroke: var(--tb-red); stroke-width: 2.2; }
 .edge text { font-size: 13.5px; fill: var(--tb-mut); paint-order: stroke; stroke: #fff; stroke-width: 4px; }
-.edge.on text { fill: var(--tb-teal); }
+.edge.on text { fill: var(--tb-accent); }
 .edge.bad text { fill: var(--tb-red); }
 .grp rect { fill: none; stroke: var(--tb-rule); stroke-width: 1.5; stroke-dasharray: 4 4; }
 .grp.solid rect { stroke: var(--tb-mut); stroke-dasharray: none; fill: #fafbfb; }
-.grp text { font-size: 13px; font-weight: 500; letter-spacing: .06em; fill: var(--tb-teal); }
+.grp text { font-size: 13px; font-weight: 500; letter-spacing: .06em; fill: var(--tb-accent); }
 </style>

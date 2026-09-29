@@ -5,20 +5,20 @@
 :root {
   --tb-ink: #20262e;
   --tb-mut: #66707c;
-  --tb-teal: #0f766e;
-  --tb-teal-soft: #e3f2ef;
+  /* 主題色：藍 */
+  --tb-accent: #1f5fa8;
+  --tb-accent-soft: #e6eefa;
   --tb-rule: #e2e5e9;
-  --tb-code: #f5f8f8;
+  --tb-code: #f5f7fa;
   --tb-orange: #9a4d00;
-  --tb-blue: #1f5fa8;
   --tb-red: #9b2c20;
   --tb-red-soft: #fde8e6;
   --tb-green-soft: #e3f5ea;
   /* 圖形節點（沿用參考 artifact 選項 D 的方塊風格） */
   --tb-node-line: #1a1a1a;
   --tb-node-bg: #e7e7e7;
-  --tb-node-on: #adf0c7;
-  --tb-node-run: #6eea9e;
+  --tb-node-on: #bfd8f6;
+  --tb-node-run: #7fb2ea;
 
   /* 字體：emfont 的霞鶩文楷 TC 與 JetBrains Mono，在 index.html 載入 */
   --tb-serif: "LXGWWenKaiTC", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", serif;
@@ -60,16 +60,16 @@
 }
 /* 行高亮：沒亮的行變淡，亮的行加底色（參考 artifact 選項 B） */
 .slidev-code .line { display: inline-block; width: calc(100% + 36px); margin: 0 -18px; padding: 0 18px; transition: opacity .35s, background-color .35s; }
-.slidev-code:has(.slidev-code-dishonored) .slidev-code-highlighted { background: var(--tb-teal-soft); }
+.slidev-code:has(.slidev-code-dishonored) .slidev-code-highlighted { background: var(--tb-accent-soft); }
 .slidev-code .slidev-code-dishonored { opacity: 0.28; }
 
 .slidev-layout table { font-size: 17px; }
-.slidev-layout th { color: var(--tb-teal); font-weight: 500; }
+.slidev-layout th { color: var(--tb-accent); font-weight: 500; }
 .slidev-layout td, .slidev-layout th { border-color: var(--tb-rule); padding: 6px 10px; }
 
 /* Callout（對應 Notion 的灰／藍 callout） */
 .callout {
-  border-left: 3px solid var(--tb-teal);
+  border-left: 3px solid var(--tb-accent);
   background: var(--tb-code);
   padding: 8px 14px;
   font-size: 18px;
@@ -80,7 +80,7 @@
 .callout strong { color: var(--tb-ink); }
 
 .muted { color: var(--tb-mut); }
-.teal { color: var(--tb-teal); }
+.accent { color: var(--tb-accent); }
 
 @media (prefers-reduced-motion: reduce) {
   .slidev-layout * { transition: none !important; animation: none !important; }

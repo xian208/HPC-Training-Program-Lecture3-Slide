@@ -86,16 +86,16 @@ const lastIdx = computed(() => shown.value - 1)
 </template>
 
 <style scoped>
-.term { background: #fbfcfc; border: 1px solid var(--tb-rule); font-family: var(--tb-mono); line-height: 1.6; display: flex; flex-direction: column; overflow: hidden; }
-.bar { display: flex; gap: 7px; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--tb-rule); background: #f1f4f4; }
+.term { background: #fbfcfe; border: 1px solid var(--tb-rule); font-family: var(--tb-mono); line-height: 1.6; display: flex; flex-direction: column; overflow: hidden; }
+.bar { display: flex; gap: 7px; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--tb-rule); background: #eff3f8; }
 .bar i { width: 10px; height: 10px; border-radius: 50%; background: #d3d9dc; }
 .bar span { margin-left: 8px; font-size: 11px; color: var(--tb-mut); font-family: var(--tb-sans); letter-spacing: .06em; }
 .body { padding: 12px 16px; white-space: pre; overflow: auto; flex: 1; }
-.pr { color: var(--tb-teal); }
+.pr { color: var(--tb-accent); }
 .out { color: #4a545e; }
 .out.err { color: var(--tb-red); }
-.out.ok { color: var(--tb-teal); font-weight: 500; }
+.out.ok { color: var(--tb-accent); font-weight: 500; }
 .out.mut { color: #8a939c; }
-.caret { display: inline-block; width: .55em; height: 1.15em; background: var(--tb-teal); vertical-align: -.2em; animation: blink 1s steps(1) infinite; }
+.caret { display: inline-block; width: .55em; height: 1.15em; background: var(--tb-accent); vertical-align: -.2em; animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0 } }
 </style>

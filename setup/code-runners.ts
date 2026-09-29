@@ -41,7 +41,7 @@ async function resolveCompiler(want: string) {
 
 const esc = (s: string) => s.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]!))
 // 同一行 C 原始碼對應的組語用同一個底色
-const PALETTE = ['#e3f2ef', '#fdf0dc', '#e6eefa', '#f3e6f5', '#e8f5dc', '#fbe4e1']
+const PALETTE = ['#e6eefa', '#fdf0dc', '#e3f2ef', '#f3e6f5', '#e8f5dc', '#fbe4e1']
 
 function renderAsm(asm: any[], showAddr: boolean, maxHeight = '250px') {
   const rows = asm.map((l) => {

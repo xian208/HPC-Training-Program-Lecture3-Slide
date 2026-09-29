@@ -27,7 +27,7 @@ const lecture = computed(() => ($slidev.configs as any).lectureName ?? '')
 
 <style scoped>
 .tb-prog { position: absolute; left: 0; right: 0; top: 0; height: 5px; background: #eef1f2; z-index: 10; }
-.tb-prog i { display: block; height: 100%; background: var(--tb-teal); }
+.tb-prog i { display: block; height: 100%; background: var(--tb-accent); }
 .tb-foot {
   position: absolute; left: 49px; right: 49px; bottom: 14px; z-index: 10;
   display: flex; justify-content: space-between;

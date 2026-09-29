@@ -199,7 +199,7 @@ target_link_libraries(program PRIVATE math_utils MPI::MPI_CXX)
 clicks: 3
 ---
 
-# PUBLIC 與 PRIVATE ⭐
+# PUBLIC 與 PRIVATE
 
 <IncludePropagation />
 
@@ -213,7 +213,38 @@ clicks: 3
 ]" />
 
 <!--
-⭐ include 路徑沿著 link 箭頭從 math_utils 傳到 program；PRIVATE 時在中途被擋下。
+include 路徑沿著 link 箭頭從 math_utils 傳到 program；PRIVATE 時在中途被擋下。
 - target_include_directories 等同於 -I：指定 target 的 header 搜尋路徑。
 - 注意：Lab3-3 Part B 第 1 題就是要學生自己把 PUBLIC 改成 PRIVATE 看錯誤，所以這頁不秀實際的錯誤訊息。
+-->
+
+---
+chap: Recap
+---
+
+# Recap：Build Automation
+
+<Recap :items="[
+  { ch: '05', label: 'Makefile', note: '比對時間戳，只重編有改的檔案' },
+  { ch: '06', label: 'Configure', note: '偵測環境，產生 Makefile' },
+  { ch: '07', label: 'CMake', note: '產生 build system，用 target 管依賴' },
+]" />
+
+<!--
+- make 負責「怎麼編」，configure / CMake 負責「依照這台機器產生 make 要用的規則」。
+- 下一段開始講編好之後，怎麼讓系統找到它們。
+-->
+
+---
+chap: Q&A
+center: true
+---
+
+# 有問題嗎？
+
+<Slido />
+
+<!--
+- 停一下收問題：Slido 上按讚數高的先回答。
+- 活動代碼與連結在 slides.md 的 headmatter（slido.code、slido.url）。
 -->
