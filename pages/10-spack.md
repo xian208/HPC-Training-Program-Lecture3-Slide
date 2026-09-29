@@ -362,26 +362,26 @@ chap: Recap
 # Recap：管理 software stack
 
 <Recap :items="[
-  { ch: '08', label: '環境變數', note: 'PATH 找指令，LD_LIBRARY_PATH 找 .so' },
-  { ch: '09', label: 'Module', note: 'load / unload 整組切換' },
-  { ch: '10', label: 'Spack', note: '自動解依賴，從 source 裝好' },
+  { ch: '08', label: '環境變數', note: 'PATH 找指令，LD_LIBRARY_PATH 找 .so', keys: ['PATH', 'LD_LIBRARY_PATH', 'export'] },
+  { ch: '09', label: 'Module', note: 'load / unload 整組切換', keys: ['module load', 'module show', 'purge'] },
+  { ch: '10', label: 'Spack', note: '自動解依賴，從 source 裝好', keys: ['spack install', 'spec', 'spack load'] },
 ]" />
 
 <!--
 - 三者的關係：環境變數是底層機制，module 幫你一次改一整組，spack 則連 build 帶依賴一起處理。
-- 接下來進入 Lab。
 -->
 
 ---
-chap: Q&A
+chap: Slido
 center: true
 ---
 
-# 有問題嗎？
+# Slido：換你回答
 
-<Slido />
+<Slido q="編譯成功，執行 ./use 卻出現 cannot open shared object file，要設哪個環境變數？" :options="['PATH', 'LIBRARY_PATH', 'LD_LIBRARY_PATH', 'CPATH']" />
 
 <!--
-- 停一下收問題：Slido 上按讚數高的先回答。
-- 活動代碼與連結在 slides.md 的 headmatter（slido.code、slido.url）。
+- 答案：C LD_LIBRARY_PATH（load time 找 .so）。LIBRARY_PATH 是 link time 給 linker 用的，對應「三次嘗試，兩道關卡」那頁。
+- 接下來進入 Lab。
+- 開 Slido 的 poll，給 30 秒作答，再公布結果；最後也可以開放提問。
 -->

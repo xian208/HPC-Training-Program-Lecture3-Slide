@@ -104,9 +104,9 @@ chap: Recap
 # Recap：從 source 到執行檔
 
 <Recap :items="[
-  { ch: '02', label: 'Compiler', note: 'flag 決定速度與相容性' },
-  { ch: '03', label: '編譯四階段', note: '前處理、編譯、組譯、連結' },
-  { ch: '04', label: 'Static vs Dynamic', note: '複製進來，還是執行時才接上' },
+  { ch: '02', label: 'Compiler', note: 'flag 決定速度與相容性', keys: ['-O3', '-march', '-g', '-I', '-L'] },
+  { ch: '03', label: '編譯四階段', note: '前處理、編譯、組譯、連結', keys: ['.i', '.s', '.o', 'ld'] },
+  { ch: '04', label: 'Static vs Dynamic', note: '複製進來，還是執行時才接上', keys: ['.a', '.so', 'ldd'] },
 ]" />
 
 <!--
@@ -115,15 +115,16 @@ chap: Recap
 -->
 
 ---
-chap: Q&A
+chap: Slido
 center: true
 ---
 
-# 有問題嗎？
+# Slido：換你回答
 
-<Slido />
+<Slido q="執行 gcc -c hello.s -o hello.o，是在做哪一個階段？" :options="['Preprocessing', 'Compilation', 'Assembly', 'Linking']" />
 
 <!--
-- 停一下收問題：Slido 上按讚數高的先回答。
-- 活動代碼與連結在 slides.md 的 headmatter（slido.code、slido.url）。
+- 答案：C Assembly（.s → .o）。
+- 答錯最多的通常是 Compilation：提醒 -S 才是 compilation（.i → .s）。
+- 開 Slido 的 poll，給 30 秒作答，再公布結果；最後也可以開放提問。
 -->

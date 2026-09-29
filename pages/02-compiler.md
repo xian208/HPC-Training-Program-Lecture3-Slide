@@ -43,6 +43,13 @@ clicks: 2
 
 # Compiler vs Interpreter
 
+<div mb-5>
+
+- **Compiler**：先編好，執行效率高；改 code 要重編
+- **Interpreter**：逐行執行，改完馬上跑；效率較低
+
+</div>
+
 <Flow :width="860" :height="210" :groups="[
   { x: 0, y: 8, w: 860, h: 88, label: 'COMPILER', at: 1 },
   { x: 0, y: 116, w: 860, h: 88, label: 'INTERPRETER', at: 2 },
@@ -58,13 +65,6 @@ clicks: 2
   { from: 's1', to: 'cc', at: 1 }, { from: 'cc', to: 'exe', at: 1 }, { from: 'exe', to: 'run', at: 1 },
   { from: 's2', to: 'itp', at: 2 }, { from: 'itp', to: 'out', at: 2 },
 ]" />
-
-<div mt-4>
-
-- **Compiler**：先編好，執行效率高；改 code 要重編
-- **Interpreter**：逐行執行，改完馬上跑；效率較低
-
-</div>
 
 <!--
 - 編譯：程式碼先經過編譯器，全部編譯成機器語言，產生執行檔後再一次執行，執行效率較高，但修改程式碼後需重新編譯。
@@ -90,11 +90,9 @@ GNU 開源，多數 Linux 預先安裝
 
 在 Intel CPU 上可能比 gcc 快
 
-</div>
-</div>
+<div class="note"><code>icc</code> 在 2024.0 之後移除，改用 <code>icx</code></div>
 
-<div class="callout">
-<code>icc</code> 在 2024.0 之後移除，改用 <code>icx</code>
+</div>
 </div>
 
 ---
@@ -120,7 +118,7 @@ clicks: 3
   { from: 'ir', to: 'x86', at: 2, tones: { 3: 'on' }, label: '' }, { from: 'ir', to: 'arm', at: 2 }, { from: 'ir', to: 'gpu', at: 2 },
 ]" />
 
-<div v-click="3" class="callout">
+<div v-click="3" class="note">
 <code>icx</code> = LLVM ＋ 針對 Intel CPU 最佳化的 backend
 </div>
 
@@ -163,16 +161,16 @@ clicks: 4
 
 <<< @/snippets/loop.c c
 
-<Terminal font-size="12.5px" :steps="[
+<Terminal font-size="12.5px" height="292px" :steps="[
   { cmd: 'gcc -O0 loop.c -o loop_O0' },
-  { cmd: 'time ./loop_O0', out: '1.644934057835\n\nreal\t0m1.509s\nuser\t0m1.505s\nsys\t0m0.004s' },
+  { cmd: 'time ./loop_O0', out: '1.644934057835\nreal\t0m1.509s' },
   { cmd: 'gcc -O3 loop.c -o loop_O3' },
-  { cmd: 'time ./loop_O3', out: '1.644934057835\n\nreal\t0m0.377s\nuser\t0m0.373s\nsys\t0m0.004s', tone: 'ok' },
+  { cmd: 'time ./loop_O3', out: '1.644934057835\nreal\t0m0.377s', tone: 'ok' },
 ]" />
 
 </div>
 
-<div v-click="4" class="callout">
+<div v-click="4" class="note key">
 結果相同；<code>-O0</code>、<code>-O3</code> 就是 compiler flag
 </div>
 
@@ -265,7 +263,7 @@ clicks: 3
 
 </div>
 
-<v-click at="3"><div class="callout">例如 <code>-march=skylake-avx512</code></div></v-click>
+<v-click at="3"><div class="note">例如 <code>-march=skylake-avx512</code></div></v-click>
 
 <!--
 - -march=native 偵測的是「執行編譯的那台機器」，好處是充分利用硬體，缺點是執行檔只能在相同或相容架構的機器上跑。

@@ -75,7 +75,7 @@ const notes = [
 .addr { color: var(--tb-accent); opacity: 0; transition: opacity .35s; }
 .addr.show { opacity: 1; }
 .arrow { width: 96px; text-align: center; font-family: var(--tb-sans); font-size: 12.5px; color: var(--tb-accent); font-weight: 500; }
-.lr-note { margin-top: 18px; font-size: 16px; font-family: var(--tb-sans); color: var(--tb-ink); border-left: 2.5px solid var(--tb-accent); padding-left: 12px; }
+.lr-note { margin-top: 18px; font-size: 17px; font-family: var(--tb-sans); color: var(--tb-mut); }
 .fade-enter-active, .fade-leave-active { transition: opacity .2s; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 </style>

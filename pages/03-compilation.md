@@ -233,7 +233,7 @@ gcc -c hello.s -o hello.o
 
 - `hello.o`：二進位的 relocatable object file
 
-<div class="callout">
+<div class="note">
 <code>objdump -d</code> 反組譯，檢查 flag 有沒有生效
 </div>
 

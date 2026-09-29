@@ -43,11 +43,12 @@ Mac 上也可以直接雙擊 `start.command`。
 ## 版面
 
 - 標題固定在左上；純文字頁（沒有圖、程式碼、終端機、錄影）的內容會自動上下置中，frontmatter 寫 `center: true / false` 可以強制開關
-- 每段（編譯與連結、Build Automation、環境與套件管理）結尾有 Recap 與 Slido 提問頁
+- 開場有一題 Slido 暖身；每段（編譯與連結、Build Automation、環境與套件管理）結尾有一頁 Recap 與一題 Slido，答案在講者備註
+- `.callout` 是方框（重要提醒）、`.callout.warn` 是橘色注意事項；不需要框的補充說明用 `.note`
 
 ## Slido
 
-在 `slides.md` 的 headmatter 填活動代碼與連結，提問頁會顯示代碼與 QR code：
+在 `slides.md` 的 headmatter 填活動代碼與連結，Slido 頁會顯示代碼與 QR code（題目要另外在 Slido 後台建立 poll）：
 
 ```yaml
 slido:
@@ -85,8 +86,8 @@ scripts/               check-text（文字量）、shoot / sheet（逐頁截圖�
 | `Terminal` | 模擬終端機，每次 click 逐字打出下一個指令 |
 | `MarginNotes` | 右側旁註隨 click 換句子（空字串 = 沿用上一句） |
 | `Cast` | 嵌入 asciinema；檔案還沒錄時自動顯示待錄指令 |
-| `Recap` | 段落回顧卡片（每張：章節編號、名稱、一句重點） |
-| `Slido` | 提問頁：QR code ＋ 加入步驟，代碼讀 headmatter 的 `slido` |
+| `Recap` | 整頁的段落回顧卡片（章節編號、名稱、一句重點、關鍵字） |
+| `Slido` | 互動題：題目＋選項（沒有選項＝開放作答），右側 QR code 與代碼，讀 headmatter 的 `slido` |
 
 元件都讀 `$clicks`。只靠元件推進的投影片要在 frontmatter 寫 `clicks: N`。
 

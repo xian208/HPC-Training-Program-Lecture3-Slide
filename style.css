@@ -67,17 +67,21 @@
 .slidev-layout th { color: var(--tb-accent); font-weight: 500; }
 .slidev-layout td, .slidev-layout th { border-color: var(--tb-rule); padding: 6px 10px; }
 
-/* Callout（對應 Notion 的灰／藍 callout） */
+/* Callout：方框（重要提醒、前置條件）；warn 是橘色的注意事項 */
 .callout {
-  border-left: 3px solid var(--tb-accent);
-  background: var(--tb-code);
+  border: 1.5px solid #c9d8ec;
+  background: #f6f9fd;
   padding: 8px 14px;
   font-size: 18px;
-  color: var(--tb-mut);
-  margin-top: 12px;
+  color: var(--tb-ink);
+  margin-top: 14px;
 }
-.callout.warn { border-color: var(--tb-orange); }
-.callout strong { color: var(--tb-ink); }
+.callout.warn { border-color: #e7c9a6; background: #fdf8f2; }
+.callout.warn strong { color: var(--tb-orange); }
+.callout strong { font-weight: 500; }
+/* Note：不加框的補充說明，直接接在內容下面 */
+.note { font-size: 18px; color: var(--tb-mut); margin-top: 14px; }
+.note.key { font-size: 21px; color: var(--tb-ink); }
 
 .muted { color: var(--tb-mut); }
 .accent { color: var(--tb-accent); }

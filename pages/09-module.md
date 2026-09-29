@@ -228,7 +228,7 @@ selfmodule/
 
 </div>
 
-<div class="callout">
+<div class="note">
 TCL、Lua 兩種寫法，Lmod 都能讀
 </div>
 

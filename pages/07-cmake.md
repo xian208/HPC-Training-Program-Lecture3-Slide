@@ -225,9 +225,9 @@ chap: Recap
 # Recap：Build Automation
 
 <Recap :items="[
-  { ch: '05', label: 'Makefile', note: '比對時間戳，只重編有改的檔案' },
-  { ch: '06', label: 'Configure', note: '偵測環境，產生 Makefile' },
-  { ch: '07', label: 'CMake', note: '產生 build system，用 target 管依賴' },
+  { ch: '05', label: 'Makefile', note: '比對時間戳，只重編有改的檔案', keys: ['make -j', 'target: prereq', '$@ $<'] },
+  { ch: '06', label: 'Configure', note: '偵測環境，產生 Makefile', keys: ['./configure', '--prefix'] },
+  { ch: '07', label: 'CMake', note: '產生 build system，用 target 管依賴', keys: ['-S -B', '--build', 'PUBLIC'] },
 ]" />
 
 <!--
@@ -236,15 +236,16 @@ chap: Recap
 -->
 
 ---
-chap: Q&A
+chap: Slido
 center: true
 ---
 
-# 有問題嗎？
+# Slido：換你回答
 
-<Slido />
+<Slido q="只改了 utils.c，再執行一次 make，會重新產生哪些檔案？" :options="['全部重編', 'utils.o、program', '只有 utils.o', '都不會']" />
 
 <!--
-- 停一下收問題：Slido 上按讚數高的先回答。
-- 活動代碼與連結在 slides.md 的 headmatter（slido.code、slido.url）。
+- 答案：B。utils.o 依賴 utils.c，program 依賴 utils.o，所以兩個都會重新產生；main.o 不動。
+- 可以接著問：如果改的是 header 而 Makefile 沒寫進 prerequisites 呢？（Lab3-1 Part B 第 2 題）
+- 開 Slido 的 poll，給 30 秒作答，再公布結果；最後也可以開放提問。
 -->
