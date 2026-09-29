@@ -22,5 +22,5 @@ title: Introduction
 - HPC 的一個重要研究方向是加速科學計算程式：CFD、分子動力學、氣候模擬……
 - 用預先編譯好的版本也能算出結果，但 HPC 追求的是更短的執行時間。
 - 編譯器、library 版本、編譯參數，都可能影響效能，所以傳統 HPC 應用通常選擇 build from source。
-- 這堂課從一行 gcc 開始，一路講到怎麼管理一整套 software stack；Lab 會實際 build 一套 OpenMPI，並用 CMake 編譯連結到它的程式。
+- 這堂課從一行 gcc 開始，一路講到怎麼管理一整套 software stack；Lab3-4 會用 LULESH 實際比較不同 build 方式的效能差異。
 -->
