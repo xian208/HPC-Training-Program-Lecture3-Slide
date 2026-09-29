@@ -31,6 +31,7 @@ Lab3-3、3-4 都要用 Lab3-2 裝好的 OpenMPI
 - Lab3-3 CMake 多目錄專案、PUBLIC / PRIVATE、build type。
 - Lab3-4 LULESH：同一份 source code，不同 build 方式的效能。
 - 每次開新的 terminal 都要重新載入：module use $HOME/selfmodule 後 module load openmpi/5.0.8。
+- MPI 程式這次都直接執行（只有 1 個 process），不用 mpirun；多 process 留到之後的 MPI 課程。
 -->
 
 ---
