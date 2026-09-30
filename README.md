@@ -43,26 +43,17 @@ Mac 上也可以直接雙擊 `start.command`。
 ## 版面
 
 - 標題固定在左上；純文字頁（沒有圖、程式碼、終端機、錄影）的內容會自動上下置中，frontmatter 寫 `center: true / false` 可以強制開關
-- 開場請大家加入 Slido；每段（編譯與連結、Build Automation、環境與套件管理）結尾有一頁 Recap 與 Slido 提問頁，Recap 的講者備註有一題口頭提問
-- Lab 穿插在課堂中：Makefile 後做 Lab3-1、Configure 後開始編 OpenMPI（接著休息）、Spack 後做 modulefile 與 Lab3-3，Lab3-4 回家做；三小時的流程寫在「課前準備」頁的講者備註
+- 每段（編譯與連結、Build Automation、環境與套件管理）結尾有一頁 Recap，講者備註有一題口頭提問
+- Lab 穿插在課堂中：Makefile 後做 Lab3-1、Configure 後開始編 OpenMPI（接著休息）、Spack 後做 modulefile 與 Lab3-3，Lab3-4 回家做；三小時的流程寫在封面頁的講者備註
 - 不使用 emoji 或圈號這類特殊符號
 - `.callout` 是方框（重要提醒）、`.callout.warn` 是橘色注意事項；不需要框的補充說明用 `.note`
 
-## Slido
-
-在 `slides.md` 的 headmatter 填活動代碼與連結，Slido 頁會顯示代碼與 QR code（Lab 進度調查要另外在 Slido 後台建立 poll）：
-
-```yaml
-slido:
-  code: '#1234567'
-  url: https://app.sli.do/event/xxxxxxxx
-```
 
 ## 目錄
 
 ```
 slides.md              headmatter + 依序匯入各章
-pages/00-prep.md …     一章一個檔案
+pages/01-intro.md …     一章一個檔案
 layouts/               default（內容頁）、section（章節首頁）、cover（封面）
 slide-top.vue          進度條＋頁尾
 components/            動畫元件，見下表
@@ -89,9 +80,7 @@ scripts/               check-text（文字量）、shoot / sheet（逐頁截圖�
 | `MarginNotes` | 右側旁註隨 click 換句子（空字串 = 沿用上一句） |
 | `Cast` | 嵌入 asciinema；檔案還沒錄時自動顯示待錄指令 |
 | `Recap` | 整頁的段落回顧卡片（章節編號、名稱、一句重點、關鍵字） |
-| `Slido` | Slido 提問頁（也可放題目＋選項），右側是 `SlidoJoin` |
-| `SlidoJoin` | QR code、slido.com、活動代碼，讀 headmatter 的 `slido` |
-| `LabTime` | Lab 時間頁：分鐘數（可加休息）、要做的事（slot），右側在 Slido 回報進度 |
+| `LabTime` | Lab 時間頁：分鐘數（可加休息）與要做的事（slot） |
 
 元件都讀 `$clicks`。只靠元件推進的投影片要在 frontmatter 寫 `clicks: N`。
 

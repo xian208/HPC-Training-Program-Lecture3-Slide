@@ -141,6 +141,5 @@ center: true
 - Lab3-2 的前半：下載、解壓縮、configure、make、make install（指令在 Notion Lab3-2 Part A 第 1–2 步）。
 - 輸出導到 build.log，終端機才不會一直捲；休息回來用 tail build.log 或 ls ~/opt/openmpi/5.0.8/bin 確認。
 - 4 核心 VM 實測：configure 約 2 分 20 秒、make -j4 約 5 分鐘。
-- Slido poll「OpenMPI 開始編了嗎？」：編譯中／configure 報錯／還沒開始。
 - modulefile 要等 Module 章講完，在最後一段 Lab 時間再寫。
 -->

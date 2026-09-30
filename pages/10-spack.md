@@ -373,19 +373,6 @@ chap: Recap
 -->
 
 ---
-chap: Slido
-center: true
----
-
-# 有問題嗎？
-
-<Slido />
-
-<!--
-- 集中回答 Slido 上的問題，按讚數高的先回答。
--->
-
----
 chap: Lab 時間
 center: true
 ---
@@ -403,5 +390,4 @@ center: true
 <!--
 - 先確認 OpenMPI 裝好了：ls ~/opt/openmpi/5.0.8/bin/mpicc。沒編完的人先寫 modulefile，Lab3-3 回家做。
 - Lab3-3 要先 module use $HOME/selfmodule、module load openmpi/5.0.8。
-- Slido poll「做到哪了？」：modulefile 完成／Lab3-3 完成／卡住了。
 -->

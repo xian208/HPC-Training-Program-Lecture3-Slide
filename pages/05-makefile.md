@@ -253,6 +253,5 @@ center: true
 
 <!--
 - 時間到就收：做不完的 Part B 回家補，Part A 一定要完成（之後不再用到，但確認 make 環境沒問題）。
-- Slido poll「Lab3-1 做到哪了？」：還在 Part A／Part A 完成／全部完成／卡住了。
 - 常見卡點：recipe 用空白縮排（要用 tab）、PREFIX 同一行後面接註解。
 -->
