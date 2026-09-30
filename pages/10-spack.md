@@ -47,7 +47,7 @@ clicks: 3
 才會裝 `zstd` 執行檔
 
 <!--
-🎥 需要網路也要編譯時間，錄成 cast（第一次安裝會先裝 gcc-runtime、compiler-wrapper、gmake，錄影裡會看到）。
+需要網路也要編譯時間，錄成 cast（第一次安裝會先裝 gcc-runtime、compiler-wrapper、gmake，錄影裡會看到）。
 Spack 的 zstd 預設 variant 是 ~programs，只裝 library（lib/、include/），沒有 zstd 執行檔，所以要加 +programs。
 -->
 
@@ -78,7 +78,7 @@ clicks: 4
 </div>
 
 <!--
-🎬 直接沿用 Module 那疊 PATH，只把路徑換成帶 hash 的目錄。
+直接沿用 Module 那疊 PATH，只把路徑換成帶 hash 的目錄。
 - 安裝路徑由 Spack 決定（zstd-1.5.7-<hash>），hash 由 spec 算出，不同 build 裝在不同目錄、可以並存。
 - 不用自己寫 modulefile，spack load 會把 bin/ 加到 PATH 最前面。
 - ~/spack/bin 是執行 setup-env.sh 時加上的，讓 shell 找得到 spack 指令。
@@ -301,9 +301,9 @@ clicks: 7
 </style>
 
 <!--
-💻 [+] [e] - 三種標記挑幾行高亮，不需要逐行動畫。
+[+] [e] - 三種標記挑幾行高亮，不需要逐行動畫。
 - [e] external：系統上既有的軟體（系統 gcc、glibc），Spack 不會重新編譯。
-- ⚠ 這份輸出是 Rocky 8 / skylake / oneapi 的叢集環境，上台時口頭說明。
+- 注意：這份輸出是 Rocky 8 / skylake / oneapi 的叢集環境，上台時口頭說明。
 -->
 
 ---
@@ -369,6 +369,7 @@ chap: Recap
 
 <!--
 - 三者的關係：環境變數是底層機制，module 幫你一次改一整組，spack 則連 build 帶依賴一起處理。
+- 口頭提問：編譯成功，執行 ./use 卻出現 cannot open shared object file，要設哪個環境變數？（答：LD_LIBRARY_PATH；LIBRARY_PATH 是 link time 用的）
 -->
 
 ---
@@ -376,12 +377,31 @@ chap: Slido
 center: true
 ---
 
-# Slido：換你回答
+# 有問題嗎？
 
-<Slido q="編譯成功，執行 ./use 卻出現 cannot open shared object file，要設哪個環境變數？" :options="['PATH', 'LIBRARY_PATH', 'LD_LIBRARY_PATH', 'CPATH']" />
+<Slido />
 
 <!--
-- 答案：C LD_LIBRARY_PATH（load time 找 .so）。LIBRARY_PATH 是 link time 給 linker 用的，對應「三次嘗試，兩道關卡」那頁。
-- 接下來進入 Lab。
-- 開 Slido 的 poll，給 30 秒作答，再公布結果；最後也可以開放提問。
+- 集中回答 Slido 上的問題，按讚數高的先回答。
+-->
+
+---
+chap: Lab 時間
+center: true
+---
+
+# Lab 時間：modulefile 與 CMake
+
+<LabTime minutes="20">
+
+- **Lab3-2 後半**：寫 modulefile，完成 Part B
+- **Lab3-3**：填完 7 個 TODO，編譯並執行
+- **做完的人**：先開始 Lab3-4
+
+</LabTime>
+
+<!--
+- 先確認 OpenMPI 裝好了：ls ~/opt/openmpi/5.0.8/bin/mpicc。沒編完的人先寫 modulefile，Lab3-3 回家做。
+- Lab3-3 要先 module use $HOME/selfmodule、module load openmpi/5.0.8。
+- Slido poll「做到哪了？」：modulefile 完成／Lab3-3 完成／卡住了。
 -->

@@ -210,7 +210,7 @@ int main() {
 </div>
 
 <!--
-💻 Monaco runner → Compiler Explorer（x86-64 gcc 14.2）。按左上角 ▶ 執行，也可以現場改 flag 或程式。
+Monaco runner → Compiler Explorer（x86-64 gcc 14.2）。按右上角的執行鍵，也可以現場改 flag 或程式。
 觀察重點：-O0 每一圈都把 s、i 寫回記憶體（-8(%rbp) 之類）再讀出來；-O3 整個迴圈都留在暫存器（xmm、rax）。
 左邊 L4、L5 標出迴圈對應的組語。
 連不上網路時會顯示 snippets/ce-cache 裡預先存好的輸出（gcc 13.3 產生）。
@@ -220,7 +220,7 @@ int main() {
 clicks: 3
 ---
 
-# Compiler flags ①：optimization
+# Compiler flags：optimization
 
 <v-clicks>
 
@@ -242,7 +242,7 @@ clicks: 3
 clicks: 3
 ---
 
-# Compiler flags ②：architecture
+# Compiler flags：architecture
 
 <Flow :width="860" :height="190" :groups="[
   { x: 0, y: 6, w: 360, h: 176, label: 'LOGIN NODE（較新 CPU）' },
@@ -273,7 +273,7 @@ clicks: 3
 
 ---
 
-# Compiler flags ③④：debugging、path
+# Compiler flags：debugging、path
 
 - `-g`：加入 debug 資訊，不影響執行速度
 - `-I<dir>`：編譯時到 dir 找 header

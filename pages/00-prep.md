@@ -22,4 +22,5 @@ sudo apt install -y build-essential cmake git curl ca-certificates \
 - 裝完之後，仍然要在 Module 章節初始化 lmod、在 Spack 章節 clone Spack。
 - zstd 會在 Module、Spack 章節分別用 source code 與 Spack 裝，OpenMPI 是 Lab3-2 的內容。先用 apt 裝的話，系統版本會和自己 build 的版本混在一起，比較難觀察 module 的效果。
 - zlib1g-dev：OpenMPI 內附的 PMIx 需要它，沒裝的話執行 MPI 程式時會跳 compression library 的警告。
+- 三小時流程（估計）：0:05 Intro–Linking → Recap 1 → 0:50 Makefile → 1:02 Lab3-1（15 分）→ 1:17 Configure → 1:25 開始編 OpenMPI（5 分）→ 1:30 休息 10 分（OpenMPI 在背景編）→ 1:40 CMake → Recap 2 → 1:55 環境變數、Module、Spack → Recap 3 → 2:35 modulefile＋Lab3-3（20 分）→ 2:55 Lab3-4 回家作業說明、Q&A
 -->

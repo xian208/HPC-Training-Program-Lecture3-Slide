@@ -263,5 +263,5 @@ module purge       # unload all
 </div>
 
 <!--
-🎥 use → avail → load → list → unload → purge 錄成一段，每個指令放一個 marker，播到會自動停。
+use → avail → load → list → unload → purge 錄成一段，每個指令放一個 marker，播到會自動停。
 -->

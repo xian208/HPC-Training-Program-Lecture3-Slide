@@ -37,7 +37,7 @@ $ ldd hello_static
 ]" />
 
 <!--
-💻 這是 Debian 13 x86_64 上實測的輸出（講義上是 aarch64：69K vs 689K，約 10 倍，ldd 的路徑是 /lib/aarch64-linux-gnu/...）。
+這是 Debian 13 x86_64 上實測的輸出（講義上是 aarch64：69K vs 689K，約 10 倍，ldd 的路徑是 /lib/aarch64-linux-gnu/...）。
 - dynamic 版本只記錄「執行時需要 libc.so.6」，由 loader 在執行時載入。
 - static 版本把用到的 libc 內容直接複製進執行檔。
 - Debian 上 static linking 需要 libc.a，build-essential 已經裝好了。
@@ -112,6 +112,7 @@ chap: Recap
 <!--
 - 一句話串起來：compiler 把 source 翻成機器碼，linker 把各份 object 與 library 接起來，loader 在執行時載入 .so。
 - 下一段開始講「很多檔案時怎麼自動化」。
+- 口頭提問：gcc -c hello.s -o hello.o 是在做哪一個階段？（答：Assembly，.s → .o；-S 才是 compilation）
 -->
 
 ---
@@ -119,12 +120,10 @@ chap: Slido
 center: true
 ---
 
-# Slido：換你回答
+# 有問題嗎？
 
-<Slido q="執行 gcc -c hello.s -o hello.o，是在做哪一個階段？" :options="['Preprocessing', 'Compilation', 'Assembly', 'Linking']" />
+<Slido />
 
 <!--
-- 答案：C Assembly（.s → .o）。
-- 答錯最多的通常是 Compilation：提醒 -S 才是 compilation（.i → .s）。
-- 開 Slido 的 poll，給 30 秒作答，再公布結果；最後也可以開放提問。
+- 集中回答 Slido 上的問題，按讚數高的先回答。
 -->

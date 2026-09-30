@@ -215,7 +215,7 @@ clean :
 </div>
 
 <!--
-💻 Magic Move 三步：逐條規則 → 抽出變數 → pattern rule。
+Magic Move 三步：逐條規則 → 抽出變數 → pattern rule。
 - 把 compiler、flag、檔案清單抽成變數，用 $(變數名) 取值。要換 compiler 只改一處，或執行時 make CC=icx。
 - %.o : %.c 是 pattern rule。以 main.o 為例，$< = main.c、$@ = main.o；program 那條的 $^ = main.o utils.o（全部 prerequisites）。
 - 變數同一行後面不要接註解：# 前面的空白會變成值的一部分（Lab3-1 會遇到）。
@@ -233,4 +233,26 @@ clean :
 - make -j <n>：用 n 個核心平行編譯；-j$(nproc) 用全部核心。
 - make install：完成編譯後，把執行檔、library、header file 等複製到安裝路徑（通常由 prefix 決定）。
 - 編譯途中遇到 error，建議先 make clean 再重新 make，避免殘留的 .o 造成後續錯誤。
+-->
+
+---
+chap: Lab 時間
+center: true
+---
+
+# Lab 時間：Lab3-1 Makefile
+
+<LabTime minutes="15">
+
+- **Part A**：填完 6 個 TODO，`make` 並執行
+- **Part B**：依序操作，回答 4 題觀察題
+
+<div class="note">repo：<code>xian208/2026_HPC-training_lab3-1</code></div>
+
+</LabTime>
+
+<!--
+- 時間到就收：做不完的 Part B 回家補，Part A 一定要完成（之後不再用到，但確認 make 環境沒問題）。
+- Slido poll「Lab3-1 做到哪了？」：還在 Part A／Part A 完成／全部完成／卡住了。
+- 常見卡點：recipe 用空白縮排（要用 tab）、PREFIX 同一行後面接註解。
 -->

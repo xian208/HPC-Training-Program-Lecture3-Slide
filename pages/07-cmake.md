@@ -39,7 +39,7 @@ $ cmake -S . -B build
 ]" />
 
 <!--
-💻 以後面的 my_project 為例，在專案根目錄執行。和 configure 類似。
+以後面的 my_project 為例，在專案根目錄執行。和 configure 類似。
 - 安裝：sudo apt install -y cmake，本課程需要 3.16 以上（Debian 13 為 3.31）。
 - 這個範例有 find_package(MPI REQUIRED)，還沒有 MPI 時會出現 Could NOT find MPI (missing: MPI_CXX_FOUND) 並停止，這正是 REQUIRED 的作用。
 - MPI 的路徑是 Lab3-2 自己 build 的 OpenMPI（不是 apt 裝的）。
@@ -113,7 +113,7 @@ clicks: 1
 </div>
 
 <!--
-🎬 source tree 保持乾淨：cmake -S . -B build 之後，所有產物都落在 build/，要重來直接刪掉 build/ 就好。
+source tree 保持乾淨：cmake -S . -B build 之後，所有產物都落在 build/，要重來直接刪掉 build/ 就好。
 - -S：project 根目錄（要有 root CMakeLists.txt），預設為當前目錄。
 - -B：build tree 的位置：Makefile、CMakeCache.txt、CMakeFiles/、object file、執行檔都放這裡；預設為當前目錄。
 - --build：呼叫 build system 的工具（例如 make）編譯；後面接的就是 -B 指定的目錄。
@@ -233,6 +233,7 @@ chap: Recap
 <!--
 - make 負責「怎麼編」，configure / CMake 負責「依照這台機器產生 make 要用的規則」。
 - 下一段開始講編好之後，怎麼讓系統找到它們。
+- 口頭提問：只改了 utils.c，再 make 一次會重新產生哪些檔案？（答：utils.o 與 program；main.o 不動）
 -->
 
 ---
@@ -240,12 +241,10 @@ chap: Slido
 center: true
 ---
 
-# Slido：換你回答
+# 有問題嗎？
 
-<Slido q="只改了 utils.c，再執行一次 make，會重新產生哪些檔案？" :options="['全部重編', 'utils.o、program', '只有 utils.o', '都不會']" />
+<Slido />
 
 <!--
-- 答案：B。utils.o 依賴 utils.c，program 依賴 utils.o，所以兩個都會重新產生；main.o 不動。
-- 可以接著問：如果改的是 header 而 Makefile 沒寫進 prerequisites 呢？（Lab3-1 Part B 第 2 題）
-- 開 Slido 的 poll，給 30 秒作答，再公布結果；最後也可以開放提問。
+- 集中回答 Slido 上的問題，按讚數高的先回答。
 -->

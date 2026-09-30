@@ -13,7 +13,7 @@ withDefaults(defineProps<{
   h?: string
 }>(), { kind: 'anim', h: 'auto' })
 
-const icon = { anim: '🎬 動畫待做', cast: '🎥 錄影待補', image: '🖼 圖待重畫' }
+const icon = { anim: '動畫待做', cast: '錄影待補', image: '圖待重畫' }
 </script>
 
 <template>

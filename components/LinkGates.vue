@@ -44,7 +44,7 @@ const gates = computed(() => [
       <template v-for="g in gates" :key="g.key">
         <div class="seg" :class="{ ok: g.st === 'pass' || (g.key === 'g2' && cur.g1 === 'pass') }" />
         <div class="gate" :class="g.st">
-          <div class="mark">{{ g.st === 'fail' ? '✗' : g.st === 'pass' ? '✓' : '' }}</div>
+          <div class="mark">{{ g.st === 'fail' ? '失敗' : g.st === 'pass' ? '通過' : '' }}</div>
           <div class="when">{{ g.when }}</div>
           <div class="who">{{ g.who }}</div>
           <div class="find">找 .so：<code>{{ g.find }}</code></div>
@@ -67,7 +67,7 @@ const gates = computed(() => [
 .gate { width: 176px; border: 1.5px solid var(--tb-node-line); background: var(--tb-node-bg); padding: 8px 10px; position: relative; transition: background-color .35s; }
 .gate.fail { background: #f7c9c3; }
 .gate.pass { background: var(--tb-node-on); }
-.mark { position: absolute; right: 8px; top: 2px; font-size: 22px; font-weight: 500; }
+.mark { position: absolute; right: 8px; top: 6px; font-size: 14px; font-weight: 500; }
 .gate.fail .mark { color: var(--tb-red); }
 .gate.pass .mark { color: var(--tb-accent); }
 .when { font-size: 12px; font-weight: 500; color: var(--tb-accent); letter-spacing: .03em; }

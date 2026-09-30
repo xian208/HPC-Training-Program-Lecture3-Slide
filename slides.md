@@ -34,7 +34,6 @@ meta: Compiler · Build System · Environment Variable · Module · Spack
 
 <!--
 - 每個章節一個檔案，放在 pages/，依序 import
-- 💻 = 程式 demo、🎥 = asciinema 錄影
 - 投影片只放圖、demo 與重點；細節都寫在每頁的講者備註（按 p 進 presenter mode）
 -->
 

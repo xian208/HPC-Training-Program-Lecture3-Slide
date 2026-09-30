@@ -30,12 +30,11 @@ chap: Slido
 center: true
 ---
 
-# Slido：暖身
+# 加入 Slido
 
-<Slido q="你平常都怎麼安裝軟體？" :options="['apt / brew', 'pip / conda', '下載 source 自己編', '還沒裝過']" />
+<Slido q="整堂課的問題都丟到 Slido" hint="匿名提問、幫別人按讚；Lab 時間也在這裡回報進度" />
 
 <!--
-- 暖身題，沒有標準答案；順便確認大家都連得上 Slido。
-- 帶出這堂課的主題：選「自己編」的人其實就在做 build from source。
-- 開 Slido 的 poll，給 30 秒作答，再公布結果；最後也可以開放提問。
+- 請大家現在就掃 QR code 加入，後面 Lab 時間會用 Slido 的 poll 回報進度。
+- 上課中隨時可以提問，每段 Recap 之後會集中回答。
 -->

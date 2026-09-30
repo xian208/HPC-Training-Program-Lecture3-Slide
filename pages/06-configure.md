@@ -24,7 +24,7 @@ title: Configure
 逐項檢查環境，最後產生 Makefile
 
 <!--
-🎥 需要網路、輸出又長，用 asciinema 錄。播到 checking for gcc... gcc 的 marker 會自動停下來講。
+需要網路、輸出又長，用 asciinema 錄。播到 checking for gcc... gcc 的 marker 會自動停下來講。
 - configure 一項一項檢查當前環境：CPU 架構、有哪些工具可用（沒有 gawk 就改用 mawk）、C compiler 是誰、能不能正常運作……最後依照結果產生 Makefile。
 - 安裝：sudo apt install -y curl ca-certificates（後面 zstd、OpenMPI 也會用到）。
 - 不要用 ./configure ... | head -25 截斷輸出：head 讀完 25 行就關閉 pipe，configure 會 Broken pipe 中途結束，不會產生 Makefile。
@@ -83,7 +83,7 @@ clicks: 3
 .at-line { display: flex; align-items: center; gap: 10px; margin: 4px 0; }
 .at-line .f { font-family: var(--tb-mono); font-size: 14px; border: 1.3px solid var(--tb-node-line); background: #fff; padding: 3px 10px; }
 .at-line .t { font-family: var(--tb-mono); font-size: 12.5px; color: var(--tb-mut); }
-.at-line .t::before { content: "── "; } .at-line .t::after { content: " ──▶"; }
+.at-line .t::before { content: "── "; } .at-line .t::after { content: " ──→"; }
 .at-row.usr .step { border: 1.5px solid var(--tb-node-line); background: var(--tb-node-on); padding: 6px 12px; }
 .at-row.usr .step code { background: none; border: 0; font-size: 15px; padding: 0; }
 .at-row.usr .step em { display: block; font-style: normal; font-size: 12px; color: var(--tb-ink); }
@@ -118,4 +118,29 @@ make install
 - LDFLAGS="-L..."：指定要到什麼路徑找要 link 的 library。
 - LIBS="-l..."：指定要 link 的 library。
 - CC= / CXX=：指定編譯器，例如 CC=gcc。
+-->
+
+---
+chap: Lab 時間
+center: true
+---
+
+# Lab 時間：開始編 OpenMPI
+
+<LabTime minutes="5" break-minutes="10">
+
+- **安裝**：`sudo apt install -y bzip2 zlib1g-dev`
+- **configure**：`--prefix=$HOME/opt/openmpi/5.0.8`
+- **編譯**：`make -j4 > build.log 2>&1 && make install`
+
+<div class="note">編譯約 8 分鐘，休息時讓它在背景跑</div>
+
+</LabTime>
+
+<!--
+- Lab3-2 的前半：下載、解壓縮、configure、make、make install（指令在 Notion Lab3-2 Part A 第 1–2 步）。
+- 輸出導到 build.log，終端機才不會一直捲；休息回來用 tail build.log 或 ls ~/opt/openmpi/5.0.8/bin 確認。
+- 4 核心 VM 實測：configure 約 2 分 20 秒、make -j4 約 5 分鐘。
+- Slido poll「OpenMPI 開始編了嗎？」：編譯中／configure 報錯／還沒開始。
+- modulefile 要等 Module 章講完，在最後一段 Lab 時間再寫。
 -->

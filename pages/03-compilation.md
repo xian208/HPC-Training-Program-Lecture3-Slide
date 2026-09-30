@@ -146,7 +146,7 @@ int main() {
 ]" />
 
 <!--
-💻 Magic Move：MAX、AVG(a, b) 在原地變形成展開後的樣子。
+Magic Move：MAX、AVG(a, b) 在原地變形成展開後的樣子。
 #include <stdio.h> 會把 stdio.h 的內容加進來；#define A B 會把程式裡的 A 換成 B。
 -->
 
@@ -171,7 +171,7 @@ gcc -S hello.i -o hello.s
 
 ---
 
-# C ↔ 組語對照：x86-64 vs ARM64
+# C 與組語對照：x86-64 vs ARM64
 
 <div grid="~ cols-2 gap-4">
 <div>
@@ -213,7 +213,7 @@ int main() {
 </style>
 
 <!--
-💻 Monaco runner → Compiler Explorer。組語每一行前面的 Ln 與底色 = 對應到 C 的第 n 行。
+Monaco runner → Compiler Explorer。組語每一行前面的 Ln 與底色 = 對應到 C 的第 n 行。
 可以現場改 5000 → 其他數字，看 movl $5000 跟著變。
 講義上的 hello.s 是 Debian gcc 14.2 在 x86-64 上的輸出；ARM64 那邊沒有離線備援。
 -->
@@ -254,7 +254,7 @@ int main() {
 <!--
 - Assembler 把 hello.s 轉成二進位的 relocatable object file，存在 hello.o。
 - 可以現場 cat hello.o：會看到亂碼，因為它已經是二進位格式了。
-- 💻 右邊 = godbolt 的 binary object 模式（等同 objdump -d），會顯示位址與 opcode。
+- 右邊 = godbolt 的 binary object 模式（等同 objdump -d），會顯示位址與 opcode。
 -->
 
 ---
