@@ -4,13 +4,13 @@ chapter: "03"
 title: Compilation Process
 ---
 
-從 hello.c 到 hello，其實經過了四個階段
+原始碼 hello.c 轉換為可執行檔 hello，共歷經四個階段。
 
 ---
 clicks: 4
 ---
 
-# 把中間產物留下來看看
+# 保留編譯中間產物
 
 ```bash {all|1|2-3}
 $ gcc -save-temps hello.c -o hello
@@ -19,19 +19,19 @@ hello  hello.c  hello.i  hello.o  hello.s
 ```
 
 <div class="temps">
-  <div v-click="2"><code>hello.i</code><span>Preprocessing</span></div>
-  <div v-click="3"><code>hello.s</code><span>Compilation</span></div>
-  <div v-click="4"><code>hello.o</code><span>Assembly</span></div>
+  <div v-click="2"><code>hello.i</code><span>前置處理 (Preprocessing)</span></div>
+  <div v-click="3"><code>hello.s</code><span>編譯 (Compilation)</span></div>
+  <div v-click="4"><code>hello.o</code><span>組譯 (Assembly)</span></div>
 </div>
 
 ::margin::
 
 <MarginNotes :notes="[
   '',
-  '加上 -save-temps 保留中間產物',
-  '多出三個中間檔',
+  '使用 -save-temps 參數保留中間產物',
+  '產生三個中間階段檔案',
   '',
-  '正好對應編譯的三個階段',
+  '分別對應編譯流程的三個階段',
 ]" />
 
 <style>
@@ -67,20 +67,20 @@ clicks: 4
 clicks: 3
 ---
 
-# 為什麼要分成四個階段？
+# 劃分四階段的核心優勢
 
 <div grid="~ cols-[1fr_380px] gap-6">
 <div>
 
-### 分工、跨平台
+### 模組化分工與跨平台支援
 
-每階段只做一件事，可以替換、共用
+各階段職責單一，模組易於替換與複用。
 
 <v-click at="1">
 
-### 獨立編譯
+### 支援獨立編譯機制
 
-只重編有改的檔案，再重新 link
+僅重新編譯修改過的原始碼，隨後執行重新連結。
 
 </v-click>
 
@@ -88,9 +88,9 @@ clicks: 3
 
 <MakeGraph :steps="[
   { label: '' },
-  { label: '全部編好了' },
-  { label: '只改了 utils.c', dirty: ['utils.c'] },
-  { label: '只重編 utils.o 再 link', dirty: ['utils.c'], rebuilt: ['utils.o', 'program'] },
+  { label: '專案建置完成' },
+  { label: '修改 utils.c 原始檔', dirty: ['utils.c'] },
+  { label: '僅重編 utils.o 並重新連結', dirty: ['utils.c'], rebuilt: ['utils.o', 'program'] },
 ]" />
 
 </div>
@@ -105,7 +105,7 @@ clicks: 3
 clicks: 1
 ---
 
-# Preprocessing
+# 前置處理 (Preprocessing)
 
 <CompilePipeline :active="1" small />
 
@@ -126,7 +126,7 @@ int main() {
 }
 ```
 ```c
-/* <此處省略 stdio.h 的部分> */
+/* <此處省略 stdio.h 展開內容> */
 
 int main() {
     int a = 5000;
@@ -141,8 +141,8 @@ int main() {
 ::margin::
 
 <MarginNotes label="gcc -E hello.c -o hello.i" :notes="[
-  '處理 # 開頭的指令',
-  '#include 貼進來、#define 原地展開',
+  '解析並執行 # 開頭的前置處理指令',
+  '引入 #include 檔案、原地展開 #define 巨集',
 ]" />
 
 <!--
@@ -152,7 +152,7 @@ Magic Move：MAX、AVG(a, b) 在原地變形成展開後的樣子。
 
 ---
 
-# Compilation
+# 編譯 (Compilation)
 
 <CompilePipeline :active="2" small />
 
@@ -160,8 +160,8 @@ Magic Move：MAX、AVG(a, b) 在原地變形成展開後的樣子。
 gcc -S hello.i -o hello.s
 ```
 
-- **共同格式**：C、Fortran 都能產生組合語言
-- **跟架構有關**：x86 與 ARM 的組語不同
+- **統一中間表述**：不同高階語言（如 C、Fortran）皆轉譯為組合語言
+- **硬體架構相依**：針對 x86-64 與 ARM64 等不同處理器產生專屬指令集
 
 <!--
 - Compiler 把 C 寫的 hello.i 轉成組合語言 hello.s。
@@ -171,7 +171,7 @@ gcc -S hello.i -o hello.s
 
 ---
 
-# C 與組語對照：x86-64 vs ARM64
+# 組合語言對照：x86-64 與 ARM64 架構
 
 <div grid="~ cols-2 gap-4">
 <div>
@@ -222,17 +222,17 @@ Monaco runner → Compiler Explorer。組語每一行前面的 Ln 與底色 = �
 clicks: 3
 ---
 
-# Assembly
+# 組譯 (Assembly)
 
 <CompilePipeline :active="3" small />
 
 <div grid="~ cols-[1fr_1.25fr] gap-6" mt-2>
 <div>
 
-- `hello.o`：二進位的 relocatable object file
-- `cat hello.o`：只會印出亂碼
+- `hello.o`：二進位可重定位目的檔 (Relocatable Object File)
+- `cat hello.o`：二進位內容直接輸出將呈現非文字字元
 
-<div class="note"><code>objdump -d</code> 可以反組譯回組語，用來檢查 flag 有沒有生效</div>
+<div class="note">使用 <code>objdump -d</code> 進行反組譯，可檢視機器碼並驗證編譯參數設定</div>
 
 </div>
 
@@ -256,7 +256,7 @@ clicks: 3
 clicks: 3
 ---
 
-# Linking
+# 連結 (Linking)
 
 <CompilePipeline :active="4" small />
 
@@ -266,7 +266,7 @@ clicks: 3
 
 <strong>gcc hello.o -o hello</strong>
 
-linker 把 hello.o 和 library 接成執行檔
+連結器將目的檔與相依函式庫整合成可執行檔
 
 <!--
 hello.o 裡的 printf 先畫成空洞 → linker 到 libc 找到 printf.o → 把位址填回去。
@@ -280,7 +280,7 @@ Symbol：程式中代表 function 或 variable 的名稱，例如 main、printf�
 clicks: 4
 ---
 
-# 從 hello.c 到 process：Loader
+# 載入器：從可執行檔至執行程序
 
 <Flow :width="860" :height="282" :groups="[
   { x: 0, y: 0, w: 860, h: 184, label: 'COMPILE TIME' },
@@ -291,16 +291,16 @@ clicks: 4
   { id: 's', x: 560, y: 48, label: 'hello.s', w: 120, at: 1 },
   { id: 'o', x: 770, y: 48, label: 'hello.o', w: 120, at: 1 },
   { id: 'a', x: 560, y: 140, label: 'libc.a', sub: 'static', w: 120, at: 2, tone: 'plain' },
-  { id: 'exe', x: 770, y: 140, label: 'hello', sub: '執行檔', w: 120, at: 2, tone: 'on' },
+  { id: 'exe', x: 770, y: 140, label: 'hello', sub: '可執行檔', w: 120, at: 2, tone: 'on' },
   { id: 'so', x: 560, y: 240, label: 'libc.so', sub: 'dynamic', w: 120, at: 3, tone: 'plain' },
-  { id: 'proc', x: 770, y: 240, label: 'process', sub: '執行中的程式', w: 120, at: 4, tone: 'on' },
+  { id: 'proc', x: 770, y: 240, label: 'process', sub: '執行中程序', w: 120, at: 4, tone: 'on' },
 ]" :edges="[
   { from: 'c', to: 'i', label: 'preprocessor', at: 1 },
   { from: 'i', to: 's', label: 'compiler', at: 1 },
   { from: 's', to: 'o', label: 'assembler', at: 1 },
   { from: 'o', to: 'exe', label: 'linker', at: 2, lpos: [780, 98] },
   { from: 'a', to: 'exe', label: 'linker', at: 2 },
-  { from: 'so', to: 'exe', label: 'linker 檢查 symbol', dashed: true, at: 3, lpos: [452, 204] },
+  { from: 'so', to: 'exe', label: 'linker 符號檢查', dashed: true, at: 3, lpos: [452, 204] },
   { from: 'exe', to: 'proc', label: 'loader', at: 4, lpos: [780, 202] },
   { from: 'so', to: 'proc', label: 'loader', at: 4 },
 ]" />
@@ -308,12 +308,12 @@ clicks: 4
 <div grid="~ cols-2 gap-6" mt-2>
 <div>
 
-- **Loader**：執行時把程式載入記憶體
+- **載入器 (Loader)**：於執行期間將程式映像載入實體或虛擬記憶體
 
 </div>
 <div>
 
-- **dynamic**：`.so` 在這時才被載入
+- **動態連結 (Dynamic Linking)**：共用函式庫 (`.so`) 於執行載入時才映射至記憶體
 
 </div>
 </div>
