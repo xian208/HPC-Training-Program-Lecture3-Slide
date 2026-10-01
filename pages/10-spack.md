@@ -322,7 +322,7 @@ center: true
 
 # Lab 時間：modulefile 與 CMake
 
-<LabTime minutes="20">
+<LabTime>
 
 - **Lab3-2 後半**：寫 modulefile，完成 Part B
 - **Lab3-3**：填完 7 個 TODO，編譯並執行

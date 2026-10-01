@@ -242,7 +242,7 @@ center: true
 
 # Lab 時間：Lab3-1 Makefile
 
-<LabTime minutes="15">
+<LabTime>
 
 - **Part A**：填完 6 個 TODO，`make` 並執行
 - **Part B**：依序操作，回答 4 題觀察題

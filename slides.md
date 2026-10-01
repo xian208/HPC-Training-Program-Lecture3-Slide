@@ -32,7 +32,7 @@ meta: Compiler · Build System · Environment Variable · Module · Spack
 - 每個章節一個檔案，放在 pages/，依序 import
 - 投影片只放圖、demo 與重點；細節都寫在每頁的講者備註（按 p 進 presenter mode）
 - 課前請學員先裝好 build-essential、cmake、git、curl、bzip2、zlib1g-dev、lmod（Notion「課前準備」），Lab 時間才不會卡在 apt。
-- 三小時流程（估計）：0:05 Intro–Linking → Recap 1 → 0:50 Makefile → 1:02 Lab3-1（15 分）→ 1:17 Configure → 1:25 開始編 OpenMPI（5 分）→ 1:30 休息 10 分（OpenMPI 在背景編）→ 1:40 CMake → Recap 2 → 1:55 環境變數、Module、Spack → Recap 3 → 2:35 modulefile＋Lab3-3（20 分）→ 2:55 Lab3-4 回家作業說明、Q&A
+- 三小時流程（估計）：0:05 Intro–Linking → Recap 1 → 0:50 Makefile → 1:02 Lab3-1（15 分）→ 1:17 Configure → 1:25 開始編 OpenMPI（5 分）→ 1:30 休息 10 分（OpenMPI 在背景編）→ 1:40 CMake → Recap 2 → 1:55 環境變數、Module、Spack → Recap 3 → 2:35 modulefile＋Lab3-3（20 分）→ 2:55 Lab3-4 說明、Q&A
 -->
 
 ---

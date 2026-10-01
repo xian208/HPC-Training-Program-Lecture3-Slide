@@ -90,7 +90,7 @@ clicks: 1
 
 # 常用參數：-S、-B、--build
 
-<div grid="~ cols-[1fr_1fr] gap-6">
+<div grid="~ cols-[1.3fr_1fr] gap-6">
 
 | 參數 | 作用 |
 |---|---|

@@ -6,7 +6,8 @@
     "dev": "slidev --open",
     "build": "slidev build",
     "export": "slidev export",
-    "check": "node scripts/check-text.mjs"
+    "check": "node scripts/check-text.mjs",
+    "widows": "node scripts/widows.mjs"
   },
   "dependencies": {
     "@slidev/cli": "^53.0.0",

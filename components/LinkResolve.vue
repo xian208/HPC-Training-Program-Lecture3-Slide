@@ -70,11 +70,11 @@ const notes = [
 .mem { border: 1.2px solid var(--tb-node-line); background: #fff; padding: 2px 8px; margin: 4px 0; transition: background-color .35s; }
 .mem.on { background: var(--tb-node-on); }
 .mem.more { border-style: dashed; color: var(--tb-mut); }
-.part { border: 1.2px solid var(--tb-node-line); background: #fff; padding: 4px 8px; margin: 4px 0; }
+.part { border: 1.2px solid var(--tb-node-line); background: #fff; padding: 4px 8px; margin: 4px 0; white-space: nowrap; }
 .part.on { background: var(--tb-node-on); }
 .addr { color: var(--tb-accent); opacity: 0; transition: opacity .35s; }
 .addr.show { opacity: 1; }
-.arrow { width: 96px; text-align: center; font-family: var(--tb-sans); font-size: 12.5px; color: var(--tb-accent); font-weight: 500; }
+.arrow { white-space: nowrap; padding: 0 4px; text-align: center; font-family: var(--tb-sans); font-size: 12.5px; color: var(--tb-accent); font-weight: 500; }
 .lr-note { margin-top: 18px; font-size: 17px; font-family: var(--tb-sans); color: var(--tb-mut); }
 .fade-enter-active, .fade-leave-active { transition: opacity .2s; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }

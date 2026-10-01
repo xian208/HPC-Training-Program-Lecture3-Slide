@@ -55,15 +55,6 @@ clicks: 3
 # 從開發者到使用者：GNU Autotools
 
 <div class="at-flow">
-  <div class="at-row dev">
-    <div class="at-tag">開發者發布前（了解即可）</div>
-    <div class="at-line">
-      <span class="f">Makefile.am</span><span class="t">automake</span><span class="f">Makefile.in</span>
-    </div>
-    <div class="at-line">
-      <span class="f">configure.ac</span><span class="t">autoconf</span><span class="f">configure</span>
-    </div>
-  </div>
   <div class="at-row usr">
     <div class="at-tag">使用者端</div>
     <div class="at-line">
@@ -127,13 +118,13 @@ center: true
 
 # Lab 時間：開始編 OpenMPI
 
-<LabTime minutes="5" break-minutes="10">
+<LabTime>
 
 - **安裝**：`sudo apt install -y bzip2 zlib1g-dev`
 - **configure**：`--prefix=$HOME/opt/openmpi/5.0.8`
 - **編譯**：`make -j4 > build.log 2>&1 && make install`
 
-<div class="note">預估編譯時間約需 8 分鐘，建議於背景執行並進入中場休息</div>
+<div class="note">建議於背景執行並進入中場休息</div>
 
 </LabTime>
 

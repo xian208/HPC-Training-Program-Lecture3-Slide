@@ -21,6 +21,7 @@ npm install
 npm run dev        # http://localhost:3030，按 o 看總覽、按 p 進 presenter mode
 npm run build      # 輸出到 dist/
 npm run check      # 檢查每頁的文字量（見下方規則）
+npm run widows     # 檢查折行後最後一行太短（不到 2.6 個字寬）的段落，要先 build
 ```
 
 Mac 上也可以直接雙擊 `start.command`。
@@ -44,8 +45,9 @@ Mac 上也可以直接雙擊 `start.command`。
 
 - 標題固定在左上；純文字頁（沒有圖、程式碼、終端機、錄影）的內容會自動上下置中，frontmatter 寫 `center: true / false` 可以強制開關
 - 每段（編譯與連結、Build Automation、環境與套件管理）結尾有一頁 Recap，講者備註有一題口頭提問
-- Lab 穿插在課堂中：Makefile 後做 Lab3-1、Configure 後開始編 OpenMPI（接著休息）、Spack 後做 modulefile 與 Lab3-3，Lab3-4 回家做；三小時的流程寫在封面頁的講者備註
+- Lab 穿插在課堂中：Makefile 後做 Lab3-1、Configure 後開始編 OpenMPI（接著休息）、Spack 後做 modulefile 與 Lab3-3，最後是 Lab3-4；三小時的流程寫在封面頁的講者備註
 - 不使用 emoji 或圈號這類特殊符號
+- 文字一律 `text-wrap: balance`，避免折行後最後一行只剩一兩個字；行內程式碼不折行
 - `.callout` 是方框（重要提醒）、`.callout.warn` 是橘色注意事項；不需要框的補充說明用 `.note`
 
 
@@ -80,7 +82,7 @@ scripts/               check-text（文字量）、shoot / sheet（逐頁截圖�
 | `MarginNotes` | 右側旁註隨 click 換句子（空字串 = 沿用上一句） |
 | `Cast` | 嵌入 asciinema；檔案還沒錄時自動顯示待錄指令 |
 | `Recap` | 整頁的段落回顧卡片（章節編號、名稱、一句重點、關鍵字） |
-| `LabTime` | Lab 時間頁：分鐘數（可加休息）與要做的事（slot） |
+| `LabTime` | Lab 時間頁：要做的事（slot），不寫時長 |
 
 元件都讀 `$clicks`。只靠元件推進的投影片要在 frontmatter 寫 `clicks: N`。
 

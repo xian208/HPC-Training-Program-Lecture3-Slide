@@ -83,6 +83,11 @@
 .note { font-size: 18px; color: var(--tb-mut); margin-top: 14px; }
 .note.key { font-size: 21px; color: var(--tb-ink); }
 
+/* 避免折行後最後一行只剩一兩個字 */
+.slidev-layout :is(p, li, td, th, h1, h2, h3, div, span, em, b, strong) { text-wrap: balance; }
+/* 行內程式碼、指令不要從中間斷開 */
+.slidev-layout :not(pre) > code { white-space: nowrap; }
+
 .muted { color: var(--tb-mut); }
 .accent { color: var(--tb-accent); }
 

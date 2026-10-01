@@ -73,7 +73,7 @@ const gates = computed(() => [
 .when { font-size: 12px; font-weight: 500; color: var(--tb-accent); letter-spacing: .03em; }
 .who { font-size: 15px; font-weight: 500; }
 .find { font-size: 12px; color: var(--tb-mut); margin-top: 3px; }
-.find code { font-size: 11px; background: none; border: 0; padding: 0; }
+.find code { display: block; white-space: normal; font-size: 11px; background: none; border: 0; padding: 0; }
 .note { margin-top: 10px; min-height: 1.4em; font-size: 15px; color: var(--tb-ink); text-align: center; }
 .fade-enter-active, .fade-leave-active { transition: opacity .2s; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }

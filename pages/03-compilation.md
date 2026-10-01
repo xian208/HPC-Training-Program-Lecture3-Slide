@@ -260,13 +260,9 @@ clicks: 3
 
 <CompilePipeline :active="4" small />
 
+<div class="note"><code>gcc hello.o -o hello</code>：連結器將目的檔與相依函式庫整合成可執行檔</div>
+
 <LinkResolve />
-
-::margin::
-
-<strong>gcc hello.o -o hello</strong>
-
-連結器將目的檔與相依函式庫整合成可執行檔
 
 <!--
 hello.o 裡的 printf 先畫成空洞 → linker 到 libc 找到 printf.o → 把位址填回去。
