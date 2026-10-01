@@ -237,31 +237,24 @@ modulefile 有 TCL（傳統 Environment Modules）與 Lua（Lmod）兩種寫法�
 -->
 
 ---
+clicks: 6
+---
 
 # Module 常用指令
 
-<div grid="~ cols-[1fr_300px] gap-5">
-
-<Cast src="/casts/module-commands.cast" :rows="14" :todo="[
-  'module use $HOME/selfmodule     # marker',
-  'module avail                    # marker',
-  'module load zstd/1.5.6          # marker',
-  'module list                     # marker',
-  'module unload zstd/1.5.6        # marker',
-  'module purge',
+<Terminal font-size="13px" height="356px" :steps="[
+  { cmd: 'module use $HOME/selfmodule      # where to look' },
+  { cmd: 'module avail                     # what\'s there', out: '------------ /home/xian208/selfmodule ------------\n   zstd/1.5.6\n\n-------- /usr/share/lmod/lmod/modulefiles --------\n   Core/lmod    Core/settarg (D)', tone: 'mut' },
+  { cmd: 'module load zstd/1.5.6' },
+  { cmd: 'module list                      # what\'s loaded', out: 'Currently Loaded Modules:\n  1) zstd/1.5.6', tone: 'ok' },
+  { cmd: 'module unload zstd/1.5.6' },
+  { cmd: 'module purge                     # unload all' },
 ]" />
 
-```bash
-module use <dir>   # where to look
-module avail       # what's there
-module load <m>
-module list        # what's loaded
-module unload <m>
-module purge       # unload all
-```
-
-</div>
-
 <!--
-use → avail → load → list → unload → purge 錄成一段，每個指令放一個 marker，播到會自動停。
+對應講義「Module 常用指令」：use → avail → load → list → unload → purge，每個 click 打一個指令。
+- module use：告訴 module 去哪裡找 modulefile（要照 <名稱>/<版本> 擺放）。
+- module avail 的輸出分成兩區：自己的 selfmodule，以及 Lmod 內建的；分隔線這裡縮短了。
+- load 前後的差異參考前面「module load 前後，PATH 變了什麼」。
+- module purge：一次 unload 全部。
 -->
