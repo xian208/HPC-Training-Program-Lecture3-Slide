@@ -236,9 +236,9 @@ clicks: 3
 
 </div>
 
-<Terminal font-size="12.5px" height="250px" :steps="[
+<Terminal font-size="12.5px" height="284px" :steps="[
   { cmd: 'gcc -c hello.s -o hello.o' },
-  { cmd: 'cat hello.o', out: 'ELF>�@@\nUH��H���E���E�����U�E�\nGCC: (Debian 14.2.0-19) 14.2.0\nhello.c main printf .symtab .strtab', tone: 'mut' },
+  { cmd: 'cat hello.o', out: ' ELF>@@@\nUH��H���E��E���U�E�J������E�E��H�H�N����%d\nGCC: (Debian 14.2.0-19) 14.2.0zR�JA�C\n��  Jhello.cmainprintf2��������?��������\n.symtab.strtab.shstrtab.rela.text.data.bss…\n&��1�90� B�W�R@�', tone: 'mut' },
   { cmd: 'file hello.o', out: 'hello.o: ELF 64-bit LSB relocatable, x86-64', tone: 'ok' },
 ]" />
 
