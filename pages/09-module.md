@@ -35,26 +35,26 @@ clicks: 5
 <div grid="~ cols-[1fr_1fr] gap-5">
 
 <Terminal font-size="12px" :steps="[
-  { cmd: 'which zstd' },
+  { cmd: 'which zstd', out: '/usr/bin/zstd' },
   { cmd: 'module load zstd/1.5.6' },
   { cmd: 'which zstd', out: '/home/xian208/opt/zstd/1.5.6/bin/zstd', tone: 'ok' },
   { cmd: 'module unload zstd/1.5.6' },
-  { cmd: 'which zstd' },
+  { cmd: 'which zstd', out: '/usr/bin/zstd' },
 ]" />
 
 <PathStack cmd="zstd" :steps="[
-  { label: 'load 前', path: ['/usr/local/bin', '/usr/bin', '/bin'], has: [] },
-  { label: 'load 前', path: ['/usr/local/bin', '/usr/bin', '/bin'], has: [] },
-  { label: 'module load 之後', path: ['~/opt/zstd/1.5.6/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: ['~/opt/zstd/1.5.6/bin'] },
-  { label: 'module load 之後', path: ['~/opt/zstd/1.5.6/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: ['~/opt/zstd/1.5.6/bin'] },
-  { label: 'unload 之後', path: ['/usr/local/bin', '/usr/bin', '/bin'], has: [] },
+  { label: 'load 前', path: ['/usr/local/bin', '/usr/bin', '/bin'], has: ['/usr/bin'] },
+  { label: 'load 前', path: ['/usr/local/bin', '/usr/bin', '/bin'], has: ['/usr/bin'] },
+  { label: 'module load 之後', path: ['~/opt/zstd/1.5.6/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: ['~/opt/zstd/1.5.6/bin', '/usr/bin'] },
+  { label: 'module load 之後', path: ['~/opt/zstd/1.5.6/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: ['~/opt/zstd/1.5.6/bin', '/usr/bin'] },
+  { label: 'unload 之後', path: ['/usr/local/bin', '/usr/bin', '/bin'], has: ['/usr/bin'] },
 ]" />
 
 </div>
 
 <!--
 PATH 畫成一疊目錄，load 時 zstd 的路徑從最上面插入，which 由上往下找到第一個符合的；unload 再把它抽掉。
-- 和講義相同：load 前、unload 後 which zstd 都找不到（沒有輸出）。如果系統已經有 /usr/bin/zstd（例如被其他套件一起裝進來），這兩次會印出 /usr/bin/zstd；觀察重點不變：load 之後 which 會先找到自己裝的版本，因為 module 把它加在 PATH 最前面。
+- 和講義相同：Debian 13 預設就有 /usr/bin/zstd（1.5.7，initramfs-tools 需要它）；load 之後 which 會先找到自己裝的 1.5.6，因為 module 把它加在 PATH 最前面，unload 後又變回系統的版本。
 - 講義上的 home 是 /home/xian208，PATH 這裡縮寫成 ~，也省略了 /usr/local/games 等目錄。
 -->
 

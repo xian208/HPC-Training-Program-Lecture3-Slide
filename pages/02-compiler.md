@@ -163,9 +163,9 @@ clicks: 4
 
 <Terminal font-size="12.5px" height="292px" :steps="[
   { cmd: 'gcc -O0 loop.c -o loop_O0' },
-  { cmd: 'time ./loop_O0', out: '1.644934057835\nreal\t0m1.509s' },
+  { cmd: 'time ./loop_O0', out: '1.644934057835\nreal\t0m1.721s' },
   { cmd: 'gcc -O3 loop.c -o loop_O3' },
-  { cmd: 'time ./loop_O3', out: '1.644934057835\nreal\t0m0.377s', tone: 'ok' },
+  { cmd: 'time ./loop_O3', out: '1.644934057835\nreal\t0m0.855s', tone: 'ok' },
 ]" />
 
 </div>
@@ -175,7 +175,7 @@ clicks: 4
 </div>
 
 <!--
-- 和講義相同：-O3 快了約 4 倍（講義上的數字）。在 x86_64 的 VM 上實測約 2 倍。時間會因機器而異，重點是相對差距。
+- 和講義相同：4 核心 x86_64 VM 上實測，-O3 快了約 2 倍。時間會因機器而異，重點是相對差距。
 - 想現場跑也可以，loop_O0 大約 1.5 秒。
 -->
 

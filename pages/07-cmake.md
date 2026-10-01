@@ -20,7 +20,7 @@ $ cmake -S . -B build
 -- Detecting CXX compile features - done
 -- Found MPI_CXX: /home/xian208/opt/openmpi/5.0.8/lib/libmpi.so (found version "3.1")
 -- Found MPI: TRUE (found version "3.1")
--- Configuring done (0.3s)
+-- Configuring done (1.0s)
 -- Generating done (0.0s)
 -- Build files have been written to: /home/xian208/build/my_project/build
 ```

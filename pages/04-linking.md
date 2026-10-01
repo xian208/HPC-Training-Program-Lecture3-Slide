@@ -16,13 +16,13 @@ clicks: 3
 $ gcc hello.c -o hello_dyn
 $ gcc -static hello.c -o hello_static
 $ ls -lh hello_dyn hello_static
--rwxr-xr-x 1 xian208 xian208  69K Sep 27 01:13 hello_dyn
--rwxr-xr-x 1 xian208 xian208 689K Sep 27 01:13 hello_static
+-rwxrwxr-x 1 xian208 xian208  16K Sep 30 23:34 hello_dyn
+-rwxrwxr-x 1 xian208 xian208 737K Sep 30 23:34 hello_static
 
 $ ldd hello_dyn
-	linux-vdso.so.1 (0x0000ffffa7fbc000)
-	libc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000ffffa7d90000)
-	/lib/ld-linux-aarch64.so.1 (0x0000ffffa7f80000)
+	linux-vdso.so.1 (0x00007f633a98e000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f633a786000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007f633a990000)
 $ ldd hello_static
 	not a dynamic executable
 ```
@@ -31,13 +31,13 @@ $ ldd hello_static
 
 <MarginNotes :notes="[
   '預設 dynamic；加 -static 變 static',
-  'static 大了約 10 倍',
+  'static 大了約 45 倍',
   'ldd：列出執行時要載入的 .so',
   '',
 ]" />
 
 <!--
-和講義相同，是 aarch64 上的輸出。在 x86_64 的 VM 上實測是 16K vs 737K（約 45 倍），ldd 的路徑會是 /lib/x86_64-linux-gnu/...；學員看到的數字會跟講義不同，重點是 static 大很多。
+和講義相同，是 Debian 13 x86_64 VM 上的輸出。
 - dynamic 版本只記錄「執行時需要 libc.so.6」，由 loader 在執行時載入。
 - static 版本把用到的 libc 內容直接複製進執行檔。
 - Debian 上 static linking 需要 libc.a，build-essential 已經裝好了。
@@ -54,8 +54,8 @@ clicks: 3
   { x: 450, y: 4, w: 410, h: 242, label: 'DYNAMIC', at: 2 },
 ]" :nodes="[
   { id: 'a', x: 140, y: 75, label: 'libc.a', sub: 'printf.o scanf.o …', w: 190 },
-  { id: 'se', x: 140, y: 190, label: 'hello_static', sub: '689K', w: 190, h: 70, at: 1, tone: 'on' },
-  { id: 'de', x: 590, y: 190, label: 'hello_dyn', sub: '69K', w: 170, at: 2 },
+  { id: 'se', x: 140, y: 190, label: 'hello_static', sub: '737K', w: 190, h: 70, at: 1, tone: 'on' },
+  { id: 'de', x: 590, y: 190, label: 'hello_dyn', sub: '16K', w: 170, at: 2 },
   { id: 'so', x: 590, y: 75, label: 'libc.so.6', w: 170, at: 2, tone: 'plain' },
 ]" :edges="[
   { from: 'a', to: 'se', at: 1, label: 'link time 複製進來', tone: 'on', lpos: [152, 136] },
