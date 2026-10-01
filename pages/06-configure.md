@@ -4,11 +4,11 @@ chapter: "06"
 title: Configure
 ---
 
-換一台機器，也能自動產生對的 Makefile
+自動偵測目標主機環境，產生適配的 Makefile
 
 ---
 
-# 實際跑一次 ./configure
+# 執行環境檢測腳本 ./configure
 
 <Cast src="/casts/hwloc-configure.cast" :rows="15" :todo="[
   'curl -LO https://download.open-mpi.org/release/hwloc/v2.11/hwloc-2.11.2.tar.gz',
@@ -38,8 +38,8 @@ clicks: 2
 
 <v-clicks>
 
-- **是什麼**：掃描環境、產生 Makefile 的 shell script
-- **解決什麼**：可攜性，換一台機器也能編
+- **是什麼**：檢測目標平台環境並動態產生 Makefile 的 Shell 腳本
+- **解決什麼**：提升專案可攜性，相容跨平台與異質主機架構
 
 </v-clicks>
 
@@ -133,7 +133,7 @@ center: true
 - **configure**：`--prefix=$HOME/opt/openmpi/5.0.8`
 - **編譯**：`make -j4 > build.log 2>&1 && make install`
 
-<div class="note">編譯約 8 分鐘，休息時讓它在背景跑</div>
+<div class="note">預估編譯時間約需 8 分鐘，建議於背景執行並進入中場休息</div>
 
 </LabTime>
 

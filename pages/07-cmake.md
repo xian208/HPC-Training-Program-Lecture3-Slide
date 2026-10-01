@@ -4,7 +4,7 @@ chapter: "07"
 title: CMake
 ---
 
-不負責編譯，而是「產生 build system」的工具
+獨立於編譯器之跨平台建置系統產生器（Build System Generator）
 
 ---
 
@@ -95,7 +95,7 @@ clicks: 1
 | 參數 | 作用 |
 |---|---|
 | `-S <dir>` | source 根目錄 |
-| `-B <dir>` | 產物全部放這裡 |
+| `-B <dir>` | 指定建置輸出目錄（Out-of-source build） |
 | `--build <dir>` | 呼叫 make 編譯 |
 
 <Flow :width="400" :height="230" :groups="[
@@ -136,8 +136,8 @@ cmake --install build
 
 <MarginNotes :notes="[
   '-D 設定變數，存進 CMakeCache.txt',
-  '改 code 後只要重跑這一步',
-  '改 -D 參數才要重跑第 1 步',
+  '修改原始碼後僅需重新執行建置指令',
+  '變更 -D 配置參數時方須重新生成',
 ]" />
 
 <!--

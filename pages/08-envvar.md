@@ -4,11 +4,11 @@ chapter: "08"
 title: Environment Variable
 ---
 
-編譯與執行時，怎麼知道「去哪裡找檔案」？
+系統於編譯期與執行期定位相依檔案的路徑解析機制
 
 ---
 
-# 先看一個常見的錯誤
+# 自建動態函式庫之路徑解析範例
 
 <div grid="~ cols-2 gap-5">
 <div>
@@ -43,7 +43,7 @@ int main() { printf("%d\n", add(1, 2)); return 0; }
 clicks: 5
 ---
 
-# 三次嘗試，兩道關卡
+# 連結期與載入期之路徑驗證流程
 
 <Terminal font-size="12px" :steps="[
   { cmd: 'gcc use.c -ladd -o use', out: '/usr/bin/ld: cannot find -ladd: No such file or directory\ncollect2: error: ld returned 1 exit status', tone: 'err' },
@@ -90,7 +90,7 @@ unset CFLAGS                         # remove
   { id: 'cc', x: 740, y: 60, label: 'gcc', sub: 'CFLAGS=-O3（複本）', w: 170, at: 1 },
 ]" :edges="[
   { from: 'sh', to: 'mk', at: 1, label: '啟動、複製' }, { from: 'mk', to: 'cc', at: 1, label: '再複製' },
-  { from: 'cc', to: 'sh', at: 2, dashed: true, tone: 'bad', bend: 'u', label: '子行程改了，也傳不回去' },
+  { from: 'cc', to: 'sh', at: 2, dashed: true, tone: 'bad', bend: 'u', label: '子行程變更之環境變數無法反向傳遞至父行程' },
 ]" />
 
 <!--

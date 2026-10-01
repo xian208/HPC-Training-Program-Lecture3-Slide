@@ -4,7 +4,7 @@ chapter: "10"
 title: Spack
 ---
 
-從「裝」到「用」都包辦的 HPC package manager
+涵蓋套件建置、相依性解析至環境部署的 HPC 套件管理器
 
 ---
 clicks: 3
@@ -16,9 +16,9 @@ clicks: 3
 
 <v-clicks>
 
-- **一行 spec**：版本、compiler、variant、架構
-- **自動解析**：整棵 dependency tree 一起裝
-- **各自獨立**：每種組合裝到不同路徑
+- **宣告式 Spec 語法**：自訂版本、編譯器、編譯選項與目標微架構
+- **自動解析相依性**：遞迴建置完整依賴拓撲
+- **環境完全隔離**：依組態雜湊（Hash）分別儲存於獨立路徑
 
 </v-clicks>
 
@@ -195,7 +195,7 @@ clicks: 7
 ]" />
 
 <div v-click="7" class="callout">
-照抄前，<code>%gcc@</code>、<code>target=</code> 換成自己的
+執行前請依目標系統環境調整 <code>%gcc@</code> 與 <code>target=</code> 參數
 </div>
 
 <!--
@@ -268,7 +268,7 @@ clicks: 2
 ]" />
 
 <div class="callout warn">
-<strong>不要在 login node 上編譯</strong>
+<strong>禁止於登入節點進行重度編譯作業</strong>
 </div>
 
 <!--
@@ -289,7 +289,7 @@ spack unload --all
 ```
 
 <div class="callout warn">
-<strong>不要混用 spack 跟 module</strong>
+<strong>避免同時混用 Spack 與 Module 以防環境變數衝突</strong>
 </div>
 
 <!--

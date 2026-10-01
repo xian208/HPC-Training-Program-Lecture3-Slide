@@ -4,13 +4,13 @@ chapter: "02"
 title: Compiler
 ---
 
-把 source code 轉成 CPU 能執行的機器碼
+將原始碼編譯為處理器可執行的機器碼
 
 ---
 clicks: 2
 ---
 
-# 一行 gcc 做了什麼
+# gcc 編譯與執行流程
 
 ```bash {none|1|2-3}
 $ gcc hello_world.c -o hello_world
@@ -20,16 +20,16 @@ hello world!
 
 <v-click at="1">
 
-- **compiler**：執行前，把整份 source 轉成機器碼
+- **compiler**：執行前將完整原始碼轉譯為機器碼
 
 </v-click>
 
 ::margin::
 
 <MarginNotes :notes="[
-  '兩行指令就能看到結果',
-  '第一行：gcc 編譯',
-  '第二行：真正執行程式',
+  '透過兩行指令完成編譯與執行',
+  '第一行：呼叫 gcc 進行編譯',
+  '第二行：載入並執行二進位檔',
 ]" />
 
 <!--
@@ -45,8 +45,8 @@ clicks: 2
 
 <div mb-5>
 
-- **Compiler**：先編好，執行效率高；改 code 要重編
-- **Interpreter**：逐行執行，改完馬上跑；效率較低
+- **Compiler**：預先編譯完成，執行效率高；原始碼修改後須重新編譯
+- **Interpreter**：逐行直譯執行，即時反應修改；執行效能較低
 
 </div>
 
@@ -55,12 +55,12 @@ clicks: 2
   { x: 0, y: 116, w: 860, h: 88, label: 'INTERPRETER', at: 2 },
 ]" :nodes="[
   { id: 's1', x: 90, y: 58, label: 'hello.c', at: 1 },
-  { id: 'cc', x: 280, y: 58, label: 'gcc', sub: '整份一次翻譯', w: 130, at: 1 },
+  { id: 'cc', x: 280, y: 58, label: 'gcc', sub: '整份轉譯', w: 130, at: 1 },
   { id: 'exe', x: 480, y: 58, label: 'hello', sub: '執行檔', at: 1, tone: 'on' },
-  { id: 'run', x: 700, y: 58, label: './hello', sub: '直接執行，快', w: 140, at: 1 },
+  { id: 'run', x: 700, y: 58, label: './hello', sub: '直接執行（高效率）', w: 140, at: 1 },
   { id: 's2', x: 90, y: 166, label: 'hello.py', at: 2 },
-  { id: 'itp', x: 400, y: 166, label: 'python', sub: '讀一行、執行一行', w: 250, at: 2 },
-  { id: 'out', x: 700, y: 166, label: '結果', sub: '改完馬上能跑', w: 140, at: 2, mono: false },
+  { id: 'itp', x: 400, y: 166, label: 'python', sub: '逐行直譯執行', w: 250, at: 2 },
+  { id: 'out', x: 700, y: 166, label: '結果', sub: '修改後即時執行', w: 140, at: 2, mono: false },
 ]" :edges="[
   { from: 's1', to: 'cc', at: 1 }, { from: 'cc', to: 'exe', at: 1 }, { from: 'exe', to: 'run', at: 1 },
   { from: 's2', to: 'itp', at: 2 }, { from: 'itp', to: 'out', at: 2 },
@@ -88,9 +88,9 @@ GNU 開源，多數 Linux 預先安裝
 
 ### Intel oneAPI
 
-在 Intel CPU 上可能比 gcc 快
+針對 Intel 架構具備更佳的最佳化效能
 
-<div class="note"><code>icc</code> 在 2024.0 之後移除，改用 <code>icx</code></div>
+<div class="note">Intel 已於 2024.0 版本廢棄 <code>icc</code>，由 <code>icx</code> 取代</div>
 
 </div>
 </div>
@@ -119,7 +119,7 @@ clicks: 3
 ]" />
 
 <div v-click="3" class="note">
-<code>icx</code> = LLVM ＋ 針對 Intel CPU 最佳化的 backend
+<code>icx</code>：基於 LLVM 架構，整合針對 Intel CPU 微架構最佳化的後端
 </div>
 
 <!--
@@ -136,9 +136,9 @@ clicks: 2
 
 <Flow :width="860" :height="200" :nodes="[
   { id: 'cu', x: 80, y: 100, label: 'app.cu' },
-  { id: 'nvcc', x: 270, y: 100, label: 'nvcc', sub: '拆成兩部分', w: 130 },
-  { id: 'dev', x: 520, y: 40, label: 'device code', sub: '跑在 GPU', w: 150, at: 1 },
-  { id: 'host', x: 520, y: 160, label: 'host code', sub: '跑在 CPU', w: 150, at: 2 },
+  { id: 'nvcc', x: 270, y: 100, label: 'nvcc', sub: '分離編譯流程', w: 130 },
+  { id: 'dev', x: 520, y: 40, label: 'device code', sub: '於 GPU 執行', w: 150, at: 1 },
+  { id: 'host', x: 520, y: 160, label: 'host code', sub: '於 CPU 執行', w: 150, at: 2 },
   { id: 'gpu', x: 770, y: 40, label: 'nvcc 編譯', w: 150, at: 1, tone: 'on', mono: false },
   { id: 'gcc', x: 770, y: 160, label: 'gcc 編譯', w: 150, at: 2, tone: 'on', mono: false },
 ]" :edges="[
@@ -155,7 +155,7 @@ nvcc 把 .cu（CUDA 的 C++）分成 device 端（跑在 GPU 上）與 host 端�
 clicks: 4
 ---
 
-# 只改一個參數，時間差好幾倍
+# 最佳化等級對執行效能的影響
 
 <div grid="~ cols-[1fr_1.15fr] gap-5">
 
@@ -171,7 +171,7 @@ clicks: 4
 </div>
 
 <div v-click="4" class="note key">
-結果相同；<code>-O0</code>、<code>-O3</code> 就是 compiler flag
+計算結果一致；透過調整最佳化參數（<code>-O0</code> 與 <code>-O3</code>）產生顯著效能差異
 </div>
 
 <!--
@@ -181,7 +181,7 @@ clicks: 4
 
 ---
 
-# -O0 和 -O3 到底差在哪？
+# -O0 與 -O3 的組語差異分析
 
 <div grid="~ cols-2 gap-4">
 
@@ -226,7 +226,7 @@ clicks: 3
 
 - `-O0`：不最佳化，gcc 預設
 - `-O1` / `-O2`：逐步最佳化，release 常用 `-O2`
-- `-O3`：最激進，但不保證比 `-O2` 快
+- `-O3`：啟用最高程度最佳化，但效能未必必然優於 `-O2`
 
 </v-clicks>
 
@@ -253,13 +253,13 @@ clicks: 3
   { id: 'run', x: 680, y: 100, label: './app', sub: 'Illegal instruction', w: 200, at: 1, tone: 'bad', tones: { 3: 'on' } },
 ]" :edges="[
   { from: 'src', to: 'bin', label: 'gcc' },
-  { from: 'bin', to: 'run', at: 1, tone: 'bad', tones: { 3: 'on' }, label: '拿去跑' },
+  { from: 'bin', to: 'run', at: 1, tone: 'bad', tones: { 3: 'on' }, label: '於節點部署執行' },
 ]" />
 
 <div mt-3>
 
-- `-march=native`：用編譯那台機器的全部指令集
-- **解法**：`-march=<架構>`，或在 compute node 編
+- `-march=native`：啟用編譯主機支援的完整指令集
+- **解決方案**：指定微架構 `-march=<架構>`，或直接於運算節點編譯
 
 </div>
 
@@ -276,8 +276,8 @@ clicks: 3
 # Compiler flags：debugging、path
 
 - `-g`：加入 debug 資訊，不影響執行速度
-- `-I<dir>`：編譯時到 dir 找 header
-- `-L<dir>` / `-l<name>`：link 時到 dir 找 lib&lt;name&gt;
+- `-I<dir>`：於編譯前處理階段搜尋指定目錄之標頭檔
+- `-L<dir>` / `-l<name>`：於連結階段搜尋指定目錄與函式庫檔案
 
 <!--
 - -g：方便找 bug，之後做 profiling 也需要；編譯時間與檔案大小會增加，但產生的機器碼不變，所以不影響執行速度。

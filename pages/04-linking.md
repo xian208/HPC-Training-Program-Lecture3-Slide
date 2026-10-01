@@ -4,7 +4,7 @@ chapter: "04"
 title: Static vs Dynamic Linking
 ---
 
-library 是被「複製進來」，還是執行時才「接上」？
+函式庫是在連結期靜態整合，或於執行期動態載入？
 
 ---
 clicks: 3
@@ -30,9 +30,9 @@ $ ldd hello_static
 ::margin::
 
 <MarginNotes :notes="[
-  '預設 dynamic；加 -static 變 static',
-  'static 大了約 45 倍',
-  'ldd：列出執行時要載入的 .so',
+  '預設為動態連結；加入 -static 參數啟用靜態連結',
+  '靜態連結二進位檔容量增加約 45 倍（從 16 KB 增至 737 KB）',
+  'ldd：檢視執行檔依賴的共用函式庫（.so）',
   '',
 ]" />
 
@@ -47,7 +47,7 @@ $ ldd hello_static
 clicks: 3
 ---
 
-# 複製進來 vs 執行時接上
+# 靜態連結與動態連結機制比較
 
 <Flow :width="860" :height="250" :groups="[
   { x: 0, y: 4, w: 410, h: 242, label: 'STATIC' },
@@ -58,9 +58,9 @@ clicks: 3
   { id: 'de', x: 590, y: 190, label: 'hello_dyn', sub: '16K', w: 170, at: 2 },
   { id: 'so', x: 590, y: 75, label: 'libc.so.6', w: 170, at: 2, tone: 'plain' },
 ]" :edges="[
-  { from: 'a', to: 'se', at: 1, label: 'link time 複製進來', tone: 'on', lpos: [152, 136] },
-  { from: 'de', to: 'so', at: 2, until: 3, dashed: true, label: '只記錄名字', lpos: [602, 136] },
-  { from: 'so', to: 'de', at: 3, tone: 'on', label: 'load time 接上', lpos: [602, 136] },
+  { from: 'a', to: 'se', at: 1, label: '連結期寫入二進位檔', tone: 'on', lpos: [152, 136] },
+  { from: 'de', to: 'so', at: 2, until: 3, dashed: true, label: '僅記錄符號與相依性', lpos: [602, 136] },
+  { from: 'so', to: 'de', at: 3, tone: 'on', label: '載入期動態解析', lpos: [602, 136] },
 ]" />
 
 <!--
@@ -80,7 +80,7 @@ clicks: 3
   <tbody>
     <tr v-click="1"><td>library 檔案</td><td><code>.a</code></td><td><code>.so</code></td></tr>
     <tr v-click="2"><td>何時 link</td><td>link time</td><td>load time</td></tr>
-    <tr v-click="3"><td>library 更新時</td><td>整份重新 link</td><td>換掉 <code>.so</code> 就好</td></tr>
+    <tr v-click="3"><td>library 更新時</td><td>整份重新 link</td><td>替換共用函式庫即可生效</td></tr>
   </tbody>
 </table>
 

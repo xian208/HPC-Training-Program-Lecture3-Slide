@@ -4,7 +4,7 @@ chapter: "05"
 title: Build Automation · Makefile
 ---
 
-上百個 source file，不可能每次手打 gcc
+面對多原始碼檔案專案，手動編譯將缺乏效率且易生疏漏
 
 ---
 clicks: 1
@@ -12,14 +12,14 @@ clicks: 1
 
 # Build Automation
 
-- **做法**：把編譯、連結、安裝寫成規則
-- **原因**：上百個檔案，手打不實際又容易錯
+- **機制**：定義編譯、連結與安裝之相依性規則
+- **效益**：自動化建置大型專案，降低人為配置錯誤
 
 <Flow :width="860" :height="200" :nodes="[
   { id: 'cfg', x: 90, y: 45, label: './configure', sub: 'Autotools', w: 150, at: 1 },
   { id: 'cm', x: 90, y: 155, label: 'cmake', sub: 'CMakeLists.txt', w: 150, at: 1 },
   { id: 'mk', x: 330, y: 100, label: 'Makefile', sub: '規則', w: 140 },
-  { id: 'make', x: 550, y: 100, label: 'make', sub: '照規則編譯', w: 140 },
+  { id: 'make', x: 550, y: 100, label: 'make', sub: '解析相依性並執行建置', w: 140 },
   { id: 'out', x: 770, y: 100, label: '執行檔', sub: 'library', w: 140, tone: 'on', mono: false },
 ]" :edges="[
   { from: 'cfg', to: 'mk', at: 1, label: '產生' }, { from: 'cm', to: 'mk', at: 1 },
@@ -36,7 +36,7 @@ clicks: 1
 clicks: 4
 ---
 
-# 連續執行三次 make
+# make 的增量編譯行為分析
 
 <div grid="~ cols-[1.2fr_1fr] gap-5">
 
@@ -75,7 +75,7 @@ target : prerequisites
 ```
 
 <div v-click="3" class="callout warn">
-recipe 一定要用 <strong>tab</strong> 縮排
+規則之指令區塊（recipe）必須以 <strong>Tab</strong> 鍵縮排
 </div>
 
 ::margin::
@@ -200,7 +200,7 @@ clean :
 
 <div v-click="1">
 
-- **變數**：`$(CC)` 取值，改一處就好
+- **變數**：`$(CC)` 取值，統一維護變數定義
 
 </div>
 
@@ -227,7 +227,7 @@ Magic Move 三步：逐條規則 → 抽出變數 → pattern rule。
 
 - `make -j$(nproc)`：用全部核心平行編譯
 - `make install`：複製到安裝路徑（prefix）
-- `make clean`：出錯時先清掉舊的 `.o`
+- `make clean`：建置中斷或配置變更時，先清除既有目的檔（`.o`）
 
 <!--
 - make -j <n>：用 n 個核心平行編譯；-j$(nproc) 用全部核心。

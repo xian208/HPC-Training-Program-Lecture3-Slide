@@ -4,7 +4,7 @@ chapter: "09"
 title: Module
 ---
 
-一行指令切換版本，而且可以乾淨地還原
+動態切換軟體版本並保持環境乾淨
 
 ---
 clicks: 3
@@ -99,9 +99,9 @@ clicks: 3
 
 <v-clicks>
 
-1. **不安裝**：軟體早就編好，module 只改環境變數
-2. **load / unload**：照 modulefile 加上，再反向移除
-3. **shell function**：才能改到當前 shell
+1. **非實體安裝**：軟體已預先完成建置，Module 僅動態修改環境變數
+2. **模組載入與卸載**：依循 modulefile 規則配置或反向還原路徑
+3. **Shell Function 設計**：確保環境變數變更作用於當前 Session
 
 </v-clicks>
 
