@@ -83,8 +83,7 @@ clicks: 3
 
 # 安裝與初始化
 
-<div grid="~ cols-2 gap-6">
-<div>
+<div class="steps3">
 
 ### 1. clone 下來
 
@@ -100,9 +99,6 @@ git clone --depth=2 https://github.com/spack/spack.git
 . spack/share/spack/setup-env.sh
 ```
 
-</div>
-<div>
-
 ### 3. 找 compiler
 
 ```bash
@@ -111,7 +107,12 @@ spack compiler list    # what was found
 ```
 
 </div>
-</div>
+
+<style>
+.steps3 h3 { margin: 0 0 6px !important; }
+.steps3 .slidev-code-wrapper { margin: 0 0 14px !important; }
+.steps3 .slidev-code { --slidev-code-padding: 8px 18px; }
+</style>
 
 <!--
 - Spack 不用 apt 安裝，直接 clone；但它是 Python 寫的，下載、解壓縮 source code 也需要一些系統工具。
