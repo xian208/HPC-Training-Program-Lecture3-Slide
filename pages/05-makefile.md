@@ -245,7 +245,7 @@ center: true
 <LabTime>
 
 - **Part A**：填完 6 個 TODO，`make` 並執行
-- **Part B**：依序操作，回答 4 題觀察題
+- **Part B**：依序操作，想想看觀察到的現象
 
 <div class="note">repo：<code>xian208/2026_HPC-training_lab3-1</code></div>
 
