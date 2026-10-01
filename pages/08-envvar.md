@@ -53,7 +53,7 @@ clicks: 5
   { cmd: './use', out: '3', tone: 'ok' },
 ]" />
 
-<div mt-4>
+<div mt-2>
 <LinkGates :steps="[
   { g1: '', g2: '' },
   { g1: 'fail', g2: '', note: '編譯時：linker 找不到 library' },

@@ -64,7 +64,7 @@ const gates = computed(() => [
 .end.ok { background: var(--tb-node-on); }
 .seg { flex: 1; height: 3px; background: #cfd5d8; min-width: 14px; transition: background-color .35s; }
 .seg.ok { background: var(--tb-accent); }
-.gate { width: 176px; border: 1.5px solid var(--tb-node-line); background: var(--tb-node-bg); padding: 8px 10px; position: relative; transition: background-color .35s; }
+.gate { width: 220px; border: 1.5px solid var(--tb-node-line); background: var(--tb-node-bg); padding: 8px 10px; position: relative; transition: background-color .35s; }
 .gate.fail { background: #f7c9c3; }
 .gate.pass { background: var(--tb-node-on); }
 .mark { position: absolute; right: 8px; top: 6px; font-size: 14px; font-weight: 500; }
@@ -73,7 +73,7 @@ const gates = computed(() => [
 .when { font-size: 12px; font-weight: 500; color: var(--tb-accent); letter-spacing: .03em; }
 .who { font-size: 15px; font-weight: 500; }
 .find { font-size: 12px; color: var(--tb-mut); margin-top: 3px; }
-.find code { display: block; white-space: normal; font-size: 11px; background: none; border: 0; padding: 0; }
+.find code { display: block; white-space: nowrap; font-size: 11px; background: none; border: 0; padding: 0; }
 .note { margin-top: 10px; min-height: 1.4em; font-size: 15px; color: var(--tb-ink); text-align: center; }
 .fade-enter-active, .fade-leave-active { transition: opacity .2s; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
