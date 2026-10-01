@@ -33,7 +33,7 @@ clicks: 3
 
 # Spack 與 Module 的差別
 
-module 只負責「**用**」，Spack 從「**裝**」到「**用**」都包辦
+module 只負責「**用**」，Spack 包含「**安裝到使用**」
 
 <table class="cmp">
   <thead><tr><th></th><th>Module</th><th>Spack</th></tr></thead>
