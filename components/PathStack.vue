@@ -12,7 +12,6 @@ import { useSlideContext } from '@slidev/client'
  *   ]" />
  *
  * - has：哪些目錄裡真的有 cmd 這個執行檔；which 會停在第一個
- * - Module 和 Spack 兩章共用（Spack 那頁把路徑換成帶 hash 的目錄）
  */
 interface Step { label?: string, path: string[], has?: string[] }
 const props = withDefaults(defineProps<{

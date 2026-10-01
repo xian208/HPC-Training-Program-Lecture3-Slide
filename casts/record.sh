@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # 錄製 asciinema：casts/record.sh <名稱> [rows]
-#   例：casts/record.sh spack-install-zstd 14
+#   例：casts/record.sh hwloc-configure 15
 # 產出 public/casts/<名稱>.cast，投影片會自動換掉佔位框
 set -euo pipefail
 here=$(cd "$(dirname "$0")" && pwd)
