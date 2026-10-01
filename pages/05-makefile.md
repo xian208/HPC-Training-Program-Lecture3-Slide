@@ -207,7 +207,7 @@ clean :
 <div v-click="2">
 
 - `%.o : %.c`：任何 .o 由同名 .c 產生
-- `$@` / `$<`：target / 第一個 prerequisite
+- `$@` / `$<` / `$^`：target / 第一個 / 全部 prerequisite
 
 </div>
 

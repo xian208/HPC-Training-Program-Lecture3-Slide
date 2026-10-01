@@ -104,8 +104,8 @@ Autoconf 根據 configure.ac 產生 configure，讓軟體在不同 Unix-like 系
 | 參數 | 作用 |
 |---|---|
 | `--prefix=` | `make install` 的安裝路徑 |
-| `CC=` / `CFLAGS=` | 編譯器與 flag |
-| `CPPFLAGS` / `LDFLAGS` | 到哪找 header / library |
+| `CPPFLAGS` / `LDFLAGS` / `LIBS` | header 路徑 / library 路徑 / 要 link 的 library |
+| `CC=` / `CXX=` | 指定編譯器 |
 
 ```bash
 ./configure --prefix=$HOME/opt/mylib CC=gcc CFLAGS="-O3"

@@ -262,6 +262,12 @@ clicks: 3
 
 <LinkResolve />
 
+::margin::
+
+<strong>gcc hello.o -o hello</strong>
+
+linker 把 hello.o 和 library 接成執行檔
+
 <!--
 hello.o 裡的 printf 先畫成空洞 → linker 到 libc 找到 printf.o → 把位址填回去。
 - Symbol resolution：找到每個 symbol 對應的定義，例如 printf 實際定義在哪。

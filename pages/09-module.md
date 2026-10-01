@@ -35,26 +35,26 @@ clicks: 5
 <div grid="~ cols-[1fr_1fr] gap-5">
 
 <Terminal font-size="12px" :steps="[
-  { cmd: 'which zstd', out: '/usr/bin/zstd' },
+  { cmd: 'which zstd' },
   { cmd: 'module load zstd/1.5.6' },
   { cmd: 'which zstd', out: '/home/xian208/opt/zstd/1.5.6/bin/zstd', tone: 'ok' },
   { cmd: 'module unload zstd/1.5.6' },
-  { cmd: 'which zstd', out: '/usr/bin/zstd' },
+  { cmd: 'which zstd' },
 ]" />
 
 <PathStack cmd="zstd" :steps="[
-  { label: 'load 前', path: ['/usr/local/bin', '/usr/bin', '/bin'], has: ['/usr/bin'] },
-  { label: 'load 前', path: ['/usr/local/bin', '/usr/bin', '/bin'], has: ['/usr/bin'] },
-  { label: 'module load 之後', path: ['~/opt/zstd/1.5.6/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: ['~/opt/zstd/1.5.6/bin', '/usr/bin'] },
-  { label: 'module load 之後', path: ['~/opt/zstd/1.5.6/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: ['~/opt/zstd/1.5.6/bin', '/usr/bin'] },
-  { label: 'unload 之後', path: ['/usr/local/bin', '/usr/bin', '/bin'], has: ['/usr/bin'] },
+  { label: 'load 前', path: ['/usr/local/bin', '/usr/bin', '/bin'], has: [] },
+  { label: 'load 前', path: ['/usr/local/bin', '/usr/bin', '/bin'], has: [] },
+  { label: 'module load 之後', path: ['~/opt/zstd/1.5.6/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: ['~/opt/zstd/1.5.6/bin'] },
+  { label: 'module load 之後', path: ['~/opt/zstd/1.5.6/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: ['~/opt/zstd/1.5.6/bin'] },
+  { label: 'unload 之後', path: ['/usr/local/bin', '/usr/bin', '/bin'], has: [] },
 ]" />
 
 </div>
 
 <!--
 PATH 畫成一疊目錄，load 時 zstd 的路徑從最上面插入，which 由上往下找到第一個符合的；unload 再把它抽掉。
-- Debian 13 本來就有 /usr/bin/zstd（1.5.7）；load 之後 which 會先找到自己裝的 1.5.6，因為 module 把它加在 PATH 最前面。
+- 和講義相同：load 前、unload 後 which zstd 都找不到（沒有輸出）。如果系統已經有 /usr/bin/zstd（例如被其他套件一起裝進來），這兩次會印出 /usr/bin/zstd；觀察重點不變：load 之後 which 會先找到自己裝的版本，因為 module 把它加在 PATH 最前面。
 - 講義上的 home 是 /home/xian208，PATH 這裡縮寫成 ~，也省略了 /usr/local/games 等目錄。
 -->
 
@@ -178,7 +178,7 @@ curl -sL -o zstd.tar.gz https://github.com/facebook/zstd/releases/download/v1.5.
 tar xzf zstd.tar.gz && cd zstd-1.5.6
 # compile
 make -j$(nproc)
-# install to $HOME/opt/zstd/1.5.6
+# install to specific path $HOME/opt/zstd/1.5.6
 make prefix=$HOME/opt/zstd/1.5.6 install
 ```
 

@@ -47,7 +47,8 @@ clicks: 3
 才會裝 `zstd` 執行檔
 
 <!--
-需要網路也要編譯時間，錄成 cast（第一次安裝會先裝 gcc-runtime、compiler-wrapper、gmake，錄影裡會看到）。
+需要網路也要編譯時間，錄成 cast。錄影是在 x86_64 VM 上錄的，hash 與路徑（linux-nehalem、icmiglp）和講義（aarch64、qbloxy4）不同，下一頁的模擬終端機照講義。
+第一次執行 spack install 會先裝 gcc-runtime、compiler-wrapper、gmake 等基礎套件，輸出比較長，約 1–2 分鐘（講義的 callout）；錄影時這些已經裝好，所以只看到 zstd。
 Spack 的 zstd 預設 variant 是 ~programs，只裝 library（lib/、include/），沒有 zstd 執行檔，所以要加 +programs。
 -->
 
@@ -60,19 +61,19 @@ clicks: 4
 <div grid="~ cols-[1fr_1.15fr] gap-5">
 
 <Terminal font-size="12px" :steps="[
-  { cmd: 'which zstd', out: '/usr/bin/zstd' },
+  { cmd: 'which zstd' },
   { cmd: 'spack load zstd' },
-  { cmd: 'which zstd', out: '…/zstd-1.5.7-icmiglp…/bin/zstd', tone: 'ok' },
+  { cmd: 'which zstd', out: '…/zstd-1.5.7-qbloxy4…/bin/zstd', tone: 'ok' },
   { cmd: 'spack unload zstd' },
-  { cmd: 'which zstd', out: '/usr/bin/zstd' },
+  { cmd: 'which zstd' },
 ]" :initial="1" />
 
 <PathStack cmd="zstd" :steps="[
-  { label: 'load 前', path: ['~/spack/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: ['/usr/bin'] },
-  { label: 'spack load 之後', path: ['…/zstd-1.5.7-icmiglp…/bin', '~/spack/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: ['…/zstd-1.5.7-icmiglp…/bin', '/usr/bin'] },
-  { label: 'spack load 之後', path: ['…/zstd-1.5.7-icmiglp…/bin', '~/spack/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: ['…/zstd-1.5.7-icmiglp…/bin', '/usr/bin'] },
-  { label: 'spack unload 之後', path: ['~/spack/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: ['/usr/bin'] },
-  { label: 'spack unload 之後', path: ['~/spack/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: ['/usr/bin'] },
+  { label: 'load 前', path: ['~/spack/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: [] },
+  { label: 'spack load 之後', path: ['…/zstd-1.5.7-qbloxy4…/bin', '~/spack/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: ['…/zstd-1.5.7-qbloxy4…/bin'] },
+  { label: 'spack load 之後', path: ['…/zstd-1.5.7-qbloxy4…/bin', '~/spack/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: ['…/zstd-1.5.7-qbloxy4…/bin'] },
+  { label: 'spack unload 之後', path: ['~/spack/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: [] },
+  { label: 'spack unload 之後', path: ['~/spack/bin', '/usr/local/bin', '/usr/bin', '/bin'], has: [] },
 ]" />
 
 </div>
