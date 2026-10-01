@@ -219,42 +219,37 @@ Monaco runner → Compiler Explorer。組語每一行前面的 Ln 與底色 = �
 -->
 
 ---
+clicks: 3
+---
 
 # Assembly
 
 <CompilePipeline :active="3" small />
 
-<div grid="~ cols-[1fr_1.1fr] gap-5">
+<div grid="~ cols-[1fr_1.25fr] gap-6" mt-2>
 <div>
 
-```bash
-gcc -c hello.s -o hello.o
-```
-
 - `hello.o`：二進位的 relocatable object file
+- `cat hello.o`：只會印出亂碼
 
-<div class="note">
-<code>objdump -d</code> 反組譯，檢查 flag 有沒有生效
+<div class="note"><code>objdump -d</code> 可以反組譯回組語，用來檢查 flag 有沒有生效</div>
+
 </div>
 
-</div>
-
-```c {monaco-run} {autorun: false, height: '120px', runnerOptions: ce('hello-objdump')}
-#include <stdio.h>
-int main() {
-    int a = 5000, b = 1000;
-    int c = ((a + b) / 2);
-    printf("%d\n", c);
-    return 0;
-}
-```
+<Terminal font-size="12.5px" height="250px" :steps="[
+  { cmd: 'gcc -c hello.s -o hello.o' },
+  { cmd: 'cat hello.o', out: 'ELF>�@@\nUH��H���E���E�����U�E�\nGCC: (Debian 14.2.0-19) 14.2.0\nhello.c main printf .symtab .strtab', tone: 'mut' },
+  { cmd: 'file hello.o', out: 'hello.o: ELF 64-bit LSB relocatable, x86-64', tone: 'ok' },
+]" />
 
 </div>
 
 <!--
-- Assembler 把 hello.s 轉成二進位的 relocatable object file，存在 hello.o。
-- 可以現場 cat hello.o：會看到亂碼，因為它已經是二進位格式了。
-- 右邊 = godbolt 的 binary object 模式（等同 objdump -d），會顯示位址與 opcode。
+- Assembler 把 hello.s 轉成二進位的 relocatable object file，存在 hello.o（對應講義 Assembly phase）。
+- cat 會把每個位元組當成字元印出來，大部分位元組不是可顯示的字元，所以是亂碼；中間看得到的 main、printf 是 symbol 名稱，linker 之後會用到。
+- file 確認它是 relocatable：位址還沒定，要等 linker 決定（下一頁）。
+- 講義的灰色 callout：objdump -d hello.o 可以反組譯，驗證編譯參數是否生效。這裡只口頭帶過，不展開。
+- 如果有人問「機器碼的數字在哪」：od -A x -t x1 hello.o 會看到 55 48 89 e5…，就是 push %rbp、mov %rsp,%rbp 的機器碼；cat 印不出來是因為它把位元組當字元。
 -->
 
 ---
@@ -276,29 +271,52 @@ Symbol：程式中代表 function 或 variable 的名稱，例如 main、printf�
 -->
 
 ---
-clicks: 2
+clicks: 4
 ---
 
-# 執行的那一刻：Loader
+# 從 hello.c 到 process：Loader
 
-<Flow :width="860" :height="170" :nodes="[
-  { id: 'exe', x: 90, y: 85, label: './hello' },
-  { id: 'ld', x: 330, y: 85, label: 'Loader', sub: 'OS 呼叫', w: 140, at: 1, mono: false },
-  { id: 'mem', x: 600, y: 85, label: '記憶體', sub: '從程式開頭執行', w: 160, at: 1, tone: 'on', mono: false },
-  { id: 'so', x: 330, y: 20, label: 'libc.so.6', w: 140, at: 2, tone: 'plain' },
+<Flow :width="860" :height="282" :groups="[
+  { x: 0, y: 0, w: 860, h: 184, label: 'COMPILE TIME' },
+  { x: 0, y: 192, w: 860, h: 90, label: 'RUN TIME', at: 3 },
+]" :nodes="[
+  { id: 'c', x: 95, y: 48, label: 'hello.c', w: 120 },
+  { id: 'i', x: 330, y: 48, label: 'hello.i', w: 120, at: 1 },
+  { id: 's', x: 560, y: 48, label: 'hello.s', w: 120, at: 1 },
+  { id: 'o', x: 770, y: 48, label: 'hello.o', w: 120, at: 1 },
+  { id: 'a', x: 560, y: 140, label: 'libc.a', sub: 'static', w: 120, at: 2, tone: 'plain' },
+  { id: 'exe', x: 770, y: 140, label: 'hello', sub: '執行檔', w: 120, at: 2, tone: 'on' },
+  { id: 'so', x: 560, y: 240, label: 'libc.so', sub: 'dynamic', w: 120, at: 3, tone: 'plain' },
+  { id: 'proc', x: 770, y: 240, label: 'process', sub: '執行中的程式', w: 120, at: 4, tone: 'on' },
 ]" :edges="[
-  { from: 'exe', to: 'ld', at: 1 }, { from: 'ld', to: 'mem', at: 1 },
-  { from: 'so', to: 'mem', at: 2, dashed: true, label: 'dynamic linking', lpos: [480, 36] },
+  { from: 'c', to: 'i', label: 'preprocessor', at: 1 },
+  { from: 'i', to: 's', label: 'compiler', at: 1 },
+  { from: 's', to: 'o', label: 'assembler', at: 1 },
+  { from: 'o', to: 'exe', label: 'linker', at: 2, lpos: [780, 98] },
+  { from: 'a', to: 'exe', label: 'linker', at: 2 },
+  { from: 'so', to: 'exe', label: 'linker 檢查 symbol', dashed: true, at: 3, lpos: [452, 204] },
+  { from: 'exe', to: 'proc', label: 'loader', at: 4, lpos: [780, 202] },
+  { from: 'so', to: 'proc', label: 'loader', at: 4 },
 ]" />
 
-<div mt-3>
+<div grid="~ cols-2 gap-6" mt-2>
+<div>
 
-- **Loader**：把執行檔載入記憶體，交出控制權
-- **dynamic linking**：這時才找到並載入 `.so`
+- **Loader**：執行時把程式載入記憶體
 
+</div>
+<div>
+
+- **dynamic**：`.so` 在這時才被載入
+
+</div>
 </div>
 
 <!--
-執行 ./hello 時，OS 呼叫 Loader，把執行檔的內容、資料載入記憶體，並把控制權交給程式開頭。
-若程式用了 dynamic linking，Loader 也會在這時找到對應的 .so 載入。
+和講義 Linking phase 最後那張圖相同（講義是 Compile time / Run time 兩層）。
+1. 四個階段：hello.c → hello.i → hello.s → hello.o。
+2. linker 把 hello.o 和 library 接成執行檔 hello；static linking 時把 libc.a 裡用到的部分複製進來。
+3. dynamic linking 時，link time 只檢查 libc.so 裡有沒有需要的 symbol，不複製內容。
+4. 執行（./hello）的當下，OS 呼叫 Loader，把執行檔載入記憶體、交出控制權；dynamic 的程式此時才由 loader 找到 libc.so 載入，變成執行中的 process。
+libc.a 和 libc.so 是二選一：預設是 dynamic，加 -static 才是 static（下一章會實際比較）。
 -->
