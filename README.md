@@ -1,7 +1,7 @@
 # 2026 HPC Training — Lecture 3 投影片
 
 Build from Source：Compiler、Compilation Process、Build Automation、Environment Variable、Module、Spack。
-內容來源：Notion「2026 lecture3」。投影片只放圖、demo 與重點，細節寫在每頁的講者備註（presenter mode 按 `p`）。
+內容來源：Notion「2026 lecture3」。寫作與視覺風格見 [`STYLE.md`](STYLE.md)。投影片只放圖、demo 與重點，細節寫在每頁的講者備註（presenter mode 按 `p`）。
 
 ## 線上播放
 
