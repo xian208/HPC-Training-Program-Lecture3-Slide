@@ -57,124 +57,10 @@ module 只負責「**用**」，Spack 包含「**安裝到使用**」
 -->
 
 ---
-clicks: 3
----
-
-# Spack 還可以……
-
-<v-clicks>
-
-- **並存**：同一 library 的多種 build 互不覆蓋
-- `spack env`：整組 software stack 存成設定檔
-- **產生 modulefile**：給用 module 的系統用
-
-</v-clicks>
-
-<!--
-除了 spack load / spack unload 對應 module 的切換功能之外：
-- 自動下載、編譯、安裝軟體以及它所有的 dependency
-- 用 spec 精確指定 compiler、版本、variant 與目標架構，安裝前預覽完整 dependency tree
-- 同一個 library 的不同 build 並存，不會互相覆蓋
-- spack env：把一整組 software stack 記錄成設定檔，方便重現或分享給隊友
-- 反過來產生 modulefile：spack module tcl refresh / spack module lmod refresh
--->
-
----
-
-# 安裝與初始化
-
-<div class="steps3">
-
-### 1. clone 下來
-
-```bash
-sudo apt install -y git python3 file unzip xz-utils
-cd ~
-git clone --depth=2 https://github.com/spack/spack.git
-```
-
-### 2. 初始化 shell 環境
-
-```bash
-. spack/share/spack/setup-env.sh
-```
-
-### 3. 找 compiler
-
-```bash
-spack compiler find    # auto-detect
-spack compiler list    # what was found
-```
-
-</div>
-
-<style>
-.steps3 h3 { margin: 0 0 6px !important; }
-.steps3 .slidev-code-wrapper { margin: 0 0 14px !important; }
-.steps3 .slidev-code { --slidev-code-padding: 8px 18px; }
-</style>
-
-<!--
-- Spack 不用 apt 安裝，直接 clone；但它是 Python 寫的，下載、解壓縮 source code 也需要一些系統工具。
-- setup-env.sh 讓 spack 指令能修改當前 shell 的環境變數。不想每次開 terminal 都執行，可以加到 .bashrc。
-- 用 sbatch 發 job 時，雖然 shell 環境預設會被複製過去，還是建議在 job script 裡初始化一次，避免預期之外的錯誤。
-- 編譯 library 需要 compiler，spack compiler find 讓 Spack 自動偵測。
--->
-
----
-
-# Step 1：spack info 查版本與 variant
-
-```text {1-8|10-17|19-30}{maxHeight: '345px'}
-CMakePackage:   hdf5
-
-Description:
-    HDF5 is a data model, library, and file format for storing and managing
-    data. ...
-
-Preferred version:
-    1.14.6           https://support.hdfgroup.org/releases/hdf5/v1_14/v1_14_6/...
-
-Safe versions:
-    develop-2.0      [git] https://github.com/HDFGroup/hdf5.git on branch develop
-    1.14.6           https://support.hdfgroup.org/releases/hdf5/v1_14/v1_14_6/...
-    1.14.5           https://support.hdfgroup.org/releases/hdf5/v1_14/v1_14_5/...
-    1.14.4-3         https://support.hdfgroup.org/releases/hdf5/v1_14/v1_14_4/...
-    1.14.3           https://support.hdfgroup.org/releases/hdf5/v1_14/v1_14_3/...
-    ...（共 40 個版本，節錄）
-    1.8.10           https://support.hdfgroup.org/archive/support/ftp/HDF5/...
-
-Variants:
-    cxx [false]                 false, true
-        Enable C++ support
-    fortran [false]             false, true
-        Enable Fortran support
-    hl [false]                  false, true
-        Enable the high-level library
-    mpi [true]                  false, true
-        Enable MPI support
-    shared [true]               false, true
-        Builds a shared version of the library
-    ...（節錄；另有 api、build_type、ipo、java、map、subfiling、szip、threadsafe、tools…）
-```
-
-::margin::
-
-<MarginNotes label="$ spack info hdf5" :notes="[
-  '先看有哪些版本、variant',
-  'Safe versions：可用 @ 指定',
-  'Variants：[ ] 裡是預設值',
-]" />
-
-<!--
-完整輸出在 Notion 的 details 區塊；投影片只節錄會用到的 variant。下一頁的 spec 會用 +hl ~cxx +mpi 來設定。
--->
-
----
 clicks: 7
 ---
 
-# Step 2：spec 語法
+# spec 語法
 
 <CmdAnnotate font-size="17px" :parts="[
   { t: 'spack spec ' },
@@ -207,53 +93,10 @@ clicks: 7
 -->
 
 ---
-
-# spack spec 的輸出：誰要裝、誰已經有了
-
-```text {2,12,15|11,14,16|1,18|all}{maxHeight: '250px'}
- -   hdf5@1.14.3~cxx~fortran+hl~ipo~java~map+mpi+shared~subfiling~szip~threadsafe+tools api=default build_system=cmake ... target=skylake_avx512 %c=gcc@8.4.1
-[+]      ^cmake@3.31.9~doc+ncurses+ownlibs~qtgui build_system=generic build_type=Release ... %c,cxx=oneapi@2024.0.2
-[+]          ^curl@8.17.0~gssapi~ldap~libidn2~librtmp~libssh~libssh2+nghttp2 ...
-[+]              ^nghttp2@1.67.1 build_system=autotools ...
-[+]                  ^diffutils@3.12 build_system=autotools ...
-[+]              ^openssl@3.6.0~docs+shared build_system=generic certs=mozilla ...
-[+]                  ^ca-certificates-mozilla@2025-08-12 build_system=generic ...
-[+]                  ^perl@5.42.0+cpanm+opcode+open+shared+threads ...
-[+]                      ^berkeley-db@18.1.40+cxx~docs+stl ...
-[+]              ^pkgconf@2.5.1 build_system=autotools ...
-[e]          ^intel-oneapi-compilers@2024.0.2~amd+envmods~nvidia build_system=generic ... target=x86_64
-[+]          ^intel-oneapi-runtime@2024.0.2 build_system=generic ...
-[+]      ^compiler-wrapper@1.0 build_system=generic ...
-[e]      ^gcc@8.4.1~binutils+bootstrap~graphite~nvptx~piclibs~profiled~strip ... target=x86_64
-[+]      ^gcc-runtime@8.4.1 build_system=generic ...
-[e]      ^glibc@2.28 build_system=autotools ... target=x86_64
-[+]      ^gmake@4.4.1~guile build_system=generic ...
- -       ^mpich@4.3.2~argobots~cuda+fortran+hwloc+hydra ... %c,cxx,fortran=gcc@8.4.1
-         ...（節錄，完整約 60 行）
-```
-
-<div class="legend-3">
-  <span><code>[+]</code> 已安裝，直接重複使用</span>
-  <span><code>[e]</code> external，用系統既有的</span>
-  <span><code>-</code> 還沒裝，install 時編譯</span>
-</div>
-
-<style>
-.legend-3 { display: flex; gap: 18px; font-size: 14px; color: var(--tb-mut); margin-top: 10px; }
-.legend-3 code { color: var(--tb-accent); font-weight: 500; }
-</style>
-
-<!--
-[+] [e] - 三種標記挑幾行高亮，不需要逐行動畫。
-- [e] external：系統上既有的軟體（系統 gcc、glibc），Spack 不會重新編譯。
-- 注意：這份輸出是 Rocky 8 / skylake / oneapi 的叢集環境，上台時口頭說明。
--->
-
----
 clicks: 2
 ---
 
-# Step 3：安裝
+# 在叢集上安裝
 
 <Flow :width="860" :height="200" :groups="[
   { x: 0, y: 6, w: 380, h: 188, label: 'LOGIN NODE（可以連網）' },
@@ -278,24 +121,19 @@ clicks: 2
 
 ---
 
-# 使用 library
+# 課後自行閱讀：Spack
 
-```bash
-spack find                  # list everything installed
-spack find <library name>   # only this library
-spack load <spec>           # like module load
-spack unload <spec>
-spack unload --all
-```
+- **安裝與設定**：clone、`setup-env.sh`、`spack compiler find`
+- **安裝與使用 library**：`spack info`、`spack spec`、`spack load`
 
 <div class="callout warn">
 <strong>避免同時混用 Spack 與 Module 以防環境變數衝突</strong>
 </div>
 
 <!--
-- spack load 和 module load 一樣，是修改當前 shell 的環境變數（PATH、LD_LIBRARY_PATH 等）。
-- spack 跟 module 都是改環境變數來決定 software stack，同時使用可能互相衝突，建議不要混用。
-- 想在用 module 的同時用 Spack build 的 library，可以用 spack module tcl refresh / spack module lmod refresh 產生 modulefile，詳細設定見 Spack 官方文件。
+- 對應講義 Spack 章節的「安裝 spack」「環境初始化」「Compiler 設定」「安裝 library（Step 1–3）」「使用 library」，請學員課後照著做一次。
+- 上課只講 Spack 的定位、spec 語法與「不要在 login node 上編譯」。
+- spack 跟 module 都是改環境變數來決定 software stack，同時使用可能衝突；要在 module 系統用 Spack 裝的 library，可以用 spack module tcl refresh / lmod refresh 產生 modulefile。
 -->
 
 ---
