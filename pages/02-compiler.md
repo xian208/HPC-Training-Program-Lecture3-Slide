@@ -76,27 +76,20 @@ clicks: 2
 -->
 
 ---
-clicks: 3
----
 
-# Interpreter 存在的價值
+# Compiler 與 Interpreter 優缺點
 
-<v-clicks>
-
-- **開發快**：改完立刻執行，不用等編譯
-- **可攜性高**：有直譯器就能跑，不必重編
-- **互動彈性**：REPL、Jupyter 逐行嘗試
-
-</v-clicks>
-
-<div v-click="3" class="note key">實務上常搭配：Python 管流程，計算交給編譯好的 library</div>
+| | Compiler | Interpreter |
+|---|---|---|
+| 執行速度 | **快**：事先轉成機器碼 | **慢**：執行時才逐行翻譯 |
+| 開發流程 | 修改後須重新編譯 | **改完立刻執行** |
+| 可攜性 | 每種架構各編一次 | **有直譯器就能執行** |
 
 <!--
-直覺上 compiler 的效能優勢很大，那 interpreter 為什麼還存在？
-- 開發速度：改一行就能馬上看結果，不用每次等編譯，適合快速試錯、資料分析、教學。大型 C++ 專案光是重新編譯就可能要好幾分鐘。
+直覺上 compiler 的效能優勢很大，但 interpreter 在開發流程與可攜性上各有優勢，兩者是取捨：
+- 執行速度：編譯器在執行前就把整份程式轉成機器碼，還能做最佳化；直譯器執行時才翻譯，每次執行都要付出這個成本。
+- 開發流程：直譯語言改一行就能馬上看結果，適合快速試錯、資料分析、教學；大型 C++ 專案光是重新編譯就可能要好幾分鐘。
 - 可攜性：Python 腳本拿到 x86、ARM、Mac 上都能直接跑，只要有對應的直譯器；C 程式則要在每種架構上各編一次。
-- 互動與彈性：REPL、Jupyter 可以一行一行試；動態型別、eval 這類「執行時才決定」的功能，直譯比較容易做到。
-- 實務上兩者搭配：例如 Python 負責流程，NumPy 底下真正算的是用 C / Fortran 編譯好的 BLAS；HPC application 的核心幾乎都是編譯語言。
 - 補充：Java、PyPy 用 JIT（Just-In-Time）在執行時把常跑的部分編成機器碼，兩者的界線沒有那麼分明。
 -->
 
@@ -123,11 +116,19 @@ GNU 開源，多數 Linux 預先安裝
 </div>
 </div>
 
+<!--
+- gcc：GNU 開發的開源編譯器，多數 Linux 發行版預先安裝。
+- Intel oneAPI：在 Intel CPU 上可能有比 gcc 更好的表現。
+- 轉場：Intel 把自家的 icc 換成以 LLVM 為基礎的 icx。為什麼一家 CPU 廠商要放棄自己的編譯器、改用別人的架構？下一頁看編譯器要面對的問題。
+-->
+
 ---
 clicks: 1
 ---
 
 # 為什麼需要中間表示 (IR)
+
+<div class="note key" mb-2>icx 為什麼改用 LLVM？先看編譯器要面對的問題</div>
 
 <Flow :width="860" :height="236" :groups="[
   { x: 0, y: 4, w: 400, h: 228, label: '沒有 IR：M × N 個編譯器' },
@@ -161,6 +162,7 @@ clicks: 1
 - 先把所有語言轉成同一種中間格式（IR，Intermediate Representation），再從 IR 產生各架構的機器碼：只要 3 個 frontend + 3 個 backend。
 - 大部分最佳化（-O2、-O3 的迴圈最佳化、函式內聯）都在 IR 上做，寫一次所有語言、所有架構都受益。
 - 下一頁的 LLVM 就是這個設計的代表；gcc 內部也有自己的 IR（GIMPLE），概念相同。
+- 回到 icx：建立在 LLVM 上，Intel 只要專心做針對自家 CPU 的 backend，C、C++、Fortran 的 frontend 與 IR 上的最佳化都能直接沿用。
 -->
 
 ---
