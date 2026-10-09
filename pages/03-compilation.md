@@ -53,6 +53,21 @@ clicks: 4
 
 <CompilePipeline clicks />
 
+<div class="stages">
+  <div v-click="1"><b>前置處理</b><code>.c → .i</code><span>處理 # 指令，純文字替換</span></div>
+  <div v-click="2"><b>編譯</b><code>.i → .s</code><span>翻成組合語言，最佳化在此</span></div>
+  <div v-click="3"><b>組譯</b><code>.s → .o</code><span>組合語言轉成機器碼</span></div>
+  <div v-click="4"><b>連結</b><code>.o → 執行檔</code><span>接上函式庫，決定最終位址</span></div>
+</div>
+
+<style>
+.stages { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 18px; }
+.stages > div { border-top: 3px solid var(--tb-accent); background: var(--tb-code); padding: 10px 12px; }
+.stages b { display: block; font-weight: 500; font-size: 18px; }
+.stages code { display: inline-block; margin: 4px 0 6px; font-size: 13px; }
+.stages span { display: block; font-size: 15px; line-height: 1.5; color: var(--tb-mut); }
+</style>
+
 <!--
 每一站一個 click：
 1. Preprocessing：先對原始碼做初步的「文字整理」

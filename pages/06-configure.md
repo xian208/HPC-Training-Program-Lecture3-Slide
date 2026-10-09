@@ -124,7 +124,6 @@ center: true
 - **configure**：`--prefix=$HOME/opt/openmpi/5.0.8`
 - **編譯**：`make -j4 > build.log 2>&1 && make install`
 
-<div class="note">建議於背景執行並進入中場休息</div>
 
 </LabTime>
 

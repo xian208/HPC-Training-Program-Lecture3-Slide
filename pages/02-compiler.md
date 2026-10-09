@@ -43,7 +43,9 @@ clicks: 2
 
 # Compiler vs Interpreter
 
-<div mb-5>
+<div class="note key" mb-2>兩者目的相同，差在何時翻譯成機器碼</div>
+
+<div mb-4>
 
 - **Compiler**：預先編譯完成，執行效率高；原始碼修改後須重新編譯
 - **Interpreter**：逐行直譯執行，即時反應修改；執行效能較低
@@ -70,6 +72,32 @@ clicks: 2
 - 編譯：程式碼先經過編譯器，全部編譯成機器語言，產生執行檔後再一次執行，執行效率較高，但修改程式碼後需重新編譯。
 - 直譯：程式碼透過直譯器一行一行被執行，修改後馬上可以重新執行，但執行效率較低。
 - 原講義的圖來源：hackmd（@Co-E5uCjTiSXhCaEXduquA），這裡重畫成兩條流程。
+- 先點出兩者目的一樣（讓 CPU 執行高階語言寫的程式），差別在翻譯的時機：編譯器在執行前一次翻完，直譯器在執行時邊讀邊執行。
+-->
+
+---
+clicks: 3
+---
+
+# Interpreter 存在的價值
+
+<v-clicks>
+
+- **開發快**：改完立刻執行，不用等編譯
+- **可攜性高**：有直譯器就能跑，不必重編
+- **互動彈性**：REPL、Jupyter 逐行嘗試
+
+</v-clicks>
+
+<div v-click="3" class="note key">實務上常搭配：Python 管流程，計算交給編譯好的 library</div>
+
+<!--
+直覺上 compiler 的效能優勢很大，那 interpreter 為什麼還存在？
+- 開發速度：改一行就能馬上看結果，不用每次等編譯，適合快速試錯、資料分析、教學。大型 C++ 專案光是重新編譯就可能要好幾分鐘。
+- 可攜性：Python 腳本拿到 x86、ARM、Mac 上都能直接跑，只要有對應的直譯器；C 程式則要在每種架構上各編一次。
+- 互動與彈性：REPL、Jupyter 可以一行一行試；動態型別、eval 這類「執行時才決定」的功能，直譯比較容易做到。
+- 實務上兩者搭配：例如 Python 負責流程，NumPy 底下真正算的是用 C / Fortran 編譯好的 BLAS；HPC application 的核心幾乎都是編譯語言。
+- 補充：Java、PyPy 用 JIT（Just-In-Time）在執行時把常跑的部分編成機器碼，兩者的界線沒有那麼分明。
 -->
 
 ---
@@ -96,6 +124,46 @@ GNU 開源，多數 Linux 預先安裝
 </div>
 
 ---
+clicks: 1
+---
+
+# 為什麼需要中間表示 (IR)
+
+<Flow :width="860" :height="236" :groups="[
+  { x: 0, y: 4, w: 400, h: 228, label: '沒有 IR：M × N 個編譯器' },
+  { x: 460, y: 4, w: 400, h: 228, label: '有 IR：M + N 個元件', at: 1 },
+]" :nodes="[
+  { id: 'a1', x: 80, y: 66, label: 'C', w: 100 },
+  { id: 'a2', x: 80, y: 134, label: 'C++', w: 100 },
+  { id: 'a3', x: 80, y: 202, label: 'Fortran', w: 100 },
+  { id: 'b1', x: 320, y: 66, label: 'x86', w: 90 },
+  { id: 'b2', x: 320, y: 134, label: 'ARM', w: 90 },
+  { id: 'b3', x: 320, y: 202, label: 'GPU', w: 90 },
+  { id: 'c1', x: 540, y: 66, label: 'C', w: 100, at: 1 },
+  { id: 'c2', x: 540, y: 134, label: 'C++', w: 100, at: 1 },
+  { id: 'c3', x: 540, y: 202, label: 'Fortran', w: 100, at: 1 },
+  { id: 'ir', x: 668, y: 134, label: 'IR', w: 70, at: 1, tone: 'on' },
+  { id: 'd1', x: 800, y: 66, label: 'x86', w: 80, at: 1 },
+  { id: 'd2', x: 800, y: 134, label: 'ARM', w: 80, at: 1 },
+  { id: 'd3', x: 800, y: 202, label: 'GPU', w: 80, at: 1 },
+]" :edges="[
+  { from: 'a1', to: 'b1' }, { from: 'a1', to: 'b2' }, { from: 'a1', to: 'b3' },
+  { from: 'a2', to: 'b1' }, { from: 'a2', to: 'b2' }, { from: 'a2', to: 'b3' },
+  { from: 'a3', to: 'b1' }, { from: 'a3', to: 'b2' }, { from: 'a3', to: 'b3' },
+  { from: 'c1', to: 'ir', at: 1 }, { from: 'c2', to: 'ir', at: 1 }, { from: 'c3', to: 'ir', at: 1 },
+  { from: 'ir', to: 'd1', at: 1 }, { from: 'ir', to: 'd2', at: 1 }, { from: 'ir', to: 'd3', at: 1 },
+]" />
+
+<div v-click="1" class="note key">先轉成共同格式，最佳化只需做一次</div>
+
+<!--
+- 沒有共同的中間格式時，每種語言都要對每種 CPU 架構各寫一個完整編譯器：3 種語言 × 3 種架構 = 9 個。
+- 先把所有語言轉成同一種中間格式（IR，Intermediate Representation），再從 IR 產生各架構的機器碼：只要 3 個 frontend + 3 個 backend。
+- 大部分最佳化（-O2、-O3 的迴圈最佳化、函式內聯）都在 IR 上做，寫一次所有語言、所有架構都受益。
+- 下一頁的 LLVM 就是這個設計的代表；gcc 內部也有自己的 IR（GIMPLE），概念相同。
+-->
+
+---
 clicks: 3
 ---
 
@@ -103,12 +171,12 @@ clicks: 3
 
 <Flow :width="860" :height="250" :groups="[
   { x: 0, y: 4, w: 190, h: 242, label: 'FRONTEND' },
-  { x: 335, y: 4, w: 190, h: 242, label: 'IR', at: 1 },
+  { x: 335, y: 4, w: 190, h: 242, label: 'IR（中間表示）', at: 1 },
   { x: 670, y: 4, w: 190, h: 242, label: 'BACKEND', at: 2 },
 ]" :nodes="[
-  { id: 'c', x: 95, y: 70, label: 'C' },
-  { id: 'cpp', x: 95, y: 135, label: 'C++' },
-  { id: 'f', x: 95, y: 200, label: 'Fortran' },
+  { id: 'c', x: 95, y: 70, label: 'C', sub: 'Clang' },
+  { id: 'cpp', x: 95, y: 135, label: 'C++', sub: 'Clang' },
+  { id: 'f', x: 95, y: 200, label: 'Fortran', sub: 'Flang' },
   { id: 'ir', x: 430, y: 135, label: 'LLVM IR', sub: '與平台無關', w: 130, at: 1, tone: 'on' },
   { id: 'x86', x: 765, y: 70, label: 'x86', at: 2, tones: { 3: 'on' } },
   { id: 'arm', x: 765, y: 135, label: 'ARM', at: 2, tones: { 3: 'dim' } },
@@ -118,12 +186,16 @@ clicks: 3
   { from: 'ir', to: 'x86', at: 2, tones: { 3: 'on' }, label: '' }, { from: 'ir', to: 'arm', at: 2 }, { from: 'ir', to: 'gpu', at: 2 },
 ]" />
 
+<div v-click="1" class="note">IR：Intermediate Representation，與語言、架構無關</div>
+
 <div v-click="3" class="note">
 <code>icx</code>：基於 LLVM 架構，整合針對 Intel CPU 微架構最佳化的後端
 </div>
 
 <!--
-- LLVM 把編譯過程拆成 Frontend（原始語言 → IR）、IR（與平台無關的中間語言）、Backend（IR → 各平台機器碼）三部分。
+- LLVM 把編譯過程拆成 Frontend（原始語言 → IR，例如 Clang 處理 C / C++、Flang 處理 Fortran）、IR（Intermediate Representation，與平台無關的中間語言，長得像簡化的組合語言）、Backend（IR → 各平台機器碼）三部分。
+- 大部分最佳化在 IR 上進行；backend 再做和硬體相關的最佳化（指令選擇、暫存器配置）。
+- 補充：LLVM 原本是 Low Level Virtual Machine 的縮寫，現在只是專案名稱。
 - 不同編譯器可以共用同一套基礎架構，只需要客製化自己需要的部分。
 - Intel 的 icx 就是基於 LLVM 開發，在 backend 加入針對 Intel CPU（如 AVX-512）的深度最佳化。
 -->
