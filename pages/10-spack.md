@@ -4,7 +4,7 @@ chapter: "10"
 title: Spack
 ---
 
-涵蓋套件建置、相依性解析至環境部署的 HPC 套件管理器
+涵蓋建置、相依解析與環境部署的 HPC 套件管理器
 
 ---
 clicks: 3
@@ -12,7 +12,7 @@ clicks: 3
 
 # Spack 是什麼
 
-為 HPC 設計的 package manager
+專為 HPC 設計的套件管理器
 
 <v-clicks>
 
@@ -39,8 +39,8 @@ module 只負責「**用**」，Spack 包含「**安裝到使用**」
   <thead><tr><th></th><th>Module</th><th>Spack</th></tr></thead>
   <tbody>
     <tr v-click="1"><td>定位</td><td>環境變數管理工具</td><td>package manager</td></tr>
-    <tr v-click="2"><td>軟體從哪來</td><td>自己先編好</td><td>自動下載、編譯</td></tr>
-    <tr v-click="3"><td>dependency</td><td>自己處理</td><td>自動解析整棵樹</td></tr>
+    <tr v-click="2"><td>軟體來源</td><td>須預先自行建置</td><td>自動下載並編譯</td></tr>
+    <tr v-click="3"><td>dependency</td><td>須自行處理</td><td>自動解析完整相依樹</td></tr>
   </tbody>
 </table>
 
@@ -103,7 +103,7 @@ clicks: 2
   { x: 480, y: 6, w: 380, h: 188, label: 'COMPUTE NODE（不能連網）', at: 2 },
 ]" :nodes="[
   { id: 'net', x: 100, y: 110, label: '網路', sub: 'source code', w: 130, tone: 'plain', mono: false },
-  { id: 'f', x: 280, y: 110, label: 'spack fetch', sub: '只下載', w: 140, at: 1, tone: 'on' },
+  { id: 'f', x: 280, y: 110, label: 'spack fetch', sub: '僅下載', w: 140, at: 1, tone: 'on' },
   { id: 'i', x: 670, y: 110, label: 'spack install', sub: 'srun / sbatch', w: 170, at: 2, tone: 'on' },
 ]" :edges="[
   { from: 'net', to: 'f', at: 1 },
@@ -143,9 +143,9 @@ chap: Recap
 # Recap：管理 software stack
 
 <Recap :items="[
-  { ch: '08', label: '環境變數', note: 'PATH 找指令，LD_LIBRARY_PATH 找 .so', keys: ['PATH', 'LD_LIBRARY_PATH', 'export'] },
-  { ch: '09', label: 'Module', note: 'load / unload 整組切換', keys: ['module load', 'module show', 'purge'] },
-  { ch: '10', label: 'Spack', note: '自動解依賴，從 source 裝好', keys: ['spack install', 'spec', 'spack load'] },
+  { ch: '08', label: '環境變數', note: 'PATH 定位指令，LD_LIBRARY_PATH 定位 .so', keys: ['PATH', 'LD_LIBRARY_PATH', 'export'] },
+  { ch: '09', label: 'Module', note: '以 load / unload 切換整組環境', keys: ['module load', 'module show', 'purge'] },
+  { ch: '10', label: 'Spack', note: '自動解析相依，並從原始碼建置', keys: ['spec', '%gcc@', 'login node'] },
 ]" />
 
 <!--
@@ -162,9 +162,9 @@ center: true
 
 <LabTime>
 
-- **Lab3-2 後半**：寫 modulefile，完成 Part B
-- **Lab3-3**：填完 7 個 TODO，編譯並執行
-- **做完的人**：先開始 Lab3-4
+- **Lab3-2 後半**：撰寫 modulefile 並完成 Part B
+- **Lab3-3**：完成 7 個 TODO，編譯並執行
+- **提早完成**：可開始進行 Lab3-4
 
 </LabTime>
 

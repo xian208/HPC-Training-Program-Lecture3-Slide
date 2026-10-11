@@ -4,7 +4,7 @@ chapter: "08"
 title: Environment Variable
 ---
 
-系統於編譯期與執行期定位相依檔案的路徑解析機制
+編譯期與執行期的檔案路徑解析機制
 
 ---
 
@@ -13,7 +13,7 @@ title: Environment Variable
 <div grid="~ cols-2 gap-5">
 <div>
 
-自己編了一個 `libadd.so`，放在 `mylib/`
+自建函式庫 `libadd.so`，置於 `mylib/`
 
 ```c
 // mylib/add.c
@@ -27,7 +27,7 @@ $ gcc -shared -fPIC mylib/add.c -o mylib/libadd.so
 </div>
 <div>
 
-再寫一支會呼叫它的 `use.c`
+撰寫呼叫該函式庫的 `use.c`
 
 ```c
 // use.c
@@ -56,11 +56,11 @@ clicks: 5
 <div mt-2>
 <LinkGates :steps="[
   { g1: '', g2: '' },
-  { g1: 'fail', g2: '', note: '編譯時：linker 找不到 library' },
-  { g1: 'pass', g2: '', note: '加上 -L，編譯成功' },
-  { g1: 'pass', g2: 'fail', note: '執行時：換 loader 找不到 .so' },
+  { g1: 'fail', g2: '', note: '連結期：linker 找不到函式庫' },
+  { g1: 'pass', g2: '', note: '加上 -L 後編譯成功' },
+  { g1: 'pass', g2: 'fail', note: '載入期：loader 找不到 .so' },
   { g1: 'pass', g2: '', note: '設定 LD_LIBRARY_PATH……' },
-  { g1: 'pass', g2: 'pass', note: '兩關都過，印出 3' },
+  { g1: 'pass', g2: 'pass', note: '兩階段皆通過，輸出 3' },
 ]" />
 </div>
 
@@ -75,8 +75,8 @@ clicks: 2
 
 # 環境變數是什麼
 
-- **環境變數**：名稱=值，子行程會繼承
-- `CC=icx make`：只對這一條指令生效
+- **環境變數**：以「名稱=值」儲存，子行程會繼承
+- `CC=icx make`：僅對該行指令生效
 
 ```bash
 export CFLAGS="-O3 -march=native"   # set（等號兩邊不能有空格）
@@ -89,7 +89,7 @@ unset CFLAGS                         # remove
   { id: 'mk', x: 430, y: 60, label: 'make', sub: 'CFLAGS=-O3（複本）', w: 170, at: 1 },
   { id: 'cc', x: 740, y: 60, label: 'gcc', sub: 'CFLAGS=-O3（複本）', w: 170, at: 1 },
 ]" :edges="[
-  { from: 'sh', to: 'mk', at: 1, label: '啟動、複製' }, { from: 'mk', to: 'cc', at: 1, label: '再複製' },
+  { from: 'sh', to: 'mk', at: 1, label: '啟動並複製' }, { from: 'mk', to: 'cc', at: 1, label: '再次複製' },
   { from: 'cc', to: 'sh', at: 2, dashed: true, tone: 'bad', bend: 'u', label: '子行程變更之環境變數無法反向傳遞至父行程' },
 ]" />
 
@@ -105,9 +105,9 @@ unset CFLAGS                         # remove
 
 | 用途 | 變數 |
 |---|---|
-| 編譯器與 flag | `CC` `CXX` `FC` `CFLAGS` `CXXFLAGS` |
-| 給 build system | `CPPFLAGS` `LDFLAGS` `LIBS` |
-| 找檔案的路徑 | `PATH` `CPATH` `LIBRARY_PATH` `LD_LIBRARY_PATH` |
+| 編譯器與編譯參數 | `CC` `CXX` `FC` `CFLAGS` `CXXFLAGS` |
+| 建置系統參數 | `CPPFLAGS` `LDFLAGS` `LIBS` |
+| 檔案搜尋路徑 | `PATH` `CPATH` `LIBRARY_PATH` `LD_LIBRARY_PATH` |
 
 <!--
 - CC / CXX / FC：C / C++ / Fortran 編譯器；CFLAGS / CXXFLAGS：compiler flags。
@@ -123,14 +123,14 @@ unset CFLAGS                         # remove
 
 <LinkGates :step="3" :steps="[
   { g1: '', g2: '' }, { g1: '', g2: '' }, { g1: '', g2: '' },
-  { g1: 'pass', g2: 'pass', note: '名字很像，作用的時間點不同' },
+  { g1: 'pass', g2: 'pass', note: '名稱相近，作用時機不同' },
 ]" />
 
 | | `LIBRARY_PATH` | `LD_LIBRARY_PATH` |
 |---|---|---|
 | 讀取者 | gcc / linker | loader |
 | 作用時間 | link time（編譯時） | load time（執行時） |
-| 沒設好的錯誤 | `cannot find -lxxx` | `error while loading shared libraries` |
+| 未設定時的錯誤 | `cannot find -lxxx` | `error while loading shared libraries` |
 
 <!--
 回到剛才的兩道關卡，把表格對上去就好。

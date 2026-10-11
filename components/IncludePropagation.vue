@@ -26,13 +26,13 @@ const mode = computed(() => s.value >= 3 ? 'PRIVATE' : 'PUBLIC')
       <div class="line" :class="{ flow: s === 2, blocked: s >= 3 }" />
       <div class="lbl">target_link_libraries(program PRIVATE math_utils …)</div>
       <div class="pkt" :class="{ go: s === 2, stop: s >= 3 }">-I lib/</div>
-      <div v-if="s >= 3" class="x">傳不過去</div>
+      <div v-if="s >= 3" class="x">無法傳遞</div>
     </div>
     <div class="box exe" :class="{ ok: s === 2, bad: s >= 3 }">
       <div class="nm">program <em>add_executable</em></div>
       <div class="inc" :class="{ show: s === 2 }">-I lib/（繼承）</div>
       <!-- 實際錯誤訊息是 Lab3-3 Part B 第 1 題要學生自己找的，這裡刻意不寫出來 -->
-      <div v-if="s >= 3" class="err">找不到 math_utils 的 header → 編譯失敗</div>
+      <div v-if="s >= 3" class="err">找不到 math_utils 的標頭檔 → 編譯失敗</div>
     </div>
   </div>
 </template>

@@ -4,7 +4,7 @@ chapter: "05"
 title: Build Automation · Makefile
 ---
 
-面對多原始碼檔案專案，手動編譯將缺乏效率且易生疏漏
+多檔案專案手動編譯缺乏效率且易出錯
 
 ---
 clicks: 1
@@ -18,7 +18,7 @@ clicks: 1
 <Flow :width="860" :height="200" :nodes="[
   { id: 'cfg', x: 90, y: 45, label: './configure', sub: 'Autotools', w: 150, at: 1 },
   { id: 'cm', x: 90, y: 155, label: 'cmake', sub: 'CMakeLists.txt', w: 150, at: 1 },
-  { id: 'mk', x: 330, y: 100, label: 'Makefile', sub: '規則', w: 140 },
+  { id: 'mk', x: 330, y: 100, label: 'Makefile', sub: '建置規則', w: 140 },
   { id: 'make', x: 550, y: 100, label: 'make', sub: '解析相依性並執行建置', w: 140 },
   { id: 'out', x: 770, y: 100, label: '執行檔', sub: 'library', w: 140, tone: 'on', mono: false },
 ]" :edges="[
@@ -49,10 +49,10 @@ clicks: 4
 
 <MakeGraph :width="340" :height="240" :steps="[
   { label: '專案：main.c、utils.c' },
-  { label: '第一次 make：全部編譯', fresh: ['main.c', 'utils.c'], rebuilt: ['main.o', 'utils.o', 'program'] },
-  { label: '第二次 make：沒有變動' },
-  { label: 'touch 更新 utils.c 的時間', dirty: ['utils.c'] },
-  { label: '只重編 utils.o，main.o 沿用', dirty: ['utils.c'], rebuilt: ['utils.o', 'program'] },
+  { label: '首次 make：編譯全部檔案', fresh: ['main.c', 'utils.c'], rebuilt: ['main.o', 'utils.o', 'program'] },
+  { label: '再次 make：無變動，略過編譯' },
+  { label: 'touch 更新 utils.c 修改時間', dirty: ['utils.c'] },
+  { label: '僅重編 utils.o，沿用 main.o', dirty: ['utils.c'], rebuilt: ['utils.o', 'program'] },
 ]" />
 
 </div>
@@ -82,8 +82,8 @@ target : prerequisites
 
 <MarginNotes :notes="[
   '',
-  '<strong>target</strong>：要產生的檔案或動作',
-  '<strong>prerequisites</strong>：產生 target 需要的檔案',
+  '<strong>target</strong>：目標檔案或動作名稱',
+  '<strong>prerequisites</strong>：產生 target 所需的相依檔案',
   '<strong>recipes</strong>：實際執行的 shell 指令',
 ]" />
 
@@ -129,10 +129,10 @@ clean :
 ::margin::
 
 <MarginNotes :notes="[
-  'edit 由 8 個 .o link 而成',
-  '每個 .o 由 .c 和 header 產生',
+  'edit 由 8 個目的檔連結而成',
+  '各目的檔由 .c 與標頭檔產生',
   '',
-  'clean：不產生檔案的動作',
+  'clean：不產生檔案的動作目標',
 ]" />
 
 <!--
@@ -206,7 +206,7 @@ clean :
 
 <div v-click="2">
 
-- `%.o : %.c`：任何 .o 由同名 .c 產生
+- `%.o : %.c`：任何 .o 皆由同名 .c 產生
 - `$@` / `$<` / `$^`：target / 第一個 / 全部 prerequisite
 
 </div>
@@ -225,8 +225,8 @@ Magic Move 三步：逐條規則 → 抽出變數 → pattern rule。
 
 # make 的常用選項
 
-- `make -j$(nproc)`：用全部核心平行編譯
-- `make install`：複製到安裝路徑（prefix）
+- `make -j$(nproc)`：使用全部核心平行編譯
+- `make install`：安裝至指定路徑（prefix）
 - `make clean`：建置中斷或配置變更時，先清除既有目的檔（`.o`）
 
 <!--
@@ -244,7 +244,7 @@ center: true
 
 <LabTime>
 
-- **Part A**：填完 6 個 TODO，`make` 並執行
+- **Part A**：完成 6 個 TODO，以 `make` 編譯並執行
 - **Part B**：依序操作，想想看觀察到的現象
 
 <div class="note">repo：<code>xian208/2026_HPC-training_lab3-1</code></div>

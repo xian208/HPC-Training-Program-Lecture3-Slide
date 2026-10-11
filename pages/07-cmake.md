@@ -26,16 +26,16 @@ $ cmake -S . -B build
 ```
 
 <div class="callout">
-要先完成 Lab3-2，並 <code>module load</code> OpenMPI
+須先完成 Lab3-2，並以 <code>module load</code> 載入 OpenMPI
 </div>
 
 ::margin::
 
 <MarginNotes :notes="[
   '',
-  '偵測 compiler 並確認能用',
-  '依 find_package 找到 MPI',
-  '把 Makefile 產生在 build/',
+  '偵測並驗證編譯器',
+  '依 find_package 搜尋 MPI',
+  '於 build/ 產生 Makefile',
 ]" />
 
 <!--
@@ -53,8 +53,8 @@ clicks: 3
 
 <div class="gen">
   <div class="ins">
-    <div v-click="1" class="in">CMakeLists.txt<em>project 設定</em></div>
-    <div v-click="1" class="in">系統環境<em>compiler、library 位置</em></div>
+    <div v-click="1" class="in">CMakeLists.txt<em>專案設定</em></div>
+    <div v-click="1" class="in">系統環境<em>編譯器與函式庫位置</em></div>
     <div v-click="1" class="in">-D 參數<em>使用者提供</em></div>
   </div>
   <div v-click="1" class="arr">→</div>
@@ -65,7 +65,7 @@ clicks: 3
     <div class="in">Ninja<em>-G Ninja</em></div>
   </div>
   <div v-click="3" class="arr">→</div>
-  <div v-click="3" class="core light">make / ninja<em>真正編譯</em></div>
+  <div v-click="3" class="core light">make / ninja<em>執行編譯</em></div>
 </div>
 
 <style>
@@ -94,9 +94,9 @@ clicks: 1
 
 | 參數 | 作用 |
 |---|---|
-| `-S <dir>` | source 根目錄 |
-| `-B <dir>` | 指定建置輸出目錄（Out-of-source build） |
-| `--build <dir>` | 呼叫 make 編譯 |
+| `-S <dir>` | 原始碼根目錄 |
+| `-B <dir>` | 指定建置輸出目錄<br><span style="white-space: nowrap">（Out-of-source build）</span> |
+| `--build <dir>` | 呼叫 make 執行編譯 |
 
 <Flow :width="400" :height="230" :groups="[
   { x: 0, y: 4, w: 180, h: 222, label: 'my_project/' },
@@ -135,7 +135,7 @@ cmake --install build
 ::margin::
 
 <MarginNotes :notes="[
-  '-D 設定變數，存進 CMakeCache.txt',
+  '-D 設定變數，寫入 CMakeCache.txt',
   '修改原始碼後僅需重新執行建置指令',
   '變更 -D 配置參數時方須重新生成',
 ]" />
@@ -207,9 +207,9 @@ clicks: 3
 
 <MarginNotes :notes="[
   '',
-  'PUBLIC：自己用，也傳給 link 它的',
-  'program 也能 include 它的 header',
-  'PRIVATE：只有自己用',
+  'PUBLIC：自身使用，並傳遞給連結者',
+  'program 可引入其標頭檔',
+  'PRIVATE：僅限自身使用',
 ]" />
 
 <!--
@@ -225,9 +225,9 @@ chap: Recap
 # Recap：Build Automation
 
 <Recap :items="[
-  { ch: '05', label: 'Makefile', note: '比對時間戳，只重編有改的檔案', keys: ['make -j', 'target: prereq', '$@ $<'] },
+  { ch: '05', label: 'Makefile', note: '依時間戳僅重編變更的檔案', keys: ['make -j', 'target: prereq', '$@ $<'] },
   { ch: '06', label: 'Configure', note: '偵測環境，產生 Makefile', keys: ['./configure', '--prefix'] },
-  { ch: '07', label: 'CMake', note: '產生 build system，用 target 管依賴', keys: ['-S -B', '--build', 'PUBLIC'] },
+  { ch: '07', label: 'CMake', note: '產生建置系統，以 target 管理相依', keys: ['-S -B', '--build', 'PUBLIC'] },
 ]" />
 
 <!--

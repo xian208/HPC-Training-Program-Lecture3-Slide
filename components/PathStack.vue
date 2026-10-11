@@ -44,7 +44,7 @@ const isNew = (p: string) => idx.value > 0 && !prev.value.path.includes(p)
     </TransitionGroup>
     <div class="which">
       <span class="pr">$</span> which {{ cmd }}
-      <span class="res" :class="{ none: !hit }">→ {{ hit ? `${hit}/${cmd}` : '（找不到，沒有輸出）' }}</span>
+      <span class="res" :class="{ none: !hit }">→ {{ hit ? `${hit}/${cmd}` : '（未找到，無輸出）' }}</span>
     </div>
   </div>
 </template>

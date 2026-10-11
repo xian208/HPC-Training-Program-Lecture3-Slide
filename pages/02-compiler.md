@@ -43,11 +43,11 @@ clicks: 2
 
 # Compiler vs Interpreter
 
-<div class="note key" mb-2>兩者目的相同，差在何時翻譯成機器碼</div>
+<div class="note key" mb-2>兩者目的相同，差異在於轉譯為機器碼的時機</div>
 
 <div mb-4>
 
-- **Compiler**：預先編譯完成，執行效率高；原始碼修改後須重新編譯
+- **Compiler**：預先完成編譯，執行效率高；修改後須重編
 - **Interpreter**：逐行直譯執行，即時反應修改；執行效能較低
 
 </div>
@@ -81,9 +81,9 @@ clicks: 2
 
 | | Compiler | Interpreter |
 |---|---|---|
-| 執行速度 | **快**：事先轉成機器碼 | **慢**：執行時才逐行翻譯 |
-| 開發流程 | 修改後須重新編譯 | **改完立刻執行** |
-| 可攜性 | 每種架構各編一次 | **有直譯器就能執行** |
+| 執行速度 | **快**：執行前已轉為機器碼 | **慢**：執行時逐行轉譯 |
+| 開發流程 | 修改後須重新編譯 | **修改後可立即執行** |
+| 可攜性 | 各架構須分別編譯 | **具備直譯器即可執行** |
 
 <!--
 直覺上 compiler 的效能優勢很大，但 interpreter 在開發流程與可攜性上各有優勢，兩者是取捨：
@@ -102,7 +102,7 @@ clicks: 2
 
 ### gcc
 
-GNU 開源，多數 Linux 預先安裝
+GNU 開源編譯器，多數 Linux 預先安裝
 
 </div>
 <div>
@@ -128,7 +128,7 @@ clicks: 1
 
 # 為什麼需要中間表示 (IR)
 
-<div class="note key" mb-2>icx 為什麼改用 LLVM？先看編譯器要面對的問題</div>
+<div class="note key" mb-2>icx 為何改採 LLVM？先檢視編譯器面臨的問題</div>
 
 <Flow :width="860" :height="236" :groups="[
   { x: 0, y: 4, w: 400, h: 228, label: '沒有 IR：M × N 個編譯器' },
@@ -155,7 +155,7 @@ clicks: 1
   { from: 'ir', to: 'd1', at: 1 }, { from: 'ir', to: 'd2', at: 1 }, { from: 'ir', to: 'd3', at: 1 },
 ]" />
 
-<div v-click="1" class="note key">先轉成共同格式，最佳化只需做一次</div>
+<div v-click="1" class="note key">先轉為共同格式，最佳化只需實作一次</div>
 
 <!--
 - 沒有共同的中間格式時，每種語言都要對每種 CPU 架構各寫一個完整編譯器：3 種語言 × 3 種架構 = 9 個。
@@ -191,7 +191,7 @@ clicks: 3
 <div v-click="1" class="note">IR：Intermediate Representation，與語言、架構無關</div>
 
 <div v-click="3" class="note">
-<code>icx</code>：基於 LLVM 架構，整合針對 Intel CPU 微架構最佳化的後端
+<code>icx</code>：基於 LLVM，後端針對 Intel CPU 最佳化
 </div>
 
 <!--
@@ -245,7 +245,7 @@ clicks: 4
 </div>
 
 <div v-click="4" class="note key">
-計算結果一致；透過調整最佳化參數（<code>-O0</code> 與 <code>-O3</code>）產生顯著效能差異
+計算結果一致；<code>-O0</code> 與 <code>-O3</code> 效能差距顯著
 </div>
 
 <!--
@@ -298,8 +298,8 @@ clicks: 3
 
 <v-clicks>
 
-- `-O0`：不最佳化，gcc 預設
-- `-O1` / `-O2`：逐步最佳化，release 常用 `-O2`
+- `-O0`：不進行最佳化，gcc 預設等級
+- `-O1` / `-O2`：逐步提高最佳化程度，正式版常用 `-O2`
 - `-O3`：啟用最高程度最佳化，但效能未必必然優於 `-O2`
 
 </v-clicks>
@@ -349,7 +349,7 @@ clicks: 3
 
 # Compiler flags：debugging、path
 
-- `-g`：加入 debug 資訊，不影響執行速度
+- `-g`：加入除錯資訊，不影響執行速度
 - `-I<dir>`：於編譯前處理階段搜尋指定目錄之標頭檔
 - `-L<dir>` / `-l<name>`：於連結階段搜尋指定目錄與函式庫檔案
 

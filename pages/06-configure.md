@@ -21,7 +21,7 @@ title: Configure
 
 <strong>NOTE</strong>
 
-逐項檢查環境，最後產生 Makefile
+逐項檢測環境，最後產生 Makefile
 
 <!--
 需要網路、輸出又長，用 asciinema 錄。播到 checking for gcc... gcc 的 marker 會自動停下來講。
@@ -52,11 +52,10 @@ clicks: 2
 clicks: 3
 ---
 
-# 從開發者到使用者：GNU Autotools
+# GNU Autotools 使用流程
 
 <div class="at-flow">
   <div class="at-row usr">
-    <div class="at-tag">使用者端</div>
     <div class="at-line">
       <span v-click="1" class="step"><code>./configure</code><em>讀 Makefile.in → 產生 Makefile</em></span>
       <span v-click="2" class="arr">→</span>
@@ -90,12 +89,12 @@ Autoconf 根據 configure.ac 產生 configure，讓軟體在不同 Unix-like 系
 
 # 常用參數
 
-`./configure --help` 看全部參數
+以 `./configure --help` 檢視全部參數
 
 | 參數 | 作用 |
 |---|---|
 | `--prefix=` | `make install` 的安裝路徑 |
-| `CPPFLAGS` / `LDFLAGS` / `LIBS` | header 路徑 / library 路徑 / 要 link 的 library |
+| `CPPFLAGS` / `LDFLAGS` / `LIBS` | 標頭檔路徑 / 函式庫路徑 / 連結的函式庫 |
 | `CC=` / `CXX=` | 指定編譯器 |
 
 ```bash

@@ -4,7 +4,7 @@ chapter: "04"
 title: Static vs Dynamic Linking
 ---
 
-函式庫是在連結期靜態整合，或於執行期動態載入？
+函式庫於連結期整合，或於執行期載入？
 
 ---
 clicks: 3
@@ -31,7 +31,7 @@ $ ldd hello_static
 
 <MarginNotes :notes="[
   '預設為動態連結；加入 -static 參數啟用靜態連結',
-  '靜態連結二進位檔容量增加約 45 倍（從 16 KB 增至 737 KB）',
+  '靜態連結檔案大小約為 45 倍（16 KB → 737 KB）',
   'ldd：檢視執行檔依賴的共用函式庫（.so）',
   '',
 ]" />
@@ -78,9 +78,9 @@ clicks: 3
 <table class="cmp">
   <thead><tr><th></th><th>Static Linking</th><th>Dynamic Linking</th></tr></thead>
   <tbody>
-    <tr v-click="1"><td>library 檔案</td><td><code>.a</code></td><td><code>.so</code></td></tr>
-    <tr v-click="2"><td>何時 link</td><td>link time</td><td>load time</td></tr>
-    <tr v-click="3"><td>library 更新時</td><td>整份重新 link</td><td>替換共用函式庫即可生效</td></tr>
+    <tr v-click="1"><td>函式庫檔案</td><td><code>.a</code></td><td><code>.so</code></td></tr>
+    <tr v-click="2"><td>連結時機</td><td>link time</td><td>load time</td></tr>
+    <tr v-click="3"><td>函式庫更新時</td><td>須重新連結整個執行檔</td><td>替換共用函式庫即可生效</td></tr>
   </tbody>
 </table>
 
@@ -104,9 +104,9 @@ chap: Recap
 # Recap：從 source 到執行檔
 
 <Recap :items="[
-  { ch: '02', label: 'Compiler', note: 'flag 決定速度與相容性', keys: ['-O3', '-march', '-g', '-I', '-L'] },
-  { ch: '03', label: '編譯四階段', note: '前處理、編譯、組譯、連結', keys: ['.i', '.s', '.o', 'ld'] },
-  { ch: '04', label: 'Static vs Dynamic', note: '複製進來，還是執行時才接上', keys: ['.a', '.so', 'ldd'] },
+  { ch: '02', label: 'Compiler', note: '編譯參數影響效能與相容性', keys: ['-O3', '-march', '-g', '-I', '-L'] },
+  { ch: '03', label: '編譯四階段', note: '前置處理、編譯、組譯、連結', keys: ['.i', '.s', '.o', 'ld'] },
+  { ch: '04', label: 'Static vs Dynamic', note: '連結期整合，或執行期載入', keys: ['.a', '.so', 'ldd'] },
 ]" />
 
 <!--

@@ -26,6 +26,12 @@ npm run widows     # 檢查折行後最後一行太短（不到 2.6 個字寬）
 
 Mac 上也可以直接雙擊 `start.command`。
 
+## 上課前準備
+
+- **在學員規格的 VM 上量一次 Lab 時間**：`bash scripts/measure-labs.sh` 會量 OpenMPI 的下載、configure、`make -j`，以及 LULESH 的 serial / OpenMP 執行時間，最後印成一張表（`--quick` 跳過 OpenMPI）。所有檔案放在暫存資料夾，跑完自動刪除。
+- **OpenMPI tarball 內網鏡像**：全班同時下載約 30 MB 的 tarball 可能很慢。可以在講師機或任一台內網機器上放一份，用 `python3 -m http.server 8000` 分享，學員改用 `curl -LO http://<IP>:8000/openmpi-5.0.8.tar.bz2` 下載。
+- **Compiler Explorer**：「-O0 與 -O3 的組語差異」「組合語言對照」兩頁需要連到 godbolt.org；連不上時會自動改顯示 `snippets/ce-cache/` 裡預存的輸出（x86-64 與 ARM64 都有）。上課前在教室網路實際點一次確認。
+
 ## 文字量規則
 
 `npm run check` 會檢查每一頁：
@@ -95,7 +101,7 @@ scripts/               check-text（文字量）、shoot / sheet（逐頁截圖�
 ````
 
 `{monaco-run}` 會把程式送到 godbolt.org 編譯，顯示組語（每行標出對應的 C 行號）、執行結果或 objdump；設定組在 `setup/ce-presets.ts`。
-現場要有網路，連不上時自動改顯示 `snippets/ce-cache/` 的預存輸出（ARM64 沒有備援）。
+現場要有網路，連不上時自動改顯示 `snippets/ce-cache/` 的預存輸出（x86-64、ARM64 都有）。
 
 ## 截圖檢查
 

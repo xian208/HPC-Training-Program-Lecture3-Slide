@@ -33,7 +33,7 @@ defineProps<{ items: { ch?: string, label: string, note: string, keys?: string[]
 }
 .ch { font-family: var(--tb-mono); font-size: 34px; line-height: 1; color: var(--tb-accent); opacity: .35; }
 b { display: block; font-family: var(--tb-serif); font-weight: 500; font-size: 27px; margin: 14px 0 10px; color: var(--tb-ink); }
-p { margin: 0 !important; font-size: 19px; line-height: 1.55; color: var(--tb-mut); }
+p { margin: 0 !important; font-size: 19px; line-height: 1.55; color: var(--tb-mut); word-break: keep-all; }
 .keys { margin-top: auto; padding-top: 18px; display: flex; flex-wrap: wrap; gap: 6px; }
 .keys code { font-size: 14px !important; background: #fff !important; border: 1px solid #c9d8ec !important; padding: 2px 8px !important; color: var(--tb-accent); }
 </style>

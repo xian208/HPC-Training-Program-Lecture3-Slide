@@ -54,10 +54,10 @@ clicks: 4
 <CompilePipeline clicks />
 
 <div class="stages">
-  <div v-click="1"><b>前置處理</b><code>.c → .i</code><span>處理 # 指令，純文字替換</span></div>
-  <div v-click="2"><b>編譯</b><code>.i → .s</code><span>翻成組合語言，最佳化在此</span></div>
-  <div v-click="3"><b>組譯</b><code>.s → .o</code><span>組合語言轉成機器碼</span></div>
-  <div v-click="4"><b>連結</b><code>.o → 執行檔</code><span>接上函式庫，決定最終位址</span></div>
+  <div v-click="1"><b>前置處理</b><code>.c → .i</code><span>處理 # 指令，進行文字替換</span></div>
+  <div v-click="2"><b>編譯</b><code>.i → .s</code><span>轉譯為組合語言並進行最佳化</span></div>
+  <div v-click="3"><b>組譯</b><code>.s → .o</code><span>將組合語言轉為機器碼</span></div>
+  <div v-click="4"><b>連結</b><code>.o → 執行檔</code><span>整合函式庫並決定最終位址</span></div>
 </div>
 
 <style>
@@ -247,7 +247,7 @@ clicks: 3
 - `hello.o`：二進位可重定位目的檔 (Relocatable Object File)
 - `cat hello.o`：二進位內容直接輸出將呈現非文字字元
 
-<div class="note">使用 <code>objdump -d</code> 進行反組譯，可檢視機器碼並驗證編譯參數設定</div>
+<div class="note">使用 <code>objdump -d</code> 反組譯，驗證編譯參數設定</div>
 
 </div>
 
@@ -275,7 +275,7 @@ clicks: 3
 
 <CompilePipeline :active="4" small />
 
-<div class="note"><code>gcc hello.o -o hello</code>：連結器將目的檔與相依函式庫整合成可執行檔</div>
+<div class="note"><code>gcc hello.o -o hello</code>：整合目的檔與函式庫為可執行檔</div>
 
 <LinkResolve />
 

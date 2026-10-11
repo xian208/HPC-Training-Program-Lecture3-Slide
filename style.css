@@ -84,7 +84,8 @@
 .note.key { font-size: 21px; color: var(--tb-ink); }
 
 /* 避免折行後最後一行只剩一兩個字 */
-.slidev-layout :is(p, li, td, th, h1, h2, h3, div, span, em, b, strong) { text-wrap: balance; }
+/* 程式碼、終端機不套用：text-wrap 會蓋掉 white-space: pre，讓程式碼開始自動折行 */
+.slidev-layout :is(p, li, td, th, h1, h2, h3, div, span, em, b, strong):not(pre, pre *, .slidev-code-wrapper *, .term *) { text-wrap: balance; }
 /* 行內程式碼、指令不要從中間斷開 */
 .slidev-layout :not(pre) > code { white-space: nowrap; }
 

@@ -15,8 +15,8 @@ clicks: 3
 <v-clicks>
 
 - **Module**：動態修改當前 shell 的環境變數
-- **modulefile**：每個版本一份，記錄要改什麼
-- `module load` / `unload`：套用，或還原
+- **modulefile**：每個版本一份，記錄須修改的變數
+- `module load` / `unload`：套用或還原設定
 
 </v-clicks>
 
@@ -79,9 +79,9 @@ setenv{"ZSTD_ROOT","/home/xian208/opt/zstd/1.5.6"}
 ::margin::
 
 <MarginNotes label="$ module show zstd/1.5.6" :notes="[
-  'PATH：找得到 zstd 執行檔',
-  '找 .so、library、header',
-  '給 pkg-config、CMake 用',
+  'PATH：定位 zstd 執行檔',
+  '搜尋 .so、函式庫與標頭檔',
+  '供 pkg-config 與 CMake 使用',
   '',
 ]" />
 
@@ -133,8 +133,8 @@ clicks: 6
   { id: 'sh2', x: 180, y: 50, label: 'bash', sub: 'FOO=hello', w: 170, at: 6, tone: 'on' },
   { id: 'ch', x: 180, y: 190, label: './set.sh', sub: 'FOO=hello', w: 170, at: 3, until: 5, tones: { 4: 'dim' } },
 ]" :edges="[
-  { from: 'sh', to: 'ch', at: 3, until: 4, label: '開一個子行程' },
-  { from: 'ch', to: 'sh', at: 4, until: 5, dashed: true, tone: 'bad', label: '結束，FOO 沒傳回來' },
+  { from: 'sh', to: 'ch', at: 3, until: 4, label: '建立子行程' },
+  { from: 'ch', to: 'sh', at: 4, until: 5, dashed: true, tone: 'bad', label: '結束後 FOO 未傳回' },
 ]" />
 
 </div>
@@ -152,14 +152,14 @@ clicks: 6
 sudo apt install -y lmod
 ```
 
-載入 `module` 這個 shell function：
+載入 `module` shell function：
 
 ```bash
 source /etc/profile.d/lmod.sh
 type module     # should print: module is a function
 ```
 
-每個新 terminal 都要，所以加進 `~/.bashrc`：
+每個新終端機皆須載入，建議加入 `~/.bashrc`：
 
 ```bash
 echo 'source /etc/profile.d/lmod.sh' >> ~/.bashrc
@@ -205,7 +205,7 @@ setenv ZSTD_ROOT $root
 
 # modulefile 要放在哪
 
-依照 `<名稱>/<版本>` 擺放，檔名就是版本號
+依 `<名稱>/<版本>` 擺放，檔名即版本號
 
 <div grid="~ cols-2 gap-5">
 
@@ -229,7 +229,7 @@ selfmodule/
 </div>
 
 <div class="note">
-TCL、Lua 兩種寫法，Lmod 都能讀
+Lmod 可讀取 TCL 與 Lua 兩種格式
 </div>
 
 <!--

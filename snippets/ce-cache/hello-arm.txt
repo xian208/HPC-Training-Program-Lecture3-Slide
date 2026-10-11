@@ -1,0 +1,24 @@
+# ARM64 gcc 14.2（Compiler Explorer），離線備援
+.LC0:
+        .string "%d\n"
+main:
+        stp     x29, x30, [sp, -32]!
+        mov     x29, sp
+        mov     w0, 5000
+        str     w0, [sp, 28]
+        mov     w0, 1000
+        str     w0, [sp, 24]
+        ldr     w1, [sp, 28]
+        ldr     w0, [sp, 24]
+        add     w0, w1, w0
+        lsr     w1, w0, 31
+        add     w0, w1, w0
+        asr     w0, w0, 1
+        str     w0, [sp, 20]
+        ldr     w1, [sp, 20]
+        adrp    x0, .LC0
+        add     x0, x0, :lo12:.LC0
+        bl      printf
+        mov     w0, 0
+        ldp     x29, x30, [sp], 32
+        ret

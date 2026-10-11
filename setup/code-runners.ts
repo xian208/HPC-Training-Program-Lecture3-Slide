@@ -110,7 +110,7 @@ export default defineCodeRunnersSetup(() => ({
     catch (e) {
       const cached = fromCache(o.fallback)
       if (cached)
-        return { html: `<div style="font-size:11px;color:#9a4d00;margin-bottom:4px">⚠ 連不上 Compiler Explorer，以下是預先存好的輸出</div><pre style="margin:0;font-family:var(--tb-mono);font-size:12px;line-height:1.55;max-height:${o.maxHeight ?? '250px'};overflow:auto;white-space:pre">${esc(cached)}</pre>` }
+        return { html: `<div style="font-size:11px;color:#9a4d00;margin-bottom:4px">連不上 Compiler Explorer，以下是預先存好的輸出</div><pre style="margin:0;font-family:var(--tb-mono);font-size:12px;line-height:1.55;max-height:${o.maxHeight ?? '250px'};overflow:auto;white-space:pre">${esc(cached)}</pre>` }
       return { error: `連不上 Compiler Explorer：${(e as Error).message}` }
     }
   },

@@ -15,10 +15,10 @@ const { $clicks } = useSlideContext()
 const s = computed(() => Math.max($clicks.value - props.offset, 0))
 const libs = ['printf.o', 'scanf.o', 'malloc.o', 'free.o']
 const notes = [
-  'hello.o 知道要呼叫 printf，但不知道它在哪',
-  'Symbol resolution：到 libc.a 找到 printf 的定義',
-  '把用到的 object file 合併成一個執行檔',
-  'Relocation：決定最終位址，更新所有 reference',
+  'hello.o 參照 printf，但尚未得知其位址',
+  '符號解析：於 libc.a 找到 printf 的定義',
+  '將所需目的檔合併為單一執行檔',
+  '重定位：決定最終位址並更新所有參照',
 ]
 </script>
 
@@ -35,7 +35,7 @@ const notes = [
         <div class="ind">…</div>
       </div>
     </div>
-    <div class="arrow" :class="{ on: s >= 1 }">{{ s >= 1 ? 'printf 在哪？→' : '' }}</div>
+    <div class="arrow" :class="{ on: s >= 1 }">{{ s >= 1 ? '定位 printf →' : '' }}</div>
     <div class="col">
       <div class="cap">libc.a <em>（ar t libc.a）</em></div>
       <div class="lib">

@@ -77,7 +77,7 @@ const edgeHot = (e: [string, string]) => state(e[1]) === 'rebuilt'
       </g>
     </svg>
     <div class="legend">
-      <span class="k dirty" />修改過 <span class="k rebuilt" />重新編譯
+      <span class="k dirty" />已修改 <span class="k rebuilt" />重新編譯
       <Transition name="fade" mode="out-in"><b :key="step.label">{{ step.label }}</b></Transition>
     </div>
   </div>

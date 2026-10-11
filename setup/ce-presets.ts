@@ -12,7 +12,7 @@ export const cePresets: Record<string, Record<string, unknown>> = {
   'loop-O0': { flags: '-O0', fallback: 'loop-O0', maxHeight: '185px' },
   'loop-O3': { flags: '-O3', fallback: 'loop-O3', maxHeight: '185px' },
   'hello-x86': { fallback: 'hello-asm', maxHeight: '160px' },
-  'hello-arm': { compiler: 'ARM64 gcc 14.2', maxHeight: '160px' },
+  'hello-arm': { compiler: 'ARM64 gcc 14.2', fallback: 'hello-arm', maxHeight: '160px' },
   'hello-objdump': { mode: 'objdump', fallback: 'hello-objdump', maxHeight: '140px' },
 }
 
