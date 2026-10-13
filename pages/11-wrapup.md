@@ -52,6 +52,7 @@ center: true
 <!--
 - 開始前先請大家確認 OpenMPI 編完了：tail build.log，或 ls ~/opt/openmpi/5.0.8/bin/mpicc。還沒編完的人先做 Lab3-1，不要同時跑 LULESH（會跟 make 搶核心，時間不準）。
 - 順序：Lab3-1 → modulefile → Lab3-3 → Lab3-4。Lab3-3 要先 module load openmpi/5.0.8。
+- 常見卡點：Lab3-1 recipe 用空白縮排（要用 tab）、PREFIX 同一行後面接註解；modulefile 寫法照 zstd 範例，路徑換成 ~/opt/openmpi/5.0.8。
 - 用 Slido 統計進度；最後 5 分鐘收尾、Q&A。
 -->
 
