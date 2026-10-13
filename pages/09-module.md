@@ -258,3 +258,25 @@ clicks: 6
 - load 前後的差異參考前面「module load 前後，PATH 變了什麼」。
 - module purge：一次 unload 全部。
 -->
+
+---
+chap: Lab 預告
+center: true
+---
+
+# Lab 預告：Lab3-2 modulefile
+
+<LabTime>
+
+- **確認安裝**：OpenMPI 已安裝至 `~/opt/openmpi/5.0.8`
+- **modulefile**：仿照 zstd 範例撰寫並載入
+- **Part B**：依序操作，想想看觀察到的現象
+
+<div class="note">課程最後統一進行</div>
+
+</LabTime>
+
+<!--
+- 這裡只預告，先不動手。
+- 寫法跟剛剛的 zstd modulefile 一樣，只是路徑換成 ~/opt/openmpi/5.0.8。
+-->

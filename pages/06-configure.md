@@ -115,7 +115,7 @@ chap: Lab 時間
 center: true
 ---
 
-# Lab 時間：開始編 OpenMPI
+# 先開始編譯 OpenMPI
 
 <LabTime>
 
@@ -123,6 +123,7 @@ center: true
 - **configure**：`--prefix=$HOME/opt/openmpi/5.0.8`
 - **編譯**：`make -j4 > build.log 2>&1 && make install`
 
+<div class="note">編譯約需 8 分鐘，於背景執行，課程繼續進行</div>
 
 </LabTime>
 
@@ -130,5 +131,6 @@ center: true
 - Lab3-2 的前半：下載、解壓縮、configure、make、make install（指令在 Notion Lab3-2 Part A 第 1–2 步）。
 - 輸出導到 build.log，終端機才不會一直捲；休息回來用 tail build.log 或 ls ~/opt/openmpi/5.0.8/bin 確認。
 - 4 核心 VM 實測：configure 約 2 分 20 秒、make -j4 約 5 分鐘。
-- modulefile 要等 Module 章講完，在最後一段 Lab 時間再寫。
+- 這是唯一在課中動手的步驟：編譯時間長，先開始跑，最後 Lab 時間就不用等。
+- 指令下完就繼續上課；modulefile 等最後 Lab 時間再寫。
 -->

@@ -35,6 +35,27 @@ Lab3-4 Step 5 要用 Lab3-2 裝好的 OpenMPI
 -->
 
 ---
+chap: Lab 時間
+center: true
+---
+
+# Lab 時間
+
+<LabTime>
+
+- **Lab3-1**：完成 Part A 與 Part B
+- **Lab3-2**：確認 OpenMPI 已安裝，撰寫 modulefile
+- **Lab3-3、Lab3-4**：依序進行，課後可繼續完成
+
+</LabTime>
+
+<!--
+- 開始前先請大家確認 OpenMPI 編完了：tail build.log，或 ls ~/opt/openmpi/5.0.8/bin/mpicc。還沒編完的人先做 Lab3-1，不要同時跑 LULESH（會跟 make 搶核心，時間不準）。
+- 順序：Lab3-1 → modulefile → Lab3-3 → Lab3-4。Lab3-3 要先 module load openmpi/5.0.8。
+- 用 Slido 統計進度；最後 5 分鐘收尾、Q&A。
+-->
+
+---
 check: false
 ---
 

@@ -219,6 +219,27 @@ include 路徑沿著 link 箭頭從 math_utils 傳到 program；PRIVATE 時在�
 -->
 
 ---
+chap: Lab 預告
+center: true
+---
+
+# Lab 預告：Lab3-3 CMake
+
+<LabTime>
+
+- **Part A**：完成 7 個 TODO，編譯並執行
+- **Part B**：將 `PUBLIC` 改為 `PRIVATE`，觀察錯誤
+
+<div class="note">需使用 Lab3-2 安裝的 OpenMPI，課程最後統一進行</div>
+
+</LabTime>
+
+<!--
+- 這裡只預告，先不動手。
+- Lab3-3 要先 module use $HOME/selfmodule、module load openmpi/5.0.8，所以排在 modulefile 之後做。
+-->
+
+---
 chap: Recap
 ---
 

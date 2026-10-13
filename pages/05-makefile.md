@@ -236,22 +236,22 @@ Magic Move 三步：逐條規則 → 抽出變數 → pattern rule。
 -->
 
 ---
-chap: Lab 時間
+chap: Lab 預告
 center: true
 ---
 
-# Lab 時間：Lab3-1 Makefile
+# Lab 預告：Lab3-1 Makefile
 
 <LabTime>
 
 - **Part A**：完成 6 個 TODO，以 `make` 編譯並執行
 - **Part B**：依序操作，想想看觀察到的現象
 
-<div class="note">repo：<code>xian208/2026_HPC-training_lab3-1</code></div>
+<div class="note">repo：<code>xian208/2026_HPC-training_lab3-1</code>，課程最後統一進行</div>
 
 </LabTime>
 
 <!--
-- 時間到就收：做不完的 Part B 回家補，Part A 一定要完成（之後不再用到，但確認 make 環境沒問題）。
+- 這裡只預告，先不動手；所有 Lab 都在最後一段一起做。
 - 常見卡點：recipe 用空白縮排（要用 tab）、PREFIX 同一行後面接註解。
 -->
