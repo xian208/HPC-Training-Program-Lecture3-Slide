@@ -43,16 +43,18 @@ center: true
 
 <LabTime>
 
-- **Lab3-1**：完成 Part A 與 Part B
-- **Lab3-2**：確認 OpenMPI 已安裝，撰寫 modulefile
-- **Lab3-3、Lab3-4**：依序進行，課後可繼續完成
+- **Lab3-2**：先開始編譯 OpenMPI，於背景執行
+- **Lab3-1**：等待編譯期間完成
+- **後續**：modulefile → Lab3-3 → Lab3-4
 
 </LabTime>
 
 <!--
-- 開始前先請大家確認 OpenMPI 編完了：tail build.log，或 ls ~/opt/openmpi/5.0.8/bin/mpicc。還沒編完的人先做 Lab3-1，不要同時跑 LULESH（會跟 make 搶核心，時間不準）。
-- 順序：Lab3-1 → modulefile → Lab3-3 → Lab3-4。Lab3-3 要先 module load openmpi/5.0.8。
-- 常見卡點：Lab3-1 recipe 用空白縮排（要用 tab）、PREFIX 同一行後面接註解；modulefile 寫法照 zstd 範例，路徑換成 ~/opt/openmpi/5.0.8。
+- 先做 Lab3-2 Part A 第 1–2 步：sudo apt install -y bzip2 zlib1g-dev，下載、解壓縮、./configure --prefix=$HOME/opt/openmpi/5.0.8，然後 make -j4 > build.log 2>&1 && make install。
+- 4 核心 VM 實測：configure 約 2 分 20 秒、make -j4 約 5 分鐘；輸出導到 build.log，另開一個 terminal 做 Lab3-1。
+- 確認裝好：ls ~/opt/openmpi/5.0.8/bin/mpicc，再寫 modulefile（照 zstd 範例，路徑換成 ~/opt/openmpi/5.0.8）。
+- 編譯還在跑時不要做 Lab3-4：LULESH 會跟 make 搶核心，時間不準。
+- 常見卡點：Lab3-1 recipe 用空白縮排（要用 tab）、PREFIX 同一行後面接註解。Lab3-3 要先 module load openmpi/5.0.8。
 - 用 Slido 統計進度；最後 5 分鐘收尾、Q&A。
 -->
 
