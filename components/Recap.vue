@@ -22,10 +22,10 @@ defineProps<{ items: { ch?: string, label: string, note: string }[] }>()
 </template>
 
 <style scoped>
-.recap { display: flex; flex-direction: column; height: 360px; justify-content: center; }
+.recap { display: flex; flex-direction: column; height: 380px; }
 .row {
   display: grid; grid-template-columns: 64px 280px 1fr; align-items: center; column-gap: 24px;
-  padding: 30px 0; border-top: 1px solid var(--tb-rule);
+  flex: 1; border-top: 1px solid var(--tb-rule);
 }
 .row:last-child { border-bottom: 1px solid var(--tb-rule); }
 .ch { font-family: var(--tb-mono); font-size: 34px; line-height: 1; color: var(--tb-accent); }
