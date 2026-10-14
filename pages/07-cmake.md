@@ -225,9 +225,9 @@ chap: Recap
 # Recap：Build Automation
 
 <Recap :items="[
-  { ch: '05', label: 'Makefile', note: '依時間戳僅重編變更的檔案', keys: ['make -j', 'target: prereq', '$@ $<'] },
-  { ch: '06', label: 'Configure', note: '偵測環境，產生 Makefile', keys: ['./configure', '--prefix'] },
-  { ch: '07', label: 'CMake', note: '產生建置系統，以 target 管理相依', keys: ['-S -B', '--build', 'PUBLIC'] },
+  { ch: '05', label: 'Makefile', note: '依時間戳僅重編變更的檔案' },
+  { ch: '06', label: 'Configure', note: '偵測環境，產生 Makefile' },
+  { ch: '07', label: 'CMake', note: '產生建置系統，以 target 管理相依' },
 ]" />
 
 <!--

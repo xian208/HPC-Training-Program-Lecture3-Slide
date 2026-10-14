@@ -143,9 +143,9 @@ chap: Recap
 # Recap：管理 software stack
 
 <Recap :items="[
-  { ch: '08', label: '環境變數', note: 'PATH 定位指令，LD_LIBRARY_PATH 定位 .so', keys: ['PATH', 'LD_LIBRARY_PATH', 'export'] },
-  { ch: '09', label: 'Module', note: '以 load / unload 切換整組環境', keys: ['module load', 'module show', 'purge'] },
-  { ch: '10', label: 'Spack', note: '自動解析相依，並從原始碼建置', keys: ['spec', '%gcc@', 'login node'] },
+  { ch: '08', label: '環境變數', note: 'PATH 定位指令，LD_LIBRARY_PATH 定位 .so' },
+  { ch: '09', label: 'Module', note: '以 load / unload 切換整組環境' },
+  { ch: '10', label: 'Spack', note: '自動解析相依，並從原始碼建置' },
 ]" />
 
 <!--

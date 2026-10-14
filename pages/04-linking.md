@@ -104,9 +104,9 @@ chap: Recap
 # Recap：從 source 到執行檔
 
 <Recap :items="[
-  { ch: '02', label: 'Compiler', note: '編譯參數影響效能與相容性', keys: ['-O3', '-march', '-g', '-I', '-L'] },
-  { ch: '03', label: '編譯四階段', note: '前置處理、編譯、組譯、連結', keys: ['gcc -E', 'gcc -S', 'gcc -c'] },
-  { ch: '04', label: 'Static vs Dynamic', note: '連結期整合，或執行期載入', keys: ['.a', '.so', 'ldd'] },
+  { ch: '02', label: 'Compiler', note: '編譯參數影響效能與相容性' },
+  { ch: '03', label: '編譯四階段', note: '前置處理、編譯、組譯、連結' },
+  { ch: '04', label: 'Static vs Dynamic', note: '連結期整合，或執行期載入' },
 ]" />
 
 <!--
